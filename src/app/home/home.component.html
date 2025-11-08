@@ -1,2 +1,30 @@
-<h1>Working on Portfolio...</h1>
-<p>Coming soon!</p>
+<div 
+  class="profile-page"
+  [style.--background-image-url]="currentBackground" 
+  [class.hover-active]="isHovering">
+
+  <!-- LEFT PANEL: Profiles (Structure remains the same) -->
+  <div class="left-panel">
+    <div class="netflix-logo">
+      <h1>K</h1>
+    </div>
+    <div class="profile-container">
+      <span class="profile-title">Who's watching?</span>
+      <div class="profiles-list">
+        <div 
+          *ngFor="let profile of profiles"
+          class="profile-item"
+          (mouseenter)="onProfileHover(profile)"
+          (mouseleave)="onProfileLeave()"
+          (click)="selectProfile(profile)">
+          <div class="profile-icon">
+            <img [src]="profile.image" [alt]="profile.name">
+          </div>
+          <span class="profile-label">{{ profile.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-panel"></div>
+</div>
