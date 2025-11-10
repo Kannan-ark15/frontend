@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AppNavbarComponent } from './components/app-navbar/app-navbar.component';
 import { CommonModule } from '@angular/common';
 import { HeroVideoComponent } from './components/hero-video/hero-video.component';
 import { TopCardsGridComponent } from './components/top-cards-grid/top-cards.component';
+import { Elements } from './elements/elements';
+import { Card } from './elements/card.model';
+import { ContactMe } from './contact-me/contact-me';
 
 export interface TopItem {
   id: number;
@@ -17,7 +20,9 @@ export interface TopItem {
     CommonModule,
     AppNavbarComponent,
     HeroVideoComponent,
-    TopCardsGridComponent
+    TopCardsGridComponent,
+    Elements,
+    ContactMe
   ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.css',
@@ -61,37 +66,38 @@ export class ProfilePage {
       title: 'API Gateway',
       description: 'Microservices'
     },
-    {
-      id: 6,
-      image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=600&fit=crop',
-      title: 'AI Platform',
-      description: 'Machine learning'
-    },
-    {
-      id: 7,
-      image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=600&fit=crop',
-      title: 'DevOps Tools',
-      description: 'CI/CD pipeline'
-    },
-    {
-      id: 8,
-      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=600&fit=crop',
-      title: 'Team Portal',
-      description: 'Collaboration'
-    },
-    {
-      id: 9,
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=600&fit=crop',
-      title: 'Security Suite',
-      description: 'Authentication'
-    },
-    {
-      id: 10,
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=600&fit=crop',
-      title: 'Code Editor',
-      description: 'Development tool'
-    }
   ];
 
-  videoSrc = 'assets/videos/hero-video.mp4'; // Replace with your video
+  videoSrc = 'assets/videos/hero-video.mp4';
+  
+    cards = signal<Card[]>([
+    {
+      id: 1,
+      title: 'About',
+      text: 'Learn more about my journey and background in software development.',
+      imageUrl: 'https://picsum.photos/seed/about/800/1200',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-programmer-writing-on-a-laptop-in-a-dark-room-4330-large.mp4'
+    },
+    {
+      id: 2,
+      title: 'Skills',
+      text: 'Discover my technical skills and expertise in various technologies.',
+      imageUrl: 'https://picsum.photos/seed/skills/800/1200',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-a-man-sits-in-a-dark-room-and-works-on-a-computer-4328-large.mp4'
+    },
+    {
+      id: 3,
+      title: 'Experience',
+      text: 'Explore my professional experience and career achievements.',
+      imageUrl: 'https://picsum.photos/seed/experience/800/1200',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-keyboard-in-a-dark-room-4326-large.mp4'
+    },
+    {
+      id: 4,
+      title: 'Certifications',
+      text: 'View my official certifications and professional credentials.',
+      imageUrl: 'https://picsum.photos/seed/certs/800/1200',
+      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4'
+    }
+  ]);
 }

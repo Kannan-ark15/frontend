@@ -2,4 +2,15 @@
 <app-hero-video [videoSrc]="videoSrc" height="75vh"></app-hero-video>
 <section class="content-section">
   <app-top-cards-grid [items]="topItems"></app-top-cards-grid>
+<div class="hover-cards-container">
+    <h2 class="section-title">Explore More</h2>
+    <div class="hover-cards-wrapper">
+      @for (card of cards(); track card.id) {
+        <app-elements [card]="card" />
+      }
+    </div>
+</div>
+<div>
+  <app-contact-me></app-contact-me>
+</div>
 </section>

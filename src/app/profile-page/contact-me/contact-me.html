@@ -1,0 +1,17 @@
+<section class="contact-section" id="contact">
+  <h2 class="section-title">Contact Me</h2>
+
+  <div class="contact-container">
+    <a
+      *ngFor="let contact of contacts"
+      [href]="contact.link"
+      class="contact-card"
+      target="_blank"
+      rel="noopener noreferrer"
+      [style.--accent]="contact.color"
+    >
+      <div class="icon">{{ contact.icon }}</div>
+      <div class="text">{{ contact.name }}</div>
+    </a>
+  </div>
+</section>
