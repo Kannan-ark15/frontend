@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'; // Import OnInit
+import { Component, inject, OnInit } from '@angular/core'; // Import OnInit
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit { // Implement OnInit
       backgroundImage: 'assets/images/Stalker.png'
     }
   ];
+ private router = inject(Router);
 
   // This hook runs once when the component is initialized
   ngOnInit(): void {
@@ -57,6 +58,6 @@ export class HomeComponent implements OnInit { // Implement OnInit
   }
 
   selectProfile(profile: any): void {
-    console.log(profile.name, 'selected');
+    this.router.navigate(['profile'], { state: { selectedProfile: profile.name } });
   }
 }

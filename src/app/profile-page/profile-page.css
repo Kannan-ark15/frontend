@@ -1,0 +1,12 @@
+.content-section {
+  background-color: #141414;
+  padding: 40px 4%;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .content-section {
+    padding: 20px 2%;
+  }
+}
