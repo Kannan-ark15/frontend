@@ -1,1 +1,56 @@
 <app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
+
+<div class="skills-container">
+  <!-- Full-screen individual skill view -->
+  <div class="fullscreen-skills" [class.hidden]="showAllSkills()">
+    @for (skill of skills; track skill.name; let i = $index) {
+    <div class="skill-fullscreen"
+     [class.active]="currentSkillIndex() === i && !isTransitioning()"
+     [class.zooming]="currentSkillIndex() === i && isTransitioning() && scrollDirection() === 'forward'"
+     [class.zooming-back]="currentSkillIndex() === i && isTransitioning() && scrollDirection() === 'backward'"
+     [style.--scroll-progress]="scrollProgress()"
+     [class.waiting]="currentSkillIndex() < i"
+     [style.--skill-color]="skill.color">
+        
+        <div class="skill-content">
+        <div class="skill-icon-large">
+            <img [src]="skill.icon" [alt]="skill.name + ' icon'" />
+        </div>
+          <h3 class="skill-name-large">{{ skill.name }}</h3>
+          <p class="skill-description-large">{{ skill.description }}</p>
+          
+          <!-- Scroll Hint -->
+          <div class="scroll-hint" *ngIf="!isTransitioning()">
+            <span class="scroll-icon">↓</span>
+            <p>Scroll to continue</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- All skills grid view -->
+  <div class="all-skills-grid" [class.visible]="showAllSkills()">
+    <div class="grid-header">
+      <h2>All Skills</h2>
+      <p class="grid-subtitle">Comprehensive overview of my technical expertise</p>
+    </div>
+
+    <div class="skills-grid">
+      @for (skill of skills; track skill.name; let i = $index) {
+        <div 
+          class="skill-card" 
+          [style.--skill-color]="skill.color"
+          [style.animation-delay]="i * 0.1 + 's'">
+        <div class="skill-card-icon">
+            <img [src]="skill.icon" [alt]="skill.name + ' icon'" />
+        </div>
+        
+        <h3 class="skill-card-name">{{ skill.name }}</h3>
+        <p class="skill-card-desc">{{ skill.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+*/
