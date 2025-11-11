@@ -67,64 +67,29 @@ export class Skills implements OnInit {
   showAllSkills = signal(false);
   isTransitioning = signal(false);
   private lastScrollTime = 0;
-  scrollProgress = signal(0);
-  private accumulatedScroll = 0;
-  private scrollThreshold = 800;
   private scrollDebounceTime = 1000; // ms
   private touchStartY: number | null = null;
     scrollDirection = signal<'forward' | 'backward'>('forward');
 
   ngOnInit() {
-      this.currentSkillIndex.set(0);
-    this.scrollProgress.set(0);
+    this.currentSkillIndex.set(0);
   }
 
 @HostListener('wheel', ['$event'])
   onWheel(event: WheelEvent) {
     if (!this.showAllSkills()) {
       event.preventDefault();
-      this.accumulatedScroll += Math.abs(event.deltaY);
-      const progress = Math.min((this.accumulatedScroll / this.scrollThreshold) * 100, 100);
-      this.scrollProgress.set(progress);
+      
       if (event.deltaY > 0) {
-          this.scrollDirection.set('forward');
-        
-        // When progress reaches 100%, move to next skill
-        if (progress >= 100) {
-          this.completeTransition('forward');
-        }
-      } else if (event.deltaY < 0 && this.currentSkillIndex() > 0) {
-        this.scrollDirection.set('backward');
-        
-        // Reverse the progress for backward scroll
-        const reverseProgress = Math.max(100 - progress, 0);
-        this.scrollProgress.set(reverseProgress);
-        
-        if (reverseProgress <= 0) {
-          this.completeTransition('backward');
-        }
+        this.scrollDirection.set('forward');
+        this.handleScrollDown();
       } 
-    }
-  }
-  private completeTransition(direction: 'forward' | 'backward') {
-    if (direction === 'forward') {
-      if (this.currentSkillIndex() >= this.skills.length - 1) {
-        // Last skill - go to grid
-        this.showAllSkills.set(true);
-      } else {
-        // Move to next skill
-        this.currentSkillIndex.set(this.currentSkillIndex() + 1);
+      else if (event.deltaY < 0) {
+        this.scrollDirection.set('backward');
+        this.handleScrollUp();
       }
-    } else {
-      // Move to previous skill
-      this.currentSkillIndex.set(this.currentSkillIndex() - 1);
     }
-    
-    // Reset scroll accumulation
-    this.accumulatedScroll = 0;
-    this.scrollProgress.set(0);
   }
-
 
   private handleScrollUp() {
     const now = Date.now();
@@ -165,26 +130,17 @@ onTouchMove(event: TouchEvent) {
     event.preventDefault();
     const touchEndY = event.touches[0].clientY;
     const deltaY = this.touchStartY - touchEndY;
-    this.accumulatedScroll += Math.abs(deltaY);
-    const progress = Math.min((this.accumulatedScroll / this.scrollThreshold) * 100, 100);
-    this.scrollProgress.set(progress);
-      
-      if (deltaY > 0) {
-        this.scrollDirection.set('forward');
-        if (progress >= 100) {
-          this.completeTransition('forward');
-          this.touchStartY = null;
-        }
-      } else if (deltaY < 0 && this.currentSkillIndex() > 0) {
-        this.scrollDirection.set('backward');
-        const reverseProgress = Math.max(100 - progress, 0);
-        this.scrollProgress.set(reverseProgress);
-        if (reverseProgress <= 0) {
-          this.completeTransition('backward');
-          this.touchStartY = null;
-        }
-      }
-      this.touchStartY = touchEndY;
+    
+    // Swipe up (positive delta) - move forward
+    if (deltaY > 50) {
+      this.handleScrollDown();
+      this.touchStartY = null;
+    }
+    // Swipe down (negative delta) - move backward
+    else if (deltaY < -50) {
+      this.handleScrollUp();
+      this.touchStartY = null;
+    }
   }
 }
 
@@ -227,8 +183,6 @@ onTouchMove(event: TouchEvent) {
   backToImmersive() {
     this.showAllSkills.set(false);
     this.currentSkillIndex.set(0);
-    this.scrollProgress.set(0);
-    this.accumulatedScroll = 0;
   }
 }
 

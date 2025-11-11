@@ -56,21 +56,15 @@
   opacity: 0;
   transform: scale(0.8);
   pointer-events: none;
-  
-  /* CSS variables for dynamic animation */
-  --scroll-progress: 0;
-  --scale-factor: calc(1 + (var(--scroll-progress) / 100) * 14); /* 1 to 15 */
-  --opacity-factor: calc(1 - (var(--scroll-progress) / 100) * 0); /* stays 1 for "dive through" effect */
 }
 
-/* Active state */
 .skill-fullscreen.active {
   opacity: 1;
   transform: scale(1);
   pointer-events: all;
   z-index: 3;
+  animation: fadeInFromBehind 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-
 
 
 /* Optional: animate the waiting skill growing as current skill zooms */
@@ -112,22 +106,9 @@
 }
 
 .skill-fullscreen.zooming {
-  opacity: var(--opacity-factor);
-  transform: scale(var(--scale-factor));
+  opacity: 1;
   z-index: 4;
-  pointer-events: none;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out; /* Smooth but responsive */
-}
-
-/* Zooming backward - scales down dynamically */
-.skill-fullscreen.zooming-back {
-  --scale-factor: calc(1 - (var(--scroll-progress) / 100) * 0.9); /* 1 to 0.1 */
-  --opacity-factor: calc(1 - (var(--scroll-progress) / 100));
-  opacity: var(--opacity-factor);
-  transform: scale(var(--scale-factor));
-  z-index: 4;
-  pointer-events: none;
-  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+  animation: zoomThroughViewer 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes zoomThroughViewer {
@@ -142,7 +123,7 @@
   }
   75% {
     opacity: 1;
-    transform: scale(9);
+    transform: scale(15);
 
   }
   100% {
@@ -151,7 +132,12 @@
 
   }
 }
-
+/* Zooming backward state - zoom away from viewer */
+.skill-fullscreen.zooming-back {
+  opacity: 1;
+  z-index: 4;
+  animation: zoomAwayFromViewer 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
 
 @keyframes zoomAwayFromViewer {
   0% {
@@ -171,9 +157,10 @@
 .skill-fullscreen.waiting {
   opacity: 0;
   transform: scale(0.8);
-  z-index: 2;
-  visibility: visible;
+  z-index: 2; /* Behind the zooming skill (which is z-index: 4) */
+  visibility: visible; /* Make sure it's ready to appear */
 }
+
 .skill-content {
   position: relative;
   z-index: 3;
