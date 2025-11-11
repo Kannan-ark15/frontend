@@ -9,9 +9,9 @@ import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-na
 })
 export class About {
     menuItems = [
-    { label: 'Profession', route: '/profession' },
+    { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/projects' },
+    { label: 'Certifications', route: '/certifications' },
     { label: 'Contact Me', route: '/contact' }
   ];
 

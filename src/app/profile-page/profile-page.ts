@@ -29,9 +29,9 @@ export interface TopItem {
 })
 export class ProfilePage {
   menuItems = [
-    { label: 'Profession', route: '/profession' },
+    { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/projects' },
+    { label: 'Certifications', route: '/certifications' },
     { label: 'Contact Me', route: '/contact' }
   ];
 
@@ -68,7 +68,7 @@ export class ProfilePage {
     },
   ];
 
-  videoSrc = 'assets/videos/hero-video.mp4';
+  videoSrc = 'assets/hero1.mp4';
   
     cards = signal<Card[]>([
     {

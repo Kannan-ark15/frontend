@@ -1,0 +1,690 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== NETFLIX-STYLE HERO VIDEO SECTION ===== */
+.hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Dark gradient overlay for readability */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  z-index: 2;
+}
+
+/* Video Content Overlay */
+.video-content {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+  max-width: 900px;
+  padding: 0 5%;
+  animation: fadeInUp 1s ease-out 0.5s backwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.video-title {
+  font-size: 5rem;
+  font-weight: 900;
+  margin: 0 0 20px 0;
+  background: linear-gradient(135deg, #e50914, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.video-subtitle {
+  font-size: 1.5rem;
+  color: #e0e0e0;
+  margin: 0;
+  font-weight: 300;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ===== EXPERIENCE CONTAINER ===== */
+.experience-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #000000 0%, #141414 50%, #000000 100%);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 0 5% 80px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header */
+.timeline-header {
+  text-align: center;
+  margin: 80px 0 100px 0;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-title {
+  font-size: 4.5rem;
+  font-weight: 900;
+  margin: 0 0 20px 0;
+  background: linear-gradient(135deg, #e50914, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  color: #808080;
+  font-weight: 300;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Vertical Line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    #e50914 10%,
+    #b20710 50%,
+    #8b0000 90%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+}
+
+/* Timeline Item */
+.timeline-item {
+  position: relative;
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Timeline Node */
+.timeline-node {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: #000;
+  border: 4px solid var(--item-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 30px var(--item-color);
+}
+
+.timeline-node:hover {
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 0 50px var(--item-color);
+}
+
+.node-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px var(--item-color));
+}
+
+.node-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--item-color);
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Content Card */
+.timeline-content {
+  width: calc(50% - 80px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 35px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-left: calc(50% + 80px);
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-right: calc(50% + 80px);
+  margin-left: 0;
+}
+
+.timeline-content:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--item-color);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--item-color);
+}
+
+.timeline-item.expanded .timeline-content {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--item-color);
+  box-shadow: 0 0 60px var(--item-color);
+}
+
+/* Content Header */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.content-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--item-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.content-duration {
+  font-size: 0.9rem;
+  color: #808080;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+}
+
+.expand-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--item-color);
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.content-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  color: #fff;
+}
+
+.content-description {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ===== FLOWCHART WITH WIRE ANIMATION ===== */
+.flowchart {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Flowchart Wire - connects nodes */
+.flowchart-wire {
+  width: 4px;
+  height: 50px;
+  margin: 0 0 0 20px;
+  position: relative;
+  background: rgba(229, 9, 20, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Multiple flowing pulses - simple glowing lines */
+.wire-flow {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--item-color) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 15px var(--item-color);
+  opacity: 0;
+}
+
+/* Animate 3 pulses flowing down */
+.flowchart-wire.animated .wire-flow {
+  animation: wirePulse1 1.5s ease-in-out forwards;
+}
+
+/* Create additional pulses using pseudo-elements */
+.flowchart-wire.animated .wire-flow::before,
+.flowchart-wire.animated .wire-flow::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  box-shadow: inherit;
+}
+
+.flowchart-wire.animated .wire-flow::before {
+  animation: wirePulse2 1.5s ease-in-out 0.15s forwards;
+}
+
+.flowchart-wire.animated .wire-flow::after {
+  animation: wirePulse3 1.5s ease-in-out 0.3s forwards;
+}
+
+/* First pulse */
+@keyframes wirePulse1 {
+  0% {
+    top: -30%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Second pulse */
+@keyframes wirePulse2 {
+  0% {
+    top: -30%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Third pulse */
+@keyframes wirePulse3 {
+  0% {
+    top: -30%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Branch connection point pulse - appears when wire completes */
+.flowchart-wire::before {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--item-color);
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 20px var(--item-color);
+  z-index: 10;
+}
+
+.flowchart-wire.animated::before {
+  animation: connectionPulse 0.8s ease-out 1.2s forwards;
+}
+
+@keyframes connectionPulse {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(2);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* First wire branch from timeline */
+.flowchart-wire:first-of-type {
+  margin-top: 10px;
+}
+
+.flowchart-wire:first-of-type::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: var(--item-color);
+  opacity: 0;
+  z-index: 5;
+}
+
+.flowchart-wire.animated:first-of-type::after {
+  animation: branchReveal 0.4s ease-out forwards;
+}
+
+@keyframes branchReveal {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Flowchart Node - starts DULL */
+.flowchart-node {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 4px solid rgba(229, 9, 20, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  opacity: 0.3;
+  transform: translateX(-30px);
+  transition: all 0.5s ease-out;
+  box-shadow: none;
+}
+
+/* Revealed state - BRIGHT and GLOWING when wire hits */
+.flowchart-node.revealed {
+  opacity: 1;
+  transform: translateX(0);
+  background: rgba(255, 255, 255, 0.08);
+  border-left-color: var(--item-color);
+  animation: nodeGlowStrong 1s ease-out;
+}
+
+@keyframes nodeGlowStrong {
+  0% {
+    box-shadow: 0 0 0 rgba(229, 9, 20, 0);
+  }
+  30% {
+    box-shadow: 0 0 50px var(--item-color), 
+                inset 0 0 30px rgba(229, 9, 20, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 25px var(--item-color), 
+                inset 0 0 15px rgba(229, 9, 20, 0.1);
+  }
+}
+
+.node-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgba(229, 9, 20, 0.5);
+  margin-bottom: 8px;
+  transition: color 0.5s ease;
+}
+
+.flowchart-node.revealed .node-title {
+  color: var(--item-color);
+}
+
+.node-text {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.5s ease;
+}
+
+.flowchart-node.revealed .node-text {
+  color: #b3b3b3;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: 0.6;
+  animation: pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.scroll-icon {
+  font-size: 2rem;
+  color: #e50914;
+  margin-bottom: 5px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.scroll-indicator p {
+  font-size: 0.9rem;
+  color: #808080;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  /* Video Section */
+  .hero-video-section {
+    height: 70vh;
+  }
+
+  .video-title {
+    font-size: 3rem;
+  }
+
+  .video-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .video-content {
+    bottom: 20%;
+  }
+
+  /* Experience Container */
+  .experience-container {
+    padding: 0 4% 60px;
+  }
+
+  .main-title {
+    font-size: 2.8rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  /* Timeline */
+  .timeline-line {
+    left: 30px;
+  }
+
+  .timeline-node {
+    left: 30px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .node-icon {
+    font-size: 2rem;
+  }
+
+  .timeline-content {
+    width: calc(100% - 100px);
+    margin-left: 100px !important;
+    margin-right: 0 !important;
+    padding: 25px;
+  }
+
+  .content-heading {
+    font-size: 1.5rem;
+  }
+
+  .content-description {
+    font-size: 1rem;
+  }
+
+  .timeline-item {
+    margin-bottom: 60px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  /* Video Section */
+  .video-title {
+    font-size: 2.2rem;
+  }
+
+  .video-subtitle {
+    font-size: 1rem;
+  }
+
+  /* Timeline */
+  .timeline-node {
+    width: 50px;
+    height: 50px;
+  }
+
+  .node-icon {
+    font-size: 1.5rem;
+  }
+
+  .content-heading {
+    font-size: 1.3rem;
+  }
+
+  .flowchart-node {
+    padding: 15px;
+  }
+
+  .node-title {
+    font-size: 1.1rem;
+  }
+
+  .node-text {
+    font-size: 0.95rem;
+  }
+}

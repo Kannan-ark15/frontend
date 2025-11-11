@@ -19,7 +19,7 @@ export interface Skill {
 })
 export class Skills implements OnInit {
   menuItems = [
-    { label: 'Profession', route: '/profession' },
+    { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
     { label: 'Projects', route: '/projects' },
     { label: 'Contact Me', route: '/contact' }
