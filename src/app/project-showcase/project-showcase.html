@@ -1,0 +1,150 @@
+<div class="project-container">
+  <!-- Video Banner Section -->
+  <section class="video-banner">
+    <div class="video-wrapper" 
+         (mouseenter)="onVideoHover(true)" 
+         (mouseleave)="onVideoHover(false)">
+      <video #videoPlayer class="banner-video" loop muted playsinline 
+             [src]="projectData.videoUrl">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-overlay" [class.playing]="isVideoHovered()"></div>
+      <div class="video-content">
+        <h1 class="project-title">{{ projectData.title }}</h1>
+        <p class="project-subtitle">{{ projectData.subtitle }}</p>
+        <p class="project-description">{{ projectData.description }}</p>
+        <div class="tech-badges">
+          @for (tech of projectData.techStack; track tech) {
+            <span class="tech-badge">{{ tech }}</span>
+          }
+        </div>
+      </div>
+      <div class="hover-hint" [class.hide]="isVideoHovered()">
+        <span class="hint-icon">▶</span>
+        <span>Hover to play</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Timeline Navigation -->
+  <section class="timeline-section">
+    <h2 class="timeline-title">THE SCREENPLAY</h2>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      @for (chapter of chapters; track chapter.id) {
+        <div class="timeline-point" 
+             [class.active]="activeChapter() === chapter.id"
+             [class.locked]="!isChapterUnlocked(chapter.id)"
+             [style.--point-color]="chapter.color"
+             (click)="scrollToChapter(chapter.id)">
+          <div class="point-wrapper">
+            <div class="point-dot">
+              @if (isChapterUnlocked(chapter.id)) {
+                {{ chapter.id }}
+              } @else {
+                🔒
+              }
+            </div>
+            <div class="point-label">{{ chapter.title }}</div>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Chapters Section -->
+  <section class="chapters-section">
+    @for (chapter of chapters; track chapter.id) {
+      <div class="chapter-wrapper">
+        <!-- Mini Timeline above each chapter (starting from chapter 2) -->
+        @if (chapter.id >= 2) {
+          <div class="mini-timeline">
+            <div class="mini-timeline-line"></div>
+            @for (ch of chapters; track ch.id) {
+              <div class="mini-timeline-point" 
+                   [class.active]="activeChapter() === ch.id"
+                   [class.current]="chapter.id === ch.id"
+                   [class.locked]="!isChapterUnlocked(ch.id)"
+                   [style.--point-color]="ch.color"
+                   (click)="scrollToChapter(ch.id)">
+                <div class="mini-point-dot">
+                  @if (isChapterUnlocked(ch.id)) {
+                    {{ ch.id }}
+                  } @else {
+                    🔒
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Chapter Card -->
+        <article [id]="'chapter-' + chapter.id" 
+                 class="chapter-card" 
+                 [class.active]="activeChapter() === chapter.id"
+                 [style.--chapter-color]="chapter.color">
+          
+          <div class="chapter-number">Chapter {{ chapter.id }}</div>
+          
+          <div class="chapter-content-wrapper">
+            <!-- Left Content -->
+            <div class="chapter-text">
+              <h3 class="chapter-title">{{ chapter.title }}</h3>
+              
+              <!-- Typing Effect Text -->
+              @if (activeChapter() === chapter.id) {
+                <p class="chapter-content typing">
+                  {{ getTypingText(chapter.id) }}<span class="cursor">|</span>
+                </p>
+              } @else {
+                <p class="chapter-content">{{ chapter.content }}</p>
+              }
+              
+              <!-- Code Snippet -->
+              @if (chapter.code) {
+                <div class="code-container">
+                  <div class="code-header">
+                    <span class="code-lang">Python</span>
+                    <span class="code-copy">📋 Copy</span>
+                  </div>
+                  <pre class="code-snippet"><code>{{ chapter.code }}</code></pre>
+                </div>
+              }
+              
+              <!-- Metrics Grid -->
+              @if (chapter.metrics) {
+                <div class="metrics-container">
+                  @for (metric of chapter.metrics; track metric.label) {
+                    <div class="metric-card">
+                      <div class="metric-icon">{{ metric.icon }}</div>
+                      <div class="metric-value">{{ metric.value }}</div>
+                      <div class="metric-label">{{ metric.label }}</div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+            
+            <!-- Right Image -->
+            @if (chapter.image) {
+              <div class="chapter-image">
+                <div class="image-glow"></div>
+                <img [src]="chapter.image" [alt]="chapter.title">
+              </div>
+            }
+          </div>
+        </article>
+      </div>
+    }
+  </section>
+
+  <!-- Footer -->
+  <footer class="project-footer">
+    <div class="footer-content">
+      <h3>Ready to explore more?</h3>
+      <p>Check out other cinematic projects</p>
+      <button class="back-button">← Back to Projects</button>
+    </div>
+  </footer>
+</div>

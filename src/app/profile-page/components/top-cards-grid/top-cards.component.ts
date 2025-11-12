@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopCardComponent } from '../top-card/top-card.component';
+import { Router } from '@angular/router';
 
 export interface TopItem {
   id: number;
@@ -144,6 +145,7 @@ export interface TopItem {
 export class TopCardsGridComponent {
   @Input() items: TopItem[] = [];
   @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
+  router = inject(Router);
   scrollLeft() {
     this.scrollContainer.nativeElement.scrollBy({
       left: -300,
@@ -159,7 +161,14 @@ export class TopCardsGridComponent {
   }
 
   onCardClick(item: TopItem) {
-    console.log('Card clicked:', item);
-    // Add navigation or modal logic here
+    switch (item.id) {
+      case 1:
+        this.router.navigate(['/sql-project'], { queryParams: { id: item.id } });
+        return
+      case 2:
+        this.router.navigate(['/movie-recommendation']);
+        return;
+      default:
+    }
   }
 }

@@ -30,7 +30,7 @@ export class Experience {
   menuItems = [
     { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/projects' },
+    { label: 'Projects', route: '/profile',fragment: 'projects-section' },
     { label: 'Contact Me', route: '/contact' }
   ];
   isMuted = true; // Start muted for autoplay

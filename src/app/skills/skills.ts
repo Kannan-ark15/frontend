@@ -21,7 +21,7 @@ export class Skills implements OnInit {
   menuItems = [
     { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/projects' },
+    { label: 'Projects', route: '/profile' },
     { label: 'Contact Me', route: '/contact' }
   ];
 

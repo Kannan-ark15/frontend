@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 export interface MenuItem {
   label: string;
   route: string;
+  fragment?: string;
 }
 
 @Component({
@@ -26,7 +27,7 @@ export interface MenuItem {
         
         <ul class="nav-menu" [class.active]="isMenuOpen">
           <li *ngFor="let item of menuItems">
-            <a [routerLink]="item.route" routerLinkActive="active" (click)="closeMenu()">
+            <a [routerLink]="item.route" routerLinkActive="active" [fragment]="item.fragment" (click)="closeMenu()">
               {{ item.label }}
             </a>
           </li>

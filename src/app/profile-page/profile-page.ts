@@ -6,6 +6,7 @@ import { TopCardsGridComponent } from './components/top-cards-grid/top-cards.com
 import { Elements } from './elements/elements';
 import { Card } from './elements/card.model';
 import { ContactMe } from './contact-me/contact-me';
+import { ActivatedRoute } from '@angular/router';
 
 export interface TopItem {
   id: number;
@@ -31,7 +32,7 @@ export class ProfilePage {
   menuItems = [
     { label: 'Experience', route: '/experience' },
     { label: 'Skills', route: '/skills' },
-    { label: 'Certifications', route: '/certifications' },
+    { label: 'Projects', route: '/profile',fragment: 'projects-section'  },
     { label: 'Contact Me', route: '/contact' }
   ];
 
@@ -100,4 +101,38 @@ export class ProfilePage {
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4'
     }
   ]);
+
+ 
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    // Listen for fragment changes
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        setTimeout(() => {
+          this.scrollToSection(fragment);
+        }, 100);
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    // Also check on page load
+    const fragment = this.route.snapshot.fragment;
+    if (fragment) {
+      setTimeout(() => {
+        this.scrollToSection(fragment);
+      }, 500);
+    }
+  }
+
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -80; // Adjust for navbar height
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
 }
