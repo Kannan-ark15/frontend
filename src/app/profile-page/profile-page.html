@@ -1,9 +1,15 @@
-<app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
-<app-hero-video [videoSrc]="videoSrc" height="75vh"></app-hero-video>
+<app-navbar [menuItems]="menuItems()" logoClickRoute="/"></app-navbar>
+<app-hero-video [videoSource]="videoSrc()"
+  [text]="overlayText()" height="75vh"></app-hero-video>
 <section class="content-section">
- <div id="projects-section">
-    <app-top-cards-grid [items]="topItems"></app-top-cards-grid>
-  </div>
+ <div class="hover-cards-container">
+    <h2 class="section-title">Explore More</h2>
+    <div class="hover-cards-wrapper">
+      @for (card of gridcard(); track card.id) {
+        <app-top-cards-grid [card]="card" />
+      }
+    </div>
+</div>
 <div class="hover-cards-container">
     <h2 class="section-title">Explore More</h2>
     <div class="hover-cards-wrapper">

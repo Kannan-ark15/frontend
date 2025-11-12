@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
             [loop]="true"
             playsinline
             preload="auto"
-           [src]="videoSrc" type="video/mp4">
+           [src]="videoSrc()" type="video/mp4">
         </video>
       <div class="hero-overlay"></div>
        <button class="mute-toggle" (click)="toggleMute()" [attr.aria-label]="isMuted() ? 'Unmute video' : 'Mute video'">
@@ -136,8 +136,15 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class HeroVideoComponent {
-  @Input() videoSrc = '';
   @Input() height = '75vh';
+  @Input() set videoSource(value: string) {
+    this.videoSrc.set(value);
+  } 
+  @Input() set text(value: string) {
+    this.overlayText.set(value);
+  }
+  videoSrc = signal('assets/videos/default-hero.mp4');
+  overlayText = signal('Welcome to My Portfolio');
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
   isMuted = signal(true); 
   ngAfterViewInit() {

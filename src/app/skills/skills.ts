@@ -1,6 +1,8 @@
-import { Component, HostListener, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
+import { ProfileService } from '../profile-page/profile-service';
+import { Router } from '@angular/router';
 
 export interface Skill {
   name: string;
@@ -18,10 +20,10 @@ export interface Skill {
   styleUrls: ['./skills.css']
 })
 export class Skills implements OnInit {
-  menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/profile' },
+  allMenuItems = [
+    { label: 'Experience', route: '/experience', section: 'Experience'  },
+    { label: 'Skills', route: '/skills', section: 'Skills'},
+    { label: 'Projects', route: '/profile',fragment: 'projects-section' },
     { label: 'Contact Me', route: '/contact' }
   ];
 
@@ -62,17 +64,24 @@ export class Skills implements OnInit {
       level: 82
     }
   ];
-
+  private profileService = inject(ProfileService);
+  private router = inject(Router);
   currentSkillIndex = signal(0);
   showAllSkills = signal(false);
   isTransitioning = signal(false);
   private lastScrollTime = 0;
   private scrollDebounceTime = 1000; // ms
   private touchStartY: number | null = null;
-    scrollDirection = signal<'forward' | 'backward'>('forward');
+  scrollDirection = signal<'forward' | 'backward'>('forward');
+  menuItems = signal<any[]>([]);
 
   ngOnInit() {
     this.currentSkillIndex.set(0);
+    this.menuItems.set(
+      this.allMenuItems.filter(item => 
+        !item.section || !this.profileService.isSecretionRestricted(item.section)
+      )
+    );
   }
 
 @HostListener('wheel', ['$event'])

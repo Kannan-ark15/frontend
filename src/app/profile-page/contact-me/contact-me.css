@@ -1,63 +1,369 @@
 .contact-section {
+  position: relative;
   width: 100%;
-  color: #fff;
-  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 4%;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  overflow: hidden;
   font-family: 'Poppins', sans-serif;
 }
 
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+.contact-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
 }
 
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #e50914 0%, #ff6b6b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #e50914, transparent);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-top: 24px;
+}
+
+/* Contact Container */
 .contact-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 40px;
   flex-wrap: wrap;
+  perspective: 1000px;
 }
 
+/* Contact Cards */
 .contact-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  width: 220px;
+  height: 220px;
+  animation: fadeInUp 0.8s ease-out backwards;
+  animation-delay: var(--delay);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact-card:hover {
+  transform: translateY(-15px) scale(1.05);
+  z-index: 10;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid transparent;
-  border-radius: 12px;
-  width: 150px;
-  height: 150px;
-  transition: all 0.3s ease;
-  color: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  overflow: hidden;
+  transition: all 0.4s ease;
 }
 
-.contact-card:hover {
+.contact-card:hover .card-inner {
+  background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent);
-  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 0 40px rgba(var(--accent-rgb, 229, 9, 20), 0.3),
+    inset 0 0 60px rgba(var(--accent-rgb, 229, 9, 20), 0.05);
+}
+
+/* Icon Wrapper */
+.icon-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: transform 0.4s ease;
+}
+
+.contact-card:hover .icon-wrapper {
+  transform: rotateY(360deg);
 }
 
 .icon {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+  font-size: 3.5rem;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
+.contact-card:hover .icon {
+  filter: drop-shadow(0 8px 16px var(--accent));
+  transform: scale(1.1);
+}
+
+.icon-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.contact-card:hover .icon-bg {
+  opacity: 0.6;
+  animation: pulse 2s infinite;
+}
+
+/* Text */
 .text {
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .contact-card {
-    width: 120px;
-    height: 120px;
+.contact-card:hover .text {
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent);
+}
+
+/* Hover Overlay */
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.contact-card:hover .hover-overlay {
+  opacity: 0.15;
+}
+
+/* Floating Background Shapes */
+.floating-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 9, 20, 0.1) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: float 20s infinite ease-in-out;
+}
+
+.shape-1 {
+  width: 400px;
+  height: 400px;
+  top: -200px;
+  left: -200px;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 300px;
+  height: 300px;
+  bottom: -150px;
+  right: -150px;
+  animation-delay: 7s;
+}
+
+.shape-3 {
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: 14s;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(100px, -100px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-100px, 100px) rotate(240deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 60px 4%;
+    min-height: auto;
+  }
+
+  .section-header {
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  .contact-container {
+    gap: 25px;
+  }
+
+  .contact-card {
+    width: 160px;
+    height: 160px;
+  }
+
+  .icon-wrapper {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+  }
+
+  .icon {
+    font-size: 2.5rem;
+  }
+
+  .text {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .shape {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .contact-card {
+    width: 140px;
+    height: 140px;
+  }
+
   .icon {
     font-size: 2rem;
   }
+
+  .text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Add glow effect on card borders */
+@keyframes borderGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px var(--accent),
+                0 0 10px var(--accent),
+                0 0 20px var(--accent);
+  }
+  50% {
+    box-shadow: 0 0 10px var(--accent),
+                0 0 20px var(--accent),
+                0 0 40px var(--accent);
+  }
+}
+
+.contact-card:hover .card-inner {
+  animation: borderGlow 2s infinite;
 }

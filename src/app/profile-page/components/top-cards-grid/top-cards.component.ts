@@ -1,7 +1,8 @@
-import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, inject, input, signal, viewChild, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TopCardComponent } from '../top-card/top-card.component';
 import { Router } from '@angular/router';
+import { Card } from '../../elements/elements';
 
 export interface TopItem {
   id: number;
@@ -13,161 +14,306 @@ export interface TopItem {
 @Component({
   selector: 'app-top-cards-grid',
   standalone: true,
-  imports: [CommonModule, TopCardComponent],
+  imports: [CommonModule],
   template: `
-    <div class="cards-section">
-      <h2 class="section-title">Top 10</h2>
+        <div
+      class="hover-card"
+      [class.expanded]="isHovered()"
+      (mouseenter)="onMouseEnter()"
+      (mouseleave)="onMouseLeave()"
+      (click)="selectedCard(card().id)">      
+      <!-- Image (visible by default) -->
+      <img
+        [src]="card().imageUrl"
+        [alt]="card().title"
+        class="card-media card-image"
+        [class.hidden]="isHovered()"
+      />
 
-      <div class="carousel-container">
-        <!-- Left Scroll Button -->
-        <button class="scroll-btn left" (click)="scrollLeft()">&lt;</button>
+      <!-- Video (visible on hover) -->
+      <video
+        #videoPlayer
+        class="card-media card-video"
+        [class.visible]="isHovered()"
+        loop
+        muted
+        playsinline
+        preload="auto">
+        <source [src]="card().videoUrl" type="video/mp4" />
+      </video>
 
-        <!-- Scrollable Cards -->
-        <div class="cards-scroll-wrapper" #scrollContainer>
-          <div class="cards-scroll">
-            <app-top-card
-              *ngFor="let item of items; let i = index"
-              [image]="item.image"
-              [title]="item.title"
-              [index]="i + 1"
-              (clicked)="onCardClick(item)">
-            </app-top-card>
-          </div>
+      <!-- Gradient Overlay -->
+      <div class="card-overlay"></div>
+
+      <!-- Content -->
+      <div class="card-content">
+        <!-- Collapsed Title (Rotated) -->
+        <h3 
+          class="card-title-collapsed"
+          [class.hidden]="isHovered()">
+          {{ card().title }}
+        </h3>
+
+        <!-- Expanded Content -->
+        <div *ngIf="isHovered()"
+          class="card-content-expanded"
+          [class.visible]="isHovered()">
+          <h3 class="card-title-expanded">{{ card().title }}</h3>
+          <p class="card-text-expanded">{{ card().text }}</p>
         </div>
-
-        <!-- Right Scroll Button -->
-        <button class="scroll-btn right" (click)="scrollRight()">&gt;</button>
       </div>
     </div>
   `,
   styles: [`
-    .cards-section {
-      margin: 0 0 40px 0;
+        .hover-card {
       position: relative;
-    }
-
-    .section-title {
-      color: #fff;
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      padding-left: 4px;
-    }
-
-    .carousel-container {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    /* Scroll buttons */
-    .scroll-btn {
-      background: transparent;
-      color: #fff;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      width: 45px;
+      width: 275px;
       height: 100%;
+      min-height: 400px;
+      max-height: 700px;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      background-color: #000;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .hover-card:hover {
+      z-index: 10;
+    }
+
+    .hover-card.expanded {
+      width: 450px;
+    }
+
+    /* Media Elements */
+    .card-media {
       position: absolute;
       top: 0;
-      z-index: 10;
-      transition: background 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .scroll-btn:hover {
-        background: transparent;
-    }
-
-    .scroll-btn.left {
       left: 0;
-      border-radius: 0 8px 8px 0;
-    }
-
-    .scroll-btn.right {
-      right: 0;
-      border-radius: 8px 0 0 8px;
-    }
-
-    /* Scroll container */
-    .cards-scroll-wrapper {
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE/Edge */
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.7s ease-in-out;
     }
 
-    .cards-scroll-wrapper::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
+    .card-image {
+      opacity: 1;
     }
 
-    /* Horizontal cards layout */
-    .cards-scroll {
+    .card-image.hidden {
+      opacity: 0;
+    }
+
+    .card-video {
+      opacity: 0;
+    }
+
+    .card-video.visible {
+      opacity: 1;
+    }
+
+    /* Gradient Overlay */
+    .card-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Content Container */
+    .card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
-      gap: 12px;
-      padding: 0 60px; /* add space so buttons don’t overlap */
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      color: #fff;
+      z-index: 2;
     }
 
-    app-top-card {
-      flex: 0 0 180px;
-      height: 240px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
+    /* Collapsed Title (Rotated) */
+    .card-title-collapsed {
+      position: absolute;
+      left: 10px;
+      bottom: 30px;
+      transform-origin: bottom left;
+      font-size: 1.75rem;
+      font-family: 'Netflix Sans', sans-serif;
+        font-size: 4rem;
+        font-weight: 900;
+        color: transparent; /* Makes the fill invisible */
+        -webkit-text-stroke: 2px white; /* outer stroke */
+        text-stroke: 2px white; /* support for other browsers */
+        letter-spacing: 2px;
+        z-index: 10;
     }
 
-    app-top-card:hover {
-      transform: scale(1.05);
+    .card-title-collapsed.hidden {
+      opacity: 0;
     }
 
+    /* Expanded Content */
+    .card-content-expanded {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease 0.2s;
+    }
+
+    .card-content-expanded.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-title-expanded {
+      margin-bottom: 12px;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+      font-size: 4rem;
+      font-weight: 900;
+      color: transparent; /* Makes the fill invisible */
+      -webkit-text-stroke: 2px white; /* outer stroke */
+      text-stroke: 2px white; /* support for other browsers */
+      letter-spacing: 2px;
+      z-index: 10;
+    }
+
+    .card-text-expanded {
+      font-size: 1.125rem;
+      color: #d1d1d1;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-      .section-title {
-        font-size: 1.4rem;
+      .hover-card {
+        width: 100px;
+        min-height: 400px;
       }
 
-      app-top-card {
-        flex: 0 0 150px;
-        height: 200px;
+      .hover-card.expanded {
+        width: 320px;
       }
 
-      .scroll-btn {
+      .card-title-collapsed {
+        font-size: 1.25rem;
+        left: -60px;
+        bottom: 100px;
+      }
+
+      .card-title-expanded {
         font-size: 1.5rem;
-        width: 36px;
+      }
+
+      .card-text-expanded {
+        font-size: 1rem;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hover-card {
+        width: 80px;
+        min-height: 350px;
+      }
+
+      .hover-card.expanded {
+        width: 280px;
       }
     }
   `]
 })
 export class TopCardsGridComponent {
-  @Input() items: TopItem[] = [];
-  @ViewChild('scrollContainer', { static: true }) scrollContainer!: ElementRef<HTMLDivElement>;
-  router = inject(Router);
-  scrollLeft() {
-    this.scrollContainer.nativeElement.scrollBy({
-      left: -300,
-      behavior: 'smooth'
+   card = input.required<Card>();
+  isHovered = signal(false);
+  videoPlayer = viewChild<ElementRef<HTMLVideoElement>>('videoPlayer');
+  hoverTimeout: number | undefined;
+  isPlaying=false;
+  router=inject(Router);
+  constructor() {
+    effect(() => {
+      const videoEl = this.videoPlayer();
+      if (!videoEl) return;
+
+      const video = videoEl.nativeElement;
+          // Clear any pending actions
+      clearTimeout(this.hoverTimeout);
+      if (this.isHovered()) {
+         this.hoverTimeout =  setTimeout(() => {  
+          if(!this.isPlaying){
+            this.isPlaying=true;
+                      video.play().catch(error => {
+          console.error('Video play failed:', error);
+        })
+          } }, 150);
+      } else {
+       this.hoverTimeout = setTimeout(() => {
+          if (this.isPlaying) {
+            this.isPlaying = false;
+            video.pause();
+            video.currentTime = 0;
+          }
+        }, 100);
+      }
     });
   }
-
-  scrollRight() {
-    this.scrollContainer.nativeElement.scrollBy({
-      left: 300,
-      behavior: 'smooth'
-    });
+  onMouseEnter(): void {
+    this.isHovered.set(true);
+    
   }
 
-  onCardClick(item: TopItem) {
-    switch (item.id) {
+  onMouseLeave(): void {
+    this.isHovered.set(false);
+  }
+
+  // selectedCard(title: string): void {
+  //   switch (title) {
+  //     case 'About':
+  //     this.router.navigate(['/about']);
+  //     break;
+  //     case 'Skills':
+  //     this.router.navigate(['/skills']);
+  //     break;
+  //     case 'Experience':
+  //     this.router.navigate(['/experience']);
+  //     break;    
+  //     case 'Certifications':
+  //     this.router.navigate(['/certifications']);
+  //     break;
+  //     default:
+  //       this.router.navigate(['']);
+  //     break;
+  //   }
+  // }
+  selectedCard(item:Number) {
+    switch (item) {
       case 1:
-        this.router.navigate(['/sql-project'], { queryParams: { id: item.id } });
+        this.router.navigate(['/sql-project'], { queryParams: { id: item } });
         return
       case 2:
         this.router.navigate(['/movie-recommendation']);
         return;
+      case 3:
+        this.router.navigate(['/e-commerce-project']);
+        return
       default:
     }
   }

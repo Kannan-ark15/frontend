@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 export interface MenuItem {
   label: string;
@@ -15,19 +15,36 @@ export interface MenuItem {
   template: `
     <nav class="navbar">
       <div class="navbar-container">
-        <a [routerLink]="logoClickRoute" class="logo" aria-label="Home - K logo">
-          K
-        </a>
-        
-        <button class="hamburger" (click)="toggleMenu()" [class.active]="isMenuOpen">
+        <div class="logo-section">
+          <a [routerLink]="logoClickRoute" class="logo">K</a>
+          <button class="switch-user-btn" [routerLink]="['/home']" (click)="closeMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Switch User</span>
+          </button>
+        </div>
+
+        <button 
+          class="hamburger" 
+          [class.active]="isMenuOpen" 
+          (click)="toggleMenu()"
+          aria-label="Toggle menu">
           <span></span>
           <span></span>
           <span></span>
         </button>
-        
+
         <ul class="nav-menu" [class.active]="isMenuOpen">
           <li *ngFor="let item of menuItems">
-            <a [routerLink]="item.route" routerLinkActive="active" [fragment]="item.fragment" (click)="closeMenu()">
+            <a 
+              [routerLink]="item.route" 
+              [fragment]="item.fragment"
+              routerLinkActive="active"
+              (click)="closeMenu()">
               {{ item.label }}
             </a>
           </li>
@@ -57,6 +74,12 @@ export interface MenuItem {
       justify-content: space-between;
     }
 
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
     .logo {
       font-size: 2.5rem;
       font-weight: 900;
@@ -69,6 +92,41 @@ export interface MenuItem {
 
     .logo:hover {
       transform: scale(1.1);
+    }
+
+    .switch-user-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid rgba(229, 9, 20, 0.5);
+      border-radius: 4px;
+      color: #e5e5e5;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .switch-user-btn svg {
+      transition: transform 0.3s ease;
+    }
+
+    .switch-user-btn:hover {
+      background: rgba(229, 9, 20, 0.1);
+      border-color: #e50914;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .switch-user-btn:hover svg {
+      transform: scale(1.1);
+    }
+
+    .switch-user-btn:active {
+      transform: translateY(0);
     }
 
     .nav-menu {
@@ -148,6 +206,23 @@ export interface MenuItem {
         display: flex;
       }
 
+      .logo-section {
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .switch-user-btn span {
+        display: none;
+      }
+
+      .switch-user-btn {
+        padding: 8px 12px;
+        min-width: unset;
+      }
+
       .nav-menu {
         position: fixed;
         right: -100%;
@@ -173,12 +248,25 @@ export interface MenuItem {
         bottom: 0;
       }
     }
+
+    @media (max-width: 480px) {
+      .switch-user-btn {
+        padding: 6px 10px;
+      }
+
+      .switch-user-btn svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
   `]
 })
 export class AppNavbarComponent {
   @Input() menuItems: MenuItem[] = [];
   @Input() logoClickRoute = '/';
   isMenuOpen = false;
+
+  constructor(private router: Router) {}
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

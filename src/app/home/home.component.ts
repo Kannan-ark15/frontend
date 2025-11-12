@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core'; // Import OnInit
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProfileService } from '../profile-page/profile-service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit { // Implement OnInit
     }
   ];
  private router = inject(Router);
+ private profileService = inject(ProfileService);
 
   // This hook runs once when the component is initialized
   ngOnInit(): void {
@@ -57,7 +59,11 @@ export class HomeComponent implements OnInit { // Implement OnInit
     this.isHovering = false;
   }
 
-  selectProfile(profile: any): void {
-    this.router.navigate(['profile'], { state: { selectedProfile: profile.name } });
+   selectProfile(profile: any): void {
+    // Set profile in service
+    this.profileService.setProfile(profile.name);
+    
+    // Navigate to profile page
+    this.router.navigate(['profile']);
   }
 }

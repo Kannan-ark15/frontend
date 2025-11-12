@@ -4,4 +4,5 @@ export interface Card {
   text: string;
   imageUrl: string;
   videoUrl: string;
+  section: string;
 }

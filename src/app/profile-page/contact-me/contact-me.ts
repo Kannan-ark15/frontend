@@ -19,7 +19,7 @@ export class ContactMe {
       name: 'GitHub',
       icon: '🐙',
       link: 'https://github.com/yourusername',
-      color: '#171515',
+      color: '#6e5494',
     },
     {
       name: 'LinkedIn',
