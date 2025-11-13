@@ -26,7 +26,6 @@ export interface TopItem {
     TopCardsGridComponent,
     Elements,
     ContactMe,
-    TopCardComponent
 ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.css',

@@ -85,7 +85,7 @@ export interface MenuItem {
       font-weight: 900;
       color: #e50914;
       text-decoration: none;
-      font-family: 'Bebas Neue', 'Impact', sans-serif;
+      font-family: 'Poppins', 'Impact', sans-serif;
       letter-spacing: 2px;
       transition: transform 0.3s ease;
     }

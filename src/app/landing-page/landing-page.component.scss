@@ -39,42 +39,72 @@ $netflix-red: #e50914;
   }
 }
 
-.animation-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-
-  &.show {
-    opacity: 1;
-    visibility: visible;
-  }
+/* Click Here Indicator Container */
+.click-indicator {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeInFloat 1s ease-out 1.5s forwards;
+    pointer-events: none;
 }
 
-#container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+.click-text {
+    font-size: 0.9rem;
+    color: rgba(229, 9, 20, 0.9);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-  app-netflix-intro {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+.arrow-container {
+    width: 30px;
+    height: 30px;
+}
+
+.curved-arrow {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: visible;
+    transform: scale(1.5);
+}
+
+.arrow-path {
+    fill: none;
+    stroke: $netflix-red;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.arrow-head {
+    fill: $netflix-red;
+}
+
+@keyframes fadeInFloat {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+// CRITICAL FIX: Remove black background, let Netflix component show through
+.animation-wrapper {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  // NO background color - transparent wrapper
+  pointer-events: none; // Allow clicks to pass through wrapper
+  
+  app-netflix-intro {
+    pointer-events: all; // But Netflix component can capture events
   }
 }

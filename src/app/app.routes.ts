@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { profileGuard } from './profile-page/profile-guard';
 export const routes: Routes = [
-    {path: '', component: LandingPageComponent},
+    {path: '', loadComponent: () => import('./landing-page/landing-page.component').then(m => m.LandingPageComponent),data: { preload: true }},
     {path: 'home',loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)},
     {path:'profile',loadComponent: () => import('./profile-page/profile-page').then(m => m.ProfilePage)},
      {

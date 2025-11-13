@@ -1,16 +1,16 @@
-import { Component, inject, OnInit } from '@angular/core'; // Import OnInit
+import { Component, inject, Input, OnInit } from '@angular/core'; // Import OnInit
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProfileService } from '../profile-page/profile-service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   // standalone: true, // Make sure this is present if you are using standalone components
-  imports: [CommonModule]
+  imports: [CommonModule,RouterModule]
 })
 export class HomeComponent implements OnInit { // Implement OnInit
-
+  @Input() logoClickRoute = '/';
   isHovering = false;
   currentBackground: string | null = null;
   profiles = [

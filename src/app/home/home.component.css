@@ -150,20 +150,24 @@
 /* ===      SHARED COMPONENT STYLES        === */
 /* =========================================== */
 
-.netflix-logo {
+.logo {
   position: absolute;
   top: 2rem;
   left: 2rem;
 }
-.netflix-logo h1 {
-  color: #e50914;
-  font-size: 2.5rem;
-  font-weight: 900;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 8px rgba(229, 9, 20, 0.5);
-}
+.logo  {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #e50914;
+      text-decoration: none;
+      font-family: 'Poppins', 'Impact', sans-serif;
+      letter-spacing: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+    }
 .profile-container {
   width: 100%;
   max-width: 500px;
@@ -206,7 +210,7 @@
 .profile-icon {
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 20%;
   overflow: hidden;
   border: 3px solid transparent;
   transition: all 0.3s ease;
@@ -246,14 +250,14 @@
 
 /* --- Mobile Breakpoint Refinements --- */
 @media (max-width: 768px) {
-  .netflix-logo {
+  .logo {
     position: relative;
     top: 0;
     left: 0;
     margin-bottom: 2rem;
     text-align: center;
   }
-  .netflix-logo h1 { font-size: 2rem; }
+  .logo  { font-size: 2rem; }
   .profile-title { font-size: 1.5rem; margin-bottom: 2rem; }
   .profiles-list { gap: 1.5rem; margin-bottom: 2rem; }
   .profile-icon { width: 80px; height: 80px; }
