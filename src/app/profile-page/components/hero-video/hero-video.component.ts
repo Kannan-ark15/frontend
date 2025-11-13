@@ -73,7 +73,7 @@ export interface ProfileHeroData {
 
     @media (max-width: 768px) {
       .hero-video-container {
-        height: 50vh !important;
+        height: 70vh !important;
       }
     }
     /* Mute Toggle Button */
@@ -171,7 +171,6 @@ export interface ProfileHeroData {
   font-weight: 500;
   line-height: 1.7;
   color: #fff;
-  margin-bottom: 25px;
   max-width: 45rem;
 }
 
@@ -223,7 +222,7 @@ export interface ProfileHeroData {
   `]
 })
 export class HeroVideoComponent {
-  @Input() height = '75vh';
+  @Input() height = '90vh';
   @Input() set videoSource(value: string) {
     this.videoSrc.set(value);
   } 

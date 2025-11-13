@@ -40,7 +40,7 @@ export class ProfilePage {
     { label: 'Experience', route: '/experience', section: 'Experience' },
     { label: 'Skills', route: '/skills', section: 'Skills' },
     { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me', route: '/contact' }
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
 
   gridcard = signal<Card[]>([

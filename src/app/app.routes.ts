@@ -27,4 +27,5 @@ export const routes: Routes = [
     {path:'sql-project', loadComponent: () => import('./sql-project/sql-project').then(m => m.SqlProject)},
     {path:'movie-recommendation', loadComponent: () => import('./movie-recommendation/movie-recommendation').then(m => m.ProjectsComponent)},
     {path:'e-commerce-project', loadComponent: () => import('./e-commerce/e-commerce').then(m => m.ECommerce)},
+    
 ]

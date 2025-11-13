@@ -13,46 +13,52 @@ export interface MenuItem {
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  template: `
-    <nav class="navbar" [class.scrolled]="isScrolled">
-      <div class="navbar-container">
-        <div class="logo-section">
-          <a [routerLink]="logoClickRoute" class="logo">K</a>
-          <button class="switch-user-btn" [routerLink]="['/home']" (click)="closeMenu()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            <span>Switch User</span>
-          </button>
-        </div>
-
-        <button 
-          class="hamburger" 
-          [class.active]="isMenuOpen" 
-          (click)="toggleMenu()"
-          aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        <ul class="nav-menu" [class.active]="isMenuOpen">
-          <li *ngFor="let item of menuItems">
-            <a 
-              [routerLink]="item.route" 
-              [fragment]="item.fragment"
-              routerLinkActive="active"
-              (click)="closeMenu()">
-              {{ item.label }}
-            </a>
-          </li>
-        </ul>
+  // app-navbar.component.ts - Updated template section
+template: `
+  <nav class="navbar" [class.scrolled]="isScrolled">
+    <div class="navbar-container">
+      <div class="logo-section">
+        <a [routerLink]="logoClickRoute" class="logo">K</a>
+        <a [routerLink]="logoClickRoute" class="switch-user-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>Switch User</span>
+        </a>
       </div>
-    </nav>
-  `,
+
+      <button class="hamburger" [class.active]="isMenuOpen" (click)="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" [class.active]="isMenuOpen">
+        <li *ngFor="let item of menuItems">
+          <!-- For fragment links: NO routerLinkActive -->
+          <a *ngIf="item.fragment"
+             [routerLink]="[item.route]"
+             [fragment]="item.fragment"
+             (click)="closeMenu()">
+            {{ item.label }}
+          </a>
+          
+          <!-- For regular route links: WITH routerLinkActive -->
+          <a *ngIf="!item.fragment"
+             [routerLink]="item.route"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{exact: true}"
+             (click)="closeMenu()">
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+`,
   styles: [`
     .navbar {
       position: fixed;

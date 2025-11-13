@@ -27,9 +27,9 @@ export class ProfileService {
       overlayText: 'Professional Portfolio & Experience',
       restrictedSections: [],
       profileHeroData: {
-        title: 'Welcome Recruiters',
-        subtitle: 'Discover Top Talent',  
-        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
+        title: 'Full Stack Developer',
+        subtitle: '',  
+        description: 'Hello Recruiters, welcome to my portfolio!Iam an innovative Full Stack Developer with expertise in building scalable web applications.Explore this website where i have bridged my passion to develop with my love to watch movies ',
         actions: ['Resume', 'LinkedIn']
       }
     },

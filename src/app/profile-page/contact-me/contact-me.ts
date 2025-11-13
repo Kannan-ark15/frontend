@@ -20,19 +20,19 @@ export class ContactMe {
     {
       name: 'Email',
       iconComponent: Mail,
-      link: 'mailto:yourname@example.com',
+      link: 'https://mail.google.com/mail/?view=cm&to=kannanar464@gmail.com&su=Hello&body=Hi%20there!',
       color: '#e50914',
     },
     {
       name: 'GitHub',
       iconComponent: Github,
-      link: 'https://github.com/yourusername',
+      link: 'https://github.com/Kannan-ark15',
       color: '#6e5494',
     },
     {
       name: 'LinkedIn',
       iconComponent: Linkedin,
-      link: 'https://www.linkedin.com/in/yourusername/',
+      link: 'https://www.linkedin.com/in/ar-kannan',
       color: '#0a66c2',
     },
   ];
