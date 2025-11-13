@@ -134,7 +134,8 @@
   transition: all 0.3s ease;
 }
 
-.tech-badge:hover {
+.tech-badge:hover,
+.tech-badge:active {
   background: rgba(229, 9, 20, 0.2);
   border-color: #e50914;
   transform: translateY(-2px);
@@ -518,7 +519,8 @@
   transition: color 0.3s ease;
 }
 
-.code-copy:hover {
+.code-copy,
+.code-copy:active {
   color: var(--chapter-color);
 }
 
@@ -567,7 +569,8 @@
   transition: transform 0.4s ease;
 }
 
-.metric-card:hover {
+.metric-card:hover ,
+.metric-card:active {
   border-color: var(--chapter-color);
   transform: translateY(-8px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
@@ -668,7 +671,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.back-button:hover {
+.back-button:hover,
+.back-button:active {
   background: #e50914;
   color: #fff;
   transform: translateY(-3px);

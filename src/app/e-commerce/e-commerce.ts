@@ -276,10 +276,11 @@ volumes:
 })
 export class ECommerce {
     menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/profile' },
-    { label: 'Contact Me', route: '/contact' }
+    {label:'Home', route:'/profile'},
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
   sentimentProject = ECOMMERCE_NETWORKING_PROJECT;
 }

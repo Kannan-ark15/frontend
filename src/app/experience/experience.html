@@ -16,18 +16,12 @@
       <!-- Video Content -->
       <div class="video-content">
         <h1 class="video-title">Welcome to My Journey</h1>
-        <p class="video-subtitle">Discover my professional experience, skills, and achievements</p>
+        <p class="video-subtitle">A timeline of experiences, education, and growth</p>
       </div>
     </div>
   </div>
 <div class="experience-container" id="timeline-section">
-  <!-- Header -->
-  <div class="timeline-header">
-    <h1 class="main-title">My Journey</h1>
-    <p class="subtitle">A timeline of experiences, education, and growth</p>
-  </div>
-
-  <!-- Timeline -->
+ <!-- Timeline -->
   <div class="timeline">
     <!-- Central vertical line -->
     <div class="timeline-line"></div>
@@ -40,7 +34,8 @@
         
         <!-- Node (Circle Icon) -->
         <div class="timeline-node" (click)="toggleExpand(item.id)">
-          <span class="node-icon">{{ item.icon }}</span>
+          <!-- <span class="node-icon">{{ item.icon }}</span> -->
+           <lucide-icon [name]="item.icon" class="node-icon"></lucide-icon>
           <div class="node-pulse"></div>
         </div>
 
@@ -79,7 +74,7 @@
                 <div class="flowchart-node"
                      [class.revealed]="isFlowchartNodeAnimated(item.id, i)">
                   <h4 class="node-title">{{ node.title }}</h4>
-                  <p class="node-text">{{ node.text }}</p>
+                  <p class="node-text"[innerHTML]="node.text"></p>
                 </div>
               }
             </div>

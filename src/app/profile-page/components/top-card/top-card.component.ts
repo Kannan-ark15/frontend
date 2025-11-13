@@ -24,7 +24,8 @@ import { CommonModule } from '@angular/common';
         background: #000;
       }
 
-      .top-card:hover {
+      .top-card:hover ,
+      .top-card:active {
         transform: scale(1.05);
         box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4);
         z-index: 10;
@@ -47,7 +48,9 @@ import { CommonModule } from '@angular/common';
         transition: transform 0.3s ease;
       }
 
-      .top-card:hover .card-image {
+      .top-card:hover,
+      .top-card:active 
+      .card-image {
         transform: scale(1.1);
       }
 

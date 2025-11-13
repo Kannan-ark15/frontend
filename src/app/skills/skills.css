@@ -344,7 +344,8 @@
   }
 }
 
-.skill-card:hover {
+.skill-card:hover,
+.skill-card:active {
   background: rgba(255, 255, 255, 0.06);
   border-color: var(--skill-color);
   transform: translateY(-12px);

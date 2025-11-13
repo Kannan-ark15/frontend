@@ -28,10 +28,11 @@ interface Stat {
 })
 export class Certifications {
   menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Certifications', route: '/certifications' },
-    { label: 'Contact Me', route: '/contact' }
+    {label:'Home', route:'/profile'},
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
 
   certificates: Certificate[] = [

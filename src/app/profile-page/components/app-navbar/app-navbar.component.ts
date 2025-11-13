@@ -101,7 +101,8 @@ template: `
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
 
-    .logo:hover {
+    .logo:hover,
+    .logo:active {
       transform: scale(1.1);
     }
 
@@ -125,12 +126,15 @@ template: `
       transition: transform 0.3s ease;
     }
 
-    .switch-user-btn:hover {
+    .switch-user-btn:hover,
+    .switch-user-btn:active {
       color: #fff;
       transform: translateY(-2px);
     }
 
-    .switch-user-btn:hover svg {
+    .switch-user-btn:hover,
+    .switch-user-btn:active
+    svg {
       transform: scale(1.1);
     }
 
@@ -214,6 +218,9 @@ template: `
     }
 
     @media (max-width: 768px) {
+      .navbar{
+            background: linear-gradient(45deg, black, transparent);
+      }
       .hamburger {
         display: flex;
       }
@@ -249,6 +256,7 @@ template: `
 
       .nav-menu.active {
         right: 0;
+        background: linear-gradient(45deg, black, transparent);
       }
 
       .nav-menu li {

@@ -28,7 +28,8 @@ $netflix-red: #e50914;
   position: absolute;
   z-index: 2;
   
-  &:hover {
+  &:hover,
+  &.active {
     transform: scale(1.1);
   }
 

@@ -1,20 +1,35 @@
 <app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
 <div class="about-page">
-  <!-- Hero Video Section -->
-  <section class="hero-video-section">
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="assets/videos/about-hero.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay">
-      <h1 class="hero-title">My Journey</h1>
-      <p class="hero-subtitle">Where Code Meets Creativity</p>
-    </div>
-    <div class="scroll-indicator">
-      <div class="mouse">
-        <div class="wheel"></div>
+ <div class="hero-video-container" [style.height]="height">
+      <video #heroVideo class="hero-video" 
+            [muted]="true"
+            [loop]="true"
+             [autoplay]="true"
+            playsinline
+            preload="auto"
+           [src]="videoSrc()" type="video/mp4">
+        </video>
+      <div class="hero-overlay"></div>
+      <div class="video-content">
+        <h1 class="project-title">About Me</h1>
+        <p class="project-description">Where Creativity meets Coding</p>
       </div>
+       <button class="mute-toggle" (click)="toggleMute()" [attr.aria-label]="isMuted() ? 'Unmute video' : 'Mute video'">
+      <!-- Muted Icon -->
+      <svg *ngIf="isMuted()" class="volume-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+      </svg>
+      
+      <!-- Unmuted Icon -->
+      <svg *ngIf="!isMuted()" class="volume-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+      </svg>
+    </button>
     </div>
-  </section>
 
   <!-- Main Attention Section -->
   <section class="attention-hero">
@@ -53,7 +68,6 @@
   <!-- About Content Section -->
   <section class="content-section">
     <div class="container">
-      
       <!-- Intro Text -->
       <div class="intro-content">
         <div class="text-reveal">
@@ -62,38 +76,12 @@
             A passionate developer driven by curiosity and innovation. 
             I transform complex problems into elegant solutions through 
             clean code and thoughtful design.
-          </p>
-        </div>
-      </div>
-
-      <!-- Journey Timeline -->
-      <div class="journey-section">
-        <h2 class="section-heading">My Path</h2>
-        
-        <div class="timeline-minimal">
-          <div class="timeline-block" data-index="01">
-            <div class="timeline-year">2018</div>
-            <div class="timeline-content">
-              <h3>The Spark</h3>
-              <p>Discovered the magic of coding and fell in love with building digital experiences.</p>
-            </div>
-          </div>
-
-          <div class="timeline-block" data-index="02">
-            <div class="timeline-year">2020</div>
-            <div class="timeline-content">
-              <h3>Growth</h3>
-              <p>Mastered modern frameworks and collaborated with talented teams on impactful projects.</p>
-            </div>
-          </div>
-
-          <div class="timeline-block" data-index="03">
-            <div class="timeline-year">2023</div>
-            <div class="timeline-content">
-              <h3>Innovation</h3>
-              <p>Now creating cutting-edge solutions that merge technical excellence with user-centered design.</p>
-            </div>
-          </div>
+            <h2 class="section-heading">Anything Else</h2>
+            <p class="section-text">
+             Dont worry iam not a Nerd who only codes all day,
+              Hitting gym has become my ritual.Gym taught me How to Raise the bar every day.
+              And yes Movies.Gym Code Moive that defines me.
+            </p>
         </div>
       </div>
 
@@ -105,79 +93,133 @@
           <div class="skill-item">
             <div class="skill-number">01</div>
             <h3>Frontend Development</h3>
-            <p>React, Angular, Vue.js - Building responsive, performant interfaces</p>
+            <p>React, Angular - Building responsive, performant interfaces</p>
           </div>
 
           <div class="skill-item">
             <div class="skill-number">02</div>
             <h3>Backend Architecture</h3>
-            <p>Node.js, Python, APIs - Scalable server-side solutions</p>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-number">03</div>
-            <h3>UI/UX Design</h3>
-            <p>Figma, Adobe XD - Crafting intuitive user experiences</p>
-          </div>
-
-          <div class="skill-item">
-            <div class="skill-number">04</div>
-            <h3>Cloud & DevOps</h3>
-            <p>AWS, Docker, CI/CD - Modern deployment pipelines</p>
+            <p>Node.js, Python, APIs,Microservices - Scalable server-side solutions</p>
           </div>
         </div>
       </div>
-
-      <!-- Philosophy -->
-      <div class="philosophy-minimal">
-        <div class="philosophy-content">
-          <h2 class="section-heading">My Approach</h2>
-          <div class="principles">
-            <div class="principle">
-              <span class="principle-marker"></span>
-              <p>User experience is paramount</p>
-            </div>
-            <div class="principle">
-              <span class="principle-marker"></span>
-              <p>Clean, maintainable code</p>
-            </div>
-            <div class="principle">
-              <span class="principle-marker"></span>
-              <p>Continuous learning and growth</p>
-            </div>
-            <div class="principle">
-              <span class="principle-marker"></span>
-              <p>Collaboration over competition</p>
-            </div>
-            <div class="principle">
-              <span class="principle-marker"></span>
-              <p>Purpose-driven development</p>
-            </div>
+     <!-- A Day in My Life Section -->
+<section class="day-in-life-section">
+  <div class="section-container">
+    <h2 class="section-title">A Day in My Life</h2>
+    <p class="section-subtitle">24 hours of code, coffee, and chaos</p>
+    
+    <div class="timeline-carousel-wrapper">
+      <div class="timeline-carousel">
+        
+        <!-- 5:00 AM -->
+        <div class="timeline-card">
+          <div class="time-badge">5:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="sunrise" [size]="56" [strokeWidth]="1.5"></lucide-icon>
           </div>
+          <h3 class="activity-title">Rise & Shine</h3>
+          <p class="activity-desc">The early bird catches the bug... I mean worm!</p>
         </div>
-      </div>
 
-      <!-- Stats -->
-      <div class="stats-section">
-        <div class="stat-card">
-          <div class="stat-number" data-target="50">0</div>
-          <div class="stat-label">Projects Completed</div>
+        <!-- 6:00 AM -->
+        <div class="timeline-card">
+          <div class="time-badge">6:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="dumbbell" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Gym Time</h3>
+          <p class="activity-desc">Raising the bar, literally and metaphorically</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="5">0</div>
-          <div class="stat-label">Years Experience</div>
+
+        <!-- 10:00 AM -->
+        <div class="timeline-card office-hours">
+          <div class="time-badge">10:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="coffee" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Coffee + Code</h3>
+          <p class="activity-desc">Caffeine loading... Hello World!</p>
+          <span class="office-badge">Office Hours</span>
         </div>
-        <div class="stat-card">
-          <div class="stat-number" data-target="100">0</div>
-          <div class="stat-label">Client Satisfaction</div>
+
+        <!-- 12:00 PM -->
+        <div class="timeline-card office-hours">
+          <div class="time-badge">12:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="utensils-crossed" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Lunch Break</h3>
+          <p class="activity-desc">Refueling the coding machine</p>
+          <span class="office-badge">Office Hours</span>
         </div>
+
+        <!-- 2:00 PM -->
+        <div class="timeline-card office-hours">
+          <div class="time-badge">2:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="bug" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Debugging Session</h3>
+          <p class="activity-desc">It's not a bug, it's a feature... right?</p>
+          <span class="office-badge">Office Hours</span>
+        </div>
+
+        <!-- 5:00 PM -->
+        <div class="timeline-card">
+          <div class="time-badge">5:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="soup" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Tea Break</h3>
+          <p class="activity-desc">Sip, relax, and contemplate semicolons</p>
+        </div>
+
+        <!-- 7:00 PM -->
+        <div class="timeline-card">
+          <div class="time-badge">7:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="film" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Movie Time</h3>
+          <p class="activity-desc">Lights, camera, action! Netflix & chill</p>
+        </div>
+
+        <!-- 8:00 PM -->
+        <div class="timeline-card">
+          <div class="time-badge">8:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="cooking-pot" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Dinner</h3>
+          <p class="activity-desc">Nom nom... energy restored!</p>
+        </div>
+
+        <!-- 10:00 PM -->
+        <div class="timeline-card">
+          <div class="time-badge">10:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="moon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Sleep Mode</h3>
+          <p class="activity-desc">Should sleep... or one more commit?</p>
+        </div>
+
       </div>
+    </div>
+    
+    <div class="carousel-controls">
+      <button class="carousel-btn prev-btn">
+        <lucide-icon name="chevron-left" [size]="24"></lucide-icon>
+      </button>
+      <button class="carousel-btn next-btn">
+        <lucide-icon name="chevron-right" [size]="24"></lucide-icon>
+      </button>
+    </div>
+  </div>
+</section>
 
     </div>
   </section>
-
-  <!-- Floating Background Gradient -->
-  <div class="gradient-orb orb-1"></div>
-  <div class="gradient-orb orb-2"></div>
 </div>
 

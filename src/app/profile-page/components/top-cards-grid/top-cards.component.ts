@@ -65,7 +65,7 @@ export interface TopItem {
     </div>
   `,
   styles: [`
-        .hover-card {
+    .hover-card {
       position: relative;
       width: 275px;
       height: 100%;
@@ -77,9 +77,16 @@ export interface TopItem {
       background-color: #000;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; 
+      overflow-y: hidden;
+    }
+    .hover-card::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
 
-    .hover-card:hover {
+    .hover-card:hover ,
+    .hover-card:active {
       z-index: 10;
     }
 
@@ -231,7 +238,7 @@ export interface TopItem {
 
     @media (max-width: 480px) {
       .hover-card {
-        width: 80px;
+        width: 100px;
         min-height: 350px;
       }
 

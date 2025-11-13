@@ -37,6 +37,7 @@ export class ProfilePage {
   overlayText = signal('');
   menuItems = signal<any[]>([]);
   private allMenuItems = [
+    {label:'Home', route:'/profile'},
     { label: 'Experience', route: '/experience', section: 'Experience' },
     { label: 'Skills', route: '/skills', section: 'Skills' },
     { label: 'Projects', route: '/profile', fragment: 'projects-section' },

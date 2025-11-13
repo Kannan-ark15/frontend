@@ -72,7 +72,8 @@
   backdrop-filter: blur(10px);
 }
 
-.certificate-card:hover {
+.certificate-card:hover,
+.certificate-card:active{
   transform: translateY(-16px) scale(1.02);
   border-color: rgba(229, 9, 20, 0.6);
   box-shadow: 0 30px 60px rgba(229, 9, 20, 0.4),
@@ -91,7 +92,9 @@
   pointer-events: none;
 }
 
-.certificate-card:hover .card-glow {
+.certificate-card:hover,
+.certificate-card:active
+.card-glow {
   opacity: 1;
   animation: rotate 8s linear infinite;
 }
@@ -137,7 +140,9 @@
   transition: color 0.3s ease;
 }
 
-.certificate-card:hover .cert-title {
+.certificate-card:hover
+.certificate-card:active,
+.cert-title {
   color: #e50914;
 }
 
@@ -189,7 +194,9 @@
   transition: all 0.3s ease;
 }
 
-.certificate-card:hover .skill-tag {
+.certificate-card:hover,
+.certificate-card:active
+.skill-tag {
   background: rgba(229, 9, 20, 0.3);
   border-color: rgba(229, 9, 20, 0.6);
   transform: translateY(-2px);
@@ -220,7 +227,8 @@
   box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
 }
 
-.view-btn:hover {
+.view-btn:hover,
+.view-btn:active {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(229, 9, 20, 0.5);
   background: linear-gradient(135deg, #ff1a24 0%, #e50914 100%);
@@ -231,7 +239,9 @@
   transition: transform 0.3s ease;
 }
 
-.view-btn:hover .arrow {
+.view-btn:hover,
+.view-btn:active,
+.arrow {
   transform: translateX(8px);
 }
 
@@ -251,7 +261,9 @@
   pointer-events: none;
 }
 
-.certificate-card:hover .card-overlay {
+.certificate-card:hover,
+.certificate-card:active,
+.card-overlay {
   opacity: 1;
 }
 
@@ -261,7 +273,9 @@
   transition: transform 0.4s ease;
 }
 
-.certificate-card:hover .overlay-content {
+.certificate-card:hover,
+.certificate-card:active,
+.overlay-content {
   transform: scale(1);
 }
 
@@ -299,7 +313,8 @@
   backdrop-filter: blur(10px);
 }
 
-.stat-card:hover {
+.stat-card:hover,
+.stat-card:active {
   transform: translateY(-8px);
   border-color: rgba(229, 9, 20, 0.6);
   box-shadow: 0 16px 40px rgba(229, 9, 20, 0.3);

@@ -21,10 +21,11 @@ export interface Skill {
 })
 export class Skills implements OnInit {
   allMenuItems = [
-    { label: 'Experience', route: '/experience', section: 'Experience'  },
-    { label: 'Skills', route: '/skills', section: 'Skills'},
-    { label: 'Projects', route: '/profile',fragment: 'projects-section' },
-    { label: 'Contact Me', route: '/contact' }
+    {label:'Home', route:'/profile'},
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
 
   skills: Skill[] = [

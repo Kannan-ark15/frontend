@@ -1,12 +1,13 @@
 import { Component, signal, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
+import { LucideAngularModule,Computer,School, GraduationCap } from 'lucide-angular';
 
 export interface TimelineItem {
   id: string;
   label: string;
   duration: string;
-  icon: string;
+  icon: any;
   color: string;
   heading: string;
   description: string;
@@ -22,16 +23,17 @@ export interface FlowchartNode {
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, AppNavbarComponent],
+  imports: [CommonModule, AppNavbarComponent, LucideAngularModule],
   templateUrl: './experience.html',
   styleUrls: ['./experience.css']
 })
 export class Experience {
   menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/profile',fragment: 'projects-section' },
-    { label: 'Contact Me', route: '/contact' }
+    {label:'Home', route:'/profile'},
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
   isMuted = true; // Start muted for autoplay
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
@@ -39,8 +41,8 @@ export class Experience {
     {
       id: 'experience',
       label: 'Work Experience',
-      duration: '1 Year',
-      icon: '💼',
+      duration: '1.3 Years',
+      icon: Computer,
       color: '#e50914',
       heading: 'Software Developer',
       description: 'Building scalable applications and automation tools for enterprise solutions.',
@@ -48,15 +50,17 @@ export class Experience {
       flowchart: [
         {
           title: 'Role',
-          text: 'Software Developer - Building scalable applications and automation tools'
+          text: 'Full Stack Software Developer - Building scalable applications and automation tools'
         },
         {
           title: 'Achievements',
-          text: 'Improved system performance by 30% and led automation initiatives'
+          text: ` &#8226;Worked on multiple product enhancemets in both frontend and backend.<br>
+                 &#8226;Imporved and educated about agentic AI capabilities within the team<br>
+                 &#8226;Introduced unique custom prompts and increased productivity by using github copilot ind development tasks.`
         },
         {
           title: 'Tech Stack',
-          text: 'Angular, Spring Boot, MySQL, Docker'
+          text: 'Angular, Spring Boot, MySQL, Docker,Flowable,Agentic AI,MCP,Microservices'
         }
       ]
     },
@@ -64,20 +68,30 @@ export class Experience {
       id: 'college',
       label: 'College',
       duration: '4 Years',
-      icon: '🎓',
+      icon: GraduationCap,
       color: '#b20710',
-      heading: 'Bachelor of Engineering in Computer Science',
-      description: 'Focused on software design, algorithms, and web technologies. Graduated with honors.',
-      expanded: false
+      heading: 'BTech in Computer Science Atrificial Intelligence and Data Science',
+      description: 'Sastra University - Graduated with CGPA: 8.4',
+      expanded: false,
+      flowchart: [
+        {
+          title: 'Academics',  
+           text: `
+            &#8226; Focused on Algorithms, AI, and ML<br>
+            &#8226; Built projects using LSTM and CNN<br>
+             &#8226; Active member of Tech Fest Committee
+            `,
+        },
+      ]
     },
     {
       id: 'school',
       label: 'School',
       duration: '2 Years',
-      icon: '🏫',
+      icon: School,
       color: '#8b0000',
       heading: 'High School',
-      description: 'Strong foundation in science and mathematics, participated in coding competitions.',
+      description: 'Strong foundation in science and mathematics',
       expanded: false
     }
   ]);

@@ -29,7 +29,7 @@ export class ProfileService {
       profileHeroData: {
         title: 'Full Stack Developer',
         subtitle: '',  
-        description: 'Hello Recruiters, welcome to my portfolio!Iam an innovative Full Stack Developer with expertise in building scalable web applications.Explore this website where i have bridged my passion to develop with my love to watch movies ',
+        description: 'Hello Recruiters, welcome to my portfolio!.I’m an innovative Full Stack Developer specializing in building scalable, high-performance web applications. This portfolio reflects the bridge between my passion for crafting impactful digital solutions and my love for storytelling through movies — combining creativity with technology in every project I build.',
         actions: ['Resume', 'LinkedIn']
       }
     },

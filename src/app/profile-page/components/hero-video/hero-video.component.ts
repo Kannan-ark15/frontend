@@ -95,7 +95,8 @@ export interface ProfileHeroData {
   backdrop-filter: blur(5px);
 }
 
-.mute-toggle:hover {
+.mute-toggle:hover,
+.mute-toggle:active {
   background: rgba(229, 9, 20, 0.8);
   border-color: #e50914;
   transform: scale(1.1);
@@ -122,7 +123,7 @@ export interface ProfileHeroData {
   position: absolute;
   bottom: 80px;
   left: 5%;
-  top:55%;
+  top:45%;
   max-width: 700px;
   z-index: 10;
   animation: fadeInUp 1s ease-out;
@@ -155,7 +156,8 @@ export interface ProfileHeroData {
   transition: all 0.3s ease;
 }
 
-.tech-badge:hover {
+.tech-badge:hover ,
+.tech-badge:active {
   transform: translateY(-2px);
 }
 
@@ -202,6 +204,7 @@ export interface ProfileHeroData {
 
   .project-description {
     margin-bottom: 0;
+    font-size: 1rem;
   }
 }
 

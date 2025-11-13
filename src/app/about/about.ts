@@ -1,23 +1,70 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Input, signal, ViewChild, AfterViewInit } from '@angular/core';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
-import * as AOS from 'aos';
+import { AboutService } from './about.service';
+import { ProfileService } from '../profile-page/profile-service';
+import { CommonModule } from '@angular/common';
+import { LucideAngularModule} from 'lucide-angular';
 @Component({
   selector: 'app-about',
-  imports: [AppNavbarComponent],
+  imports: [AppNavbarComponent, CommonModule, LucideAngularModule],
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
-export class About {
-    menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Certifications', route: '/certifications' },
-    { label: 'Contact Me', route: '/contact' }
+export class About implements AfterViewInit {
+  menuItems = [
+    { label: 'Home', route: '/profile' },
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me', route: '/profile', fragment: 'contact-id' },
   ];
   
- ngOnInit() {
+  aboutService = inject(AboutService);
+  profileService = inject(ProfileService);
+  
+  @Input() height = '90vh';
+  @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
+  
+  videoSrc = signal('assets/videos/About_Recruiter.mp4');
+  isMuted = signal(true);
+
+  ngOnInit() {
     this.animateStats();
     this.observeElements();
+    this.videoSrc.set(this.aboutService.getvideoUrlForProfile(this.profileService.getProfile()));
+  }
+
+  ngAfterViewInit() {
+    // Ensure video plays after view is initialized
+    if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
+      const video = this.heroVideoRef.nativeElement;
+      
+      // Try to play the video
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            console.log('Video playing successfully');
+          })
+          .catch(error => {
+            console.error('Error playing video:', error);
+            // If autoplay fails, it's usually because of browser policies
+            // Keep it muted and try again
+            video.muted = true;
+            this.isMuted.set(true);
+            video.play().catch(err => console.error('Second play attempt failed:', err));
+          });
+      }
+    }
+  }
+
+  toggleMute() {
+    if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
+      const video = this.heroVideoRef.nativeElement;
+      video.muted = !video.muted;
+      this.isMuted.set(video.muted);
+    }
   }
 
   @HostListener('window:scroll', [])
@@ -27,7 +74,7 @@ export class About {
 
   observeElements(): void {
     const elements = document.querySelectorAll(
-      '.intro-content, .timeline-block, .skill-item, .principle, .stat-card'
+      '.intro-content, .timeline-block, .skill-item, .principle, .stat-card,.word'
     );
     
     elements.forEach(element => {
@@ -73,5 +120,3 @@ export class About {
     });
   }
 }
-
-

@@ -168,11 +168,12 @@ if __name__ == '__main__':
   `
 })
 export class ProjectsComponent {
-       menuItems = [
-    { label: 'Experience', route: '/experience' },
-    { label: 'Skills', route: '/skills' },
-    { label: 'Projects', route: '/profile' },
-    { label: 'Contact Me', route: '/contact' }
+    menuItems = [
+    {label:'Home', route:'/profile'},
+    { label: 'Experience', route: '/experience', section: 'Experience' },
+    { label: 'Skills', route: '/skills', section: 'Skills' },
+    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
+    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
   ];
   sentimentProject = SENTIMENT_ANALYSIS_PROJECT;
 }

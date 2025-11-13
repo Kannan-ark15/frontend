@@ -51,7 +51,7 @@
 /* Video Content Overlay */
 .video-content {
   position: absolute;
-  bottom: 25%;
+  bottom: 10%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -198,7 +198,8 @@
   box-shadow: 0 0 30px var(--item-color);
 }
 
-.timeline-node:hover {
+.timeline-node:hover,
+.timeline-node.active {
   transform: translateX(-50%) scale(1.15);
   box-shadow: 0 0 50px var(--item-color);
 }
@@ -249,17 +250,14 @@
   margin-left: 0;
 }
 
-.timeline-content:hover {
+.timeline-content:hover ,
+.timeline-content:active {
   background: rgba(255, 255, 255, 0.06);
-  border-color: var(--item-color);
   transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--item-color);
 }
 
 .timeline-item.expanded .timeline-content {
   background: rgba(255, 255, 255, 0.08);
-  border-color: var(--item-color);
-  box-shadow: 0 0 60px var(--item-color);
 }
 
 /* Content Header */
