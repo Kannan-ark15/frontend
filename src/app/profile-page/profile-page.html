@@ -1,9 +1,9 @@
 <app-navbar [menuItems]="menuItems()" logoClickRoute="/"></app-navbar>
 <app-hero-video [videoSource]="videoSrc()"
-  [text]="overlayText()" height="75vh"></app-hero-video>
+  [profileHeroData]="projectData" height="75vh"></app-hero-video>
 <section class="content-section">
  <div class="hover-cards-container">
-    <h2 class="section-title">Explore More</h2>
+    <h2 class="section-title">Top 4</h2>
     <div class="hover-cards-wrapper">
       @for (card of gridcard(); track card.id) {
         <app-top-cards-grid [card]="card" />

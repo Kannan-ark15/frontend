@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+// app-navbar.component.ts - With optional scroll effect
+import { Component, Input, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 
@@ -13,7 +14,7 @@ export interface MenuItem {
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <nav class="navbar">
+    <nav class="navbar" [class.scrolled]="isScrolled">
       <div class="navbar-container">
         <div class="logo-section">
           <a [routerLink]="logoClickRoute" class="logo">K</a>
@@ -54,16 +55,19 @@ export interface MenuItem {
   `,
   styles: [`
     .navbar {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       width: 100%;
       height: 68px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.7) 90%);
-      backdrop-filter: blur(10px);
+      background: transparent;
       z-index: 1000;
-      border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+      transition: all 0.3s ease;
     }
 
+    /* Background appears when scrolled past 50px */
+ 
     .navbar-container {
       max-width: 1920px;
       margin: 0 auto;
@@ -88,6 +92,7 @@ export interface MenuItem {
       font-family: 'Poppins', 'Impact', sans-serif;
       letter-spacing: 2px;
       transition: transform 0.3s ease;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
     }
 
     .logo:hover {
@@ -99,7 +104,7 @@ export interface MenuItem {
       align-items: center;
       gap: 8px;
       padding: 8px 16px;
-      background: transparent;
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(229, 9, 20, 0.5);
       border-radius: 4px;
       color: #e5e5e5;
@@ -115,8 +120,6 @@ export interface MenuItem {
     }
 
     .switch-user-btn:hover {
-      background: rgba(229, 9, 20, 0.1);
-      border-color: #e50914;
       color: #fff;
       transform: translateY(-2px);
     }
@@ -144,6 +147,7 @@ export interface MenuItem {
       font-weight: 500;
       transition: color 0.3s ease;
       position: relative;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
     }
 
     .nav-menu li a::after {
@@ -160,6 +164,7 @@ export interface MenuItem {
     .nav-menu li a:hover,
     .nav-menu li a.active {
       color: #fff;
+      text-shadow: 1px 1px 6px rgba(229, 9, 20, 0.6);
     }
 
     .nav-menu li a:hover::after,
@@ -187,6 +192,7 @@ export interface MenuItem {
       border-radius: 3px;
       transition: all 0.3s ease;
       transform-origin: center;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     }
 
     .hamburger.active span:nth-child(1) {
@@ -228,7 +234,6 @@ export interface MenuItem {
         right: -100%;
         top: 68px;
         flex-direction: column;
-        background: rgba(0, 0, 0, 0.98);
         width: 100%;
         text-align: center;
         transition: right 0.3s ease;
@@ -265,8 +270,15 @@ export class AppNavbarComponent {
   @Input() menuItems: MenuItem[] = [];
   @Input() logoClickRoute = '/';
   isMenuOpen = false;
+  isScrolled = false;
 
   constructor(private router: Router) {}
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Add background when scrolled past 50px
+    this.isScrolled = window.pageYOffset > 50;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

@@ -284,25 +284,6 @@ export class TopCardsGridComponent {
     this.isHovered.set(false);
   }
 
-  // selectedCard(title: string): void {
-  //   switch (title) {
-  //     case 'About':
-  //     this.router.navigate(['/about']);
-  //     break;
-  //     case 'Skills':
-  //     this.router.navigate(['/skills']);
-  //     break;
-  //     case 'Experience':
-  //     this.router.navigate(['/experience']);
-  //     break;    
-  //     case 'Certifications':
-  //     this.router.navigate(['/certifications']);
-  //     break;
-  //     default:
-  //       this.router.navigate(['']);
-  //     break;
-  //   }
-  // }
   selectedCard(item:Number) {
     switch (item) {
       case 1:

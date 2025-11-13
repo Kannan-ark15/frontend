@@ -6,6 +6,12 @@ export interface ProfileConfig {
   heroVideo: string;
   overlayText: string;
   restrictedSections: string[];
+  profileHeroData?: {
+    title: string;
+    subtitle: string;
+    description: string;
+    actions: string[];
+  };
 }
 
 @Injectable({
@@ -17,21 +23,39 @@ export class ProfileService {
   private profileConfigs: Record<string, ProfileConfig> = {
     'Recruiter': {
       name: 'Recruiter',
-      heroVideo: 'assets/videos/hero1.mp4',
+      heroVideo: 'assets/videos/Recruiter.mp4',
       overlayText: 'Professional Portfolio & Experience',
-      restrictedSections: []
+      restrictedSections: [],
+      profileHeroData: {
+        title: 'Welcome Recruiters',
+        subtitle: 'Discover Top Talent',  
+        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
+        actions: ['Resume', 'LinkedIn']
+      }
     },
     'Developer': {
       name: 'Developer',
       heroVideo: 'assets/videos/hero.mp4',
       overlayText: 'Building Amazing Software Solutions',
-      restrictedSections: ['Experience']
+      restrictedSections: ['Experience'],
+      profileHeroData: {
+        title: 'Welcome Recruiters',
+        subtitle: 'Discover Top Talent',  
+        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
+        actions: ['Resume', 'Linkein']
+      }
     },
     'Stalker': {
       name: 'Stalker',
       heroVideo: 'assets/videos/stalker-hero.mp4',
       overlayText: 'Exploring Digital Footprints',
-      restrictedSections: ['Skills', 'Experience']
+      restrictedSections: ['Skills', 'Experience'],
+      profileHeroData: {
+        title: 'Welcome Recruiters',
+        subtitle: 'Discover Top Talent',  
+        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
+        actions: []
+      }
     }
   };
 

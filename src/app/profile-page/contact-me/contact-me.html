@@ -15,7 +15,11 @@
         [style.--delay]="i * 0.1 + 's'">
         <div class="card-inner">
           <div class="icon-wrapper">
-            <span class="icon">{{ contact.icon }}</span>
+            <lucide-icon 
+              class="icon" 
+              [img]="contact.iconComponent"
+              [size]="56">
+            </lucide-icon>
             <div class="icon-bg"></div>
           </div>
           <span class="text">{{ contact.name }}</span>

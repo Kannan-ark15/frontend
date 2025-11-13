@@ -42,57 +42,39 @@ export class ProfilePage {
     { label: 'Projects', route: '/profile', fragment: 'projects-section' },
     { label: 'Contact Me', route: '/contact' }
   ];
-  //   {
-  //     id: 1,
-  //     image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=600&fit=crop',
-  //     title: 'Project Alpha',
-  //     description: 'E-commerce platform'
-  //   },
-  //   {
-  //     id: 2,
-  //     image: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?w=400&h=600&fit=crop',
-  //     title: 'Dashboard Pro',
-  //     description: 'Analytics dashboard'
-  //   },
-  //   {
-  //     id: 3,
-  //     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=600&fit=crop',
-  //     title: 'Mobile App',
-  //     description: 'Social networking'
-  //   },
-  // ];
+
   gridcard = signal<Card[]>([
     {
       id: 1,
       title: '1',
-      text: 'Learn more about my journey and background in software development.',
+      text: 'Sql Syncup Automation System with Custom MCP',
       imageUrl: 'assets/images/Sql.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-programmer-writing-on-a-laptop-in-a-dark-room-4330-large.mp4',
-      section: 'About'
+      section: ''
     },
     {
       id: 2,
       title: '2',
-      text: 'Discover my technical skills and expertise in various technologies.',
+      text: 'Movie Recommendation Sytsem based on Sentiment-Analysis.',
       imageUrl: 'assets/images/Lstm.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-a-man-sits-in-a-dark-room-and-works-on-a-computer-4328-large.mp4',
-      section: 'Skills'
+      section: ''
     },
     {
       id: 3,
       title: '3',
-      text: 'Explore my professional experience and career achievements.',
+      text: 'E-commerce Website with Payment Gateway Integration.',
       imageUrl: 'assets/images/E-commerce.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-keyboard-in-a-dark-room-4326-large.mp4',
-      section: 'Experience'
+      section: ''
     },
     {
       id: 4,
-      title: 'Coming Soon..',
-      text: 'View my official certifications and professional credentials.',
-      imageUrl: 'https://picsum.photos/seed/certs/800/1200',
+      title: '4',
+      text: 'Project development in Progress.',
+      imageUrl: 'assets/images/soon.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4',
-      section: 'Certifications'
+      section: ''
     }
   ]);
     cards = signal<Card[]>([
@@ -100,15 +82,15 @@ export class ProfilePage {
       id: 1,
       title: 'About',
       text: 'Learn more about my journey and background in software development.',
-      imageUrl: 'https://picsum.photos/seed/about/800/1200',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-programmer-writing-on-a-laptop-in-a-dark-room-4330-large.mp4',
+      imageUrl: 'assets/images/about.png',
+      videoUrl: 'assets/videos/about.mp4',
       section: 'About'
     },
     {
       id: 2,
       title: 'Skills',
       text: 'Discover my technical skills and expertise in various technologies.',
-      imageUrl: 'https://picsum.photos/seed/skills/800/1200',
+      imageUrl: 'assets/images/skills.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-a-man-sits-in-a-dark-room-and-works-on-a-computer-4328-large.mp4',
       section: 'Skills'
     },
@@ -116,19 +98,20 @@ export class ProfilePage {
       id: 3,
       title: 'Experience',
       text: 'Explore my professional experience and career achievements.',
-      imageUrl: 'https://picsum.photos/seed/experience/800/1200',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-keyboard-in-a-dark-room-4326-large.mp4',
+      imageUrl: 'assets/images/experience.png',
+      videoUrl: 'assets/images/experience.png',
       section: 'Experience'
     },
     {
       id: 4,
       title: 'Certifications',
       text: 'View my official certifications and professional credentials.',
-      imageUrl: 'https://picsum.photos/seed/certs/800/1200',
+      imageUrl: 'assets/images/certificates.png',
       videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4',
       section: 'Certifications'
     }
   ]);
+  projectData: any;
 
  
   constructor(private route: ActivatedRoute) {}
@@ -140,6 +123,7 @@ export class ProfilePage {
     // Set hero video and overlay text
     this.videoSrc.set(profileConfig.heroVideo);
     this.overlayText.set(profileConfig.overlayText);
+    this.projectData = profileConfig.profileHeroData!;
     
     // Filter menu items based on restrictions
     this.menuItems.set(

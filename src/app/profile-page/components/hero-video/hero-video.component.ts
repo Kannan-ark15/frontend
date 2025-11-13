@@ -1,6 +1,11 @@
 import { Component, ElementRef, Input, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+export interface ProfileHeroData {
+  title: string;
+  subtitle: string;
+  description: string;
+  actions: string[];
+}
 @Component({
   selector: 'app-hero-video',
   standalone: true,
@@ -15,6 +20,15 @@ import { CommonModule } from '@angular/common';
            [src]="videoSrc()" type="video/mp4">
         </video>
       <div class="hero-overlay"></div>
+      <div class="video-content">
+        <h1 class="project-title">{{ profileHeroData.title }}</h1>
+        <p class="project-description">{{ profileHeroData.description }}</p>
+        <div class="tech-badges">
+          @for (tech of profileHeroData.actions; track tech) {
+            <span class="tech-badge">{{ tech }}</span>
+          }
+        </div>
+      </div>
        <button class="mute-toggle" (click)="toggleMute()" [attr.aria-label]="isMuted() ? 'Unmute video' : 'Mute video'">
       <!-- Muted Icon -->
       <svg *ngIf="isMuted()" class="volume-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,9 +117,71 @@ import { CommonModule } from '@angular/common';
 .mute-toggle:not(:hover) .volume-icon {
   animation: none;
 }
+.video-content {
+  font-color: white;
+  position: absolute;
+  bottom: 80px;
+  left: 5%;
+  top:55%;
+  max-width: 700px;
+  z-index: 10;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tech-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tech-badge {
+  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  transform: translateY(-2px);
+}
+
+.project-title {
+  font-size: clamp(3rem, 2vw, 5rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: #fff;
+}
+
+.project-description {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #fff;
+  margin-bottom: 25px;
+  max-width: 45rem;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
+  .video-content {
+    left: 4%;
+    right: 4%;
+    bottom: 60px;
+  }
   .mute-toggle {
     width: 45px;
     height: 45px;
@@ -116,6 +192,17 @@ import { CommonModule } from '@angular/common';
   .volume-icon {
     width: 22px;
     height: 22px;
+  }
+   .project-title {
+    font-size: 2rem;
+  }
+  
+  .project-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .project-description {
+    margin-bottom: 0;
   }
 }
 
@@ -143,6 +230,7 @@ export class HeroVideoComponent {
   @Input() set text(value: string) {
     this.overlayText.set(value);
   }
+  @Input() profileHeroData!: ProfileHeroData;
   videoSrc = signal('assets/videos/default-hero.mp4');
   overlayText = signal('Welcome to My Portfolio');
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
