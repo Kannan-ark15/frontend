@@ -24,8 +24,8 @@
 
 .skill-icon-large img,
 .skill-card-icon img {
-  width: 64px;    /* Customize size */
-  height: 64px;   /* Customize size */
+  width: 50vh;    /* Customize size */
+  height: 35vh;   /* Customize size */
   object-fit: contain;
   border-radius: 8px; /* Optional: Rounded corners */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Optional: Shadow */
@@ -185,7 +185,6 @@
 .skill-name-large {
   font-size: 5.5rem;
   font-weight: 900;
-  margin: 0 0 20px 0;
   background: linear-gradient(135deg, var(--skill-color), #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

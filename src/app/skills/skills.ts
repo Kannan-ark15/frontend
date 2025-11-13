@@ -31,7 +31,7 @@ export class Skills implements OnInit {
   skills: Skill[] = [
     {
       name: 'Python',
-      icon: '🐍',
+      icon: 'assets/icons/python.png',
       description: 'Backend development, Data Science, Machine Learning',
       color: 'Red',
       level: 90
@@ -45,7 +45,7 @@ export class Skills implements OnInit {
     },
     {
       name: 'JavaScript',
-      icon: 'assets/icons/angular-2.png',
+      icon: 'assets/icons/javascript.png',
       description: 'Full-stack development, Modern frameworks, Node.js',
       color: '#F7DF1E',
       level: 95
@@ -59,7 +59,7 @@ export class Skills implements OnInit {
     },
     {
       name: 'Spring Boot',
-      icon: '🍃',
+      icon: 'assets/icons/springboot.png',
       description: 'RESTful APIs, Microservices, Cloud-native applications',
       color: '#6DB33F',
       level: 82
