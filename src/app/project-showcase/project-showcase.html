@@ -13,15 +13,12 @@
         <h1 class="project-title">{{ projectData.title }}</h1>
         <p class="project-subtitle">{{ projectData.subtitle }}</p>
         <p class="project-description">{{ projectData.description }}</p>
+        <h1>Cast:</h1>
         <div class="tech-badges">
           @for (tech of projectData.techStack; track tech) {
             <span class="tech-badge">{{ tech }}</span>
           }
         </div>
-      </div>
-      <div class="hover-hint" [class.hide]="isVideoHovered()">
-        <span class="hint-icon">▶</span>
-        <span>Hover to play</span>
       </div>
     </div>
   </section>
@@ -111,19 +108,6 @@
                   <pre class="code-snippet"><code>{{ chapter.code }}</code></pre>
                 </div>
               }
-              
-              <!-- Metrics Grid -->
-              @if (chapter.metrics) {
-                <div class="metrics-container">
-                  @for (metric of chapter.metrics; track metric.label) {
-                    <div class="metric-card">
-                      <div class="metric-icon">{{ metric.icon }}</div>
-                      <div class="metric-value">{{ metric.value }}</div>
-                      <div class="metric-label">{{ metric.label }}</div>
-                    </div>
-                  }
-                </div>
-              }
             </div>
             
             <!-- Right Image -->
@@ -144,7 +128,7 @@
     <div class="footer-content">
       <h3>Ready to explore more?</h3>
       <p>Check out other cinematic projects</p>
-      <button class="back-button">← Back to Projects</button>
+      <button class="back-button" (click)="routeProjects()">← Back to Projects</button>
     </div>
   </footer>
 </div>

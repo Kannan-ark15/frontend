@@ -1,6 +1,8 @@
-import { Component, signal, ElementRef, ViewChild, AfterViewInit, OnDestroy, Input } from '@angular/core';
+import { Component, signal, ElementRef, ViewChild, AfterViewInit, OnDestroy, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectShowcaseData, Chapter } from './project-data.model';
+import { Route } from 'lucide-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-showcase',
@@ -21,7 +23,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
   allChaptersCompleted = signal(false);
   
   chapters: Chapter[] = [];
-  
+  route=inject(Router);
   private typingIntervals: Map<number, any> = new Map();
   private scrollListener: any;
 
@@ -166,6 +168,10 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
 
   getTypingText(chapterId: number): string {
     return this.typingTexts()[chapterId] || '';
+  }
+
+  routeProjects(){
+    this.route.navigate(['/profile'], { fragment: 'projects-section' });
   }
 
 }
