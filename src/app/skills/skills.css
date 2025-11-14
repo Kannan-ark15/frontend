@@ -398,6 +398,9 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .skill-content{
+        bottom: 8rem;
+  }
   .skill-name-large {
     font-size: 3.5rem;
   }

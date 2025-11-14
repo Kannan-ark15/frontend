@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { CommonModule } from '@angular/common';
-
+import { LucideAngularModule,GraduationCap,Book,Trophy,Target,Star,Rocket} from 'lucide-angular';
 interface Certificate {
   title: string;
   issuer: string;
   platform: string;
   platformColor: string;
-  icon: string;
+  icon: any;
   date: string;
   duration?: string;
   skills: string[];
@@ -15,14 +15,14 @@ interface Certificate {
 }
 
 interface Stat {
-  icon: string;
+  icon: any;
   value: string;
   label: string;
 }
 
 @Component({
   selector: 'app-certifications',
-  imports: [AppNavbarComponent, CommonModule],
+  imports: [AppNavbarComponent, CommonModule,LucideAngularModule],
   templateUrl: './certifications.html',
   styleUrl: './certifications.css',
 })
@@ -37,45 +37,45 @@ export class Certifications {
 
   certificates: Certificate[] = [
     {
-      title: 'Complete Course',
+      title: 'Web Development Bootcamp',
       issuer: 'Udemy',
       platform: 'UDEMY',
       platformColor: 'linear-gradient(135deg, #a435f0 0%, #7c1fd6 100%)',
-      icon: '🎓',
-      date: 'Completed 2024',
+      icon: GraduationCap,
+      date: 'Jan 12 2023',
       duration: 'Self-paced',
-      skills: ['Web Development', 'Programming', 'Professional Skills'],
+      skills: ['Web Development', 'Rest-Api','O-Auth','MERN Stack','MongoDB'],
       link: 'https://www.udemy.com/certificate/UC-ef297470-5dcd-4212-9c17-0eb24527fb2f/'
     },
     {
-      title: 'Course Completion',
+      title: 'Machine Learning',
       issuer: 'Coursera',
       platform: 'COURSERA',
       platformColor: 'linear-gradient(135deg, #0056d2 0%, #003d99 100%)',
-      icon: '📚',
-      date: 'Completed 2024',
-      duration: 'Online Course',
-      skills: ['Academic Learning', 'Skill Development', 'Professional Growth'],
+      icon: Book,
+      date: '03 March 2022',
+      duration: '3 Months',
+      skills: ['ML Algorithms', 'Supervised Learning', 'Unsupervised Learning','Reinforcement Learning'],
       link: 'https://www.coursera.org/account/accomplishments/verify/3Q8RZMY4DKVU?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=course'
     },
     {
-      title: 'Specialization Certificate',
+      title: 'Python For Everybody',
       issuer: 'Coursera',
       platform: 'COURSERA',
       platformColor: 'linear-gradient(135deg, #0056d2 0%, #003d99 100%)',
-      icon: '🏆',
-      date: 'Completed 2024',
-      duration: 'Multi-Course Program',
-      skills: ['Advanced Topics', 'Comprehensive Learning', 'Expert Level'],
+      icon: Trophy,
+      date: 'June 1 2021',
+      duration: '2 Months 10 Days',
+      skills: ['Python', 'Web-Scraping', 'Dataretreival with Python'],
       link: 'https://www.coursera.org/account/accomplishments/specialization/C3Y2KJDBA9KY?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=sharing_cta&utm_product=s12n'
     }
   ];
 
   stats: Stat[] = [
-    { icon: '🎯', value: '3+', label: 'Certifications' },
-    { icon: '📖', value: '2+', label: 'Platforms' },
-    { icon: '⭐', value: '100%', label: 'Completion Rate' },
-    { icon: '🚀', value: 'Active', label: 'Learning Journey' }
+    { icon: Target, value: '3+', label: 'Certifications' },
+    { icon: Book, value: '2+', label: 'Platforms' },
+    { icon: Star, value: '100%', label: 'Completion Rate' },
+    { icon: Rocket, value: 'Active', label: 'Learning Journey' }
   ];
 
   openCertificate(link: string): void {

@@ -31,11 +31,10 @@
   margin-bottom: 16px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  animation: titleGlow 3s ease-in-out infinite;
 }
 
 .subtitle {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 300;
   letter-spacing: 3px;
@@ -45,7 +44,7 @@
 .title-underline {
   width: 120px;
   height: 4px;
-  background: linear-gradient(90deg, transparent, #e50914, transparent);
+  background: #e50914;
   margin: 24px auto 0;
   border-radius: 2px;
   animation: expandWidth 1.5s ease-out;
@@ -75,9 +74,6 @@
 .certificate-card:hover,
 .certificate-card:active{
   transform: translateY(-16px) scale(1.02);
-  border-color: rgba(229, 9, 20, 0.6);
-  box-shadow: 0 30px 60px rgba(229, 9, 20, 0.4),
-              0 0 100px rgba(229, 9, 20, 0.2);
 }
 
 .card-glow {
@@ -124,6 +120,7 @@
   font-size: 2.5rem;
   filter: drop-shadow(0 4px 8px rgba(229, 9, 20, 0.5));
   animation: float 3s ease-in-out infinite;
+  color: #fff;
 }
 
 /* Card Body */
@@ -197,8 +194,6 @@
 .certificate-card:hover,
 .certificate-card:active
 .skill-tag {
-  background: rgba(229, 9, 20, 0.3);
-  border-color: rgba(229, 9, 20, 0.6);
   transform: translateY(-2px);
 }
 
@@ -223,8 +218,6 @@
   gap: 12px;
   transition: all 0.3s ease;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
 }
 
 .view-btn:hover,
@@ -248,11 +241,10 @@
 /* Card Overlay */
 .card-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10rem;
+  right: 10rem;
   width: 100%;
   height: 100%;
-  background: rgba(229, 9, 20, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -280,7 +272,7 @@
 }
 
 .overlay-icon {
-  font-size: 4rem;
+  color:#fff;
   display: block;
   margin-bottom: 16px;
   animation: pulse 1.5s ease-in-out infinite;
@@ -304,7 +296,6 @@
 
 .stat-card {
   background: rgba(20, 20, 20, 0.6);
-  border: 2px solid rgba(229, 9, 20, 0.2);
   border-radius: 20px;
   padding: 32px;
   text-align: center;
@@ -316,14 +307,13 @@
 .stat-card:hover,
 .stat-card:active {
   transform: translateY(-8px);
-  border-color: rgba(229, 9, 20, 0.6);
-  box-shadow: 0 16px 40px rgba(229, 9, 20, 0.3);
 }
 
 .stat-icon {
   font-size: 3rem;
   margin-bottom: 16px;
   animation: float 3s ease-in-out infinite;
+  color: #fff;
 }
 
 .stat-value {
@@ -424,15 +414,6 @@
   }
 }
 
-@keyframes titleGlow {
-  0%, 100% {
-    text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 40px rgba(229, 9, 20, 0.8),
-                 0 0 60px rgba(229, 9, 20, 0.5);
-  }
-}
 
 @keyframes expandWidth {
   from {

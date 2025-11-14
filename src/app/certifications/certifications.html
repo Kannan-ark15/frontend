@@ -23,7 +23,7 @@
           <div class="platform-badge" [style.background]="cert.platformColor">
             {{ cert.platform }}
           </div>
-          <div class="cert-icon">{{ cert.icon }}</div>
+          <lucide-icon [name]="cert.icon" class="cert-icon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
         </div>
 
         <div class="card-body">
@@ -32,11 +32,11 @@
           
           <div class="cert-details">
             <div class="detail-item">
-              <span class="detail-icon">📅</span>
+              <lucide-icon name="calendar" class="detail-icon"></lucide-icon>
               <span class="detail-text">{{ cert.date }}</span>
             </div>
             <div class="detail-item" *ngIf="cert.duration">
-              <span class="detail-icon">⏱️</span>
+              <lucide-icon name="AlarmClock" class="detail-icon"></lucide-icon>
               <span class="detail-text">{{ cert.duration }}</span>
             </div>
           </div>
@@ -49,15 +49,7 @@
         <div class="card-footer">
           <button class="view-btn">
             <span>View Certificate</span>
-            <span class="arrow">→</span>
           </button>
-        </div>
-
-        <div class="card-overlay">
-          <div class="overlay-content">
-            <span class="overlay-icon">🔍</span>
-            <p>Click to View</p>
-          </div>
         </div>
       </div>
     </div>
@@ -65,18 +57,11 @@
     <!-- Stats Section -->
     <div class="stats-section">
       <div class="stat-card" *ngFor="let stat of stats; let i = index" [style.animation-delay]="i * 0.1 + 's'">
-        <div class="stat-icon">{{ stat.icon }}</div>
+        <lucide-icon [name]="stat.icon" class="stat-icon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
         <div class="stat-value">{{ stat.value }}</div>
         <div class="stat-label">{{ stat.label }}</div>
       </div>
     </div>
   </div>
 
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="bg-shape shape-1"></div>
-    <div class="bg-shape shape-2"></div>
-    <div class="bg-shape shape-3"></div>
-    <div class="bg-shape shape-4"></div>
-  </div>
 </section>

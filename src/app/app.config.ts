@@ -12,7 +12,10 @@ import {
   Soup,         // 5:00 PM - Tea break
   Film,         // 7:00 PM - Movie
   CookingPot,   // 8:00 PM - Dinner
-  Moon          // 10:00 PM - Sleep
+  Moon ,
+  Search,
+  Calendar,         // 10:00 PM - Sleep
+  AlarmClock
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -28,7 +31,10 @@ export const appConfig: ApplicationConfig = {
         Soup,
         Film,
         CookingPot,
-        Moon
+        Moon,
+        Search,
+        Calendar,
+        AlarmClock
       })
     )
   ],
