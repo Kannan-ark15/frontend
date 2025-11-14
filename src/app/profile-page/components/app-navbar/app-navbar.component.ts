@@ -174,7 +174,6 @@ template: `
     .nav-menu li a:hover,
     .nav-menu li a.active {
       color: #fff;
-      text-shadow: 1px 1px 6px rgba(229, 9, 20, 0.6);
     }
 
     .nav-menu li a:hover::after,

@@ -33,12 +33,12 @@ export class Skills implements OnInit {
       name: 'Python',
       icon: 'assets/icons/python.png',
       description: 'Backend development, Data Science, Machine Learning',
-      color: 'Red',
+      color:'#FFD43B',
       level: 90
     },
     {
       name: 'Java',
-      icon: '☕',
+      icon: 'assets/icons/java.png',
       description: 'Enterprise applications, Spring Framework, Microservices',
       color: '#ED8B00',
       level: 85
@@ -63,7 +63,35 @@ export class Skills implements OnInit {
       description: 'RESTful APIs, Microservices, Cloud-native applications',
       color: '#6DB33F',
       level: 82
-    }
+    },
+    {
+    name: 'MySQL',
+    icon: 'assets/icons/mysql.png',
+    description: 'Database design, optimization, queries, indexing, joins',
+    color: '#00758F',
+    level: 80
+  },
+  {
+    name: 'React',
+    icon: 'assets/icons/react.png',
+    description: 'Component-based architecture, UI engineering, hooks & state management',
+    color: '#61DBFB',
+    level: 85
+  },
+  {
+    name: 'Node.js',
+    icon: 'assets/icons/nodejs.png',
+    description: 'Backend APIs,authentication, scalable networking applications',
+    color: '#68A063',
+    level: 78
+  },
+  {
+    name: 'Machine Learning',
+    icon: 'assets/icons/machinelearning.png',
+    description: 'Deep Learning, LSTMs, CNNs, model training & evaluation',
+    color: '#FFB800',
+    level: 75
+  }
   ];
   private profileService = inject(ProfileService);
   private router = inject(Router);
