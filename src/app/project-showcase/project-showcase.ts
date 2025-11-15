@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectShowcaseData, Chapter } from './project-data.model';
 import { Route } from 'lucide-angular';
 import { Router } from '@angular/router';
+import { ProfileService } from '../profile-page/profile-service';
 
 @Component({
   selector: 'app-project-showcase',
@@ -26,10 +27,22 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
   route=inject(Router);
   private typingIntervals: Map<number, any> = new Map();
   private scrollListener: any;
-
+  profileService=inject(ProfileService)
+  profile='';
   ngOnInit() {
     // Initialize chapters from input data
     this.chapters = this.projectData.chapters;
+
+         const currentUrl = this.route.url;
+        const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+       if (profileMatch) {
+          this.profile = profileMatch[1];
+          this.profileService.setProfile(this.profile);
+        } else {
+          this.profile = 'recruiter';
+          this.profileService.setProfile(this.profile);
+        }
+    
   }
 
   ngAfterViewInit() {
@@ -171,7 +184,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
   }
 
   routeProjects(){
-    this.route.navigate(['/profile'], { fragment: 'projects-section' });
+    this.route.navigate([`/${this.profile}/home`], { fragment: 'projects-section' });
   }
 
 }
