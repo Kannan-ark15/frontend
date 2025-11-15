@@ -4,7 +4,7 @@
     <div class="video-wrapper" 
          (mouseenter)="onVideoHover(true)" 
          (mouseleave)="onVideoHover(false)">
-      <video #videoPlayer class="banner-video" loop muted playsinline 
+      <video #videoPlayer class="banner-video" loop [muted]="true" playsinline 
              [src]="projectData.videoUrl">
         Your browser does not support the video tag.
       </video>

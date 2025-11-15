@@ -259,7 +259,7 @@ export class HeroVideoComponent {
         return 'https://www.linkedin.com/in/ar-kannan';
       default:
       case 'Resume':
-        return ''
+        return 'https://drive.google.com/uc?export=download&id=1wTxDpWbqnPQW0aCuEPkA0bY2au6NF_N2'
     }
   }
    private initializeVideo() {
