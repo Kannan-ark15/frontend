@@ -25,6 +25,8 @@ export class About implements AfterViewInit, OnInit {
   
   videoSrc = signal('assets/videos/About_Recruiter.mp4');
   isMuted = signal(false);
+  description: any;
+  title: any;
 
   ngOnInit() {
     // Extract profile from current URL
@@ -43,16 +45,18 @@ export class About implements AfterViewInit, OnInit {
     // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];
 
     this.animateStats();
     this.observeElements();
-    this.videoSrc.set(this.aboutService.getvideoUrlForProfile(this.profile));
+    const aboutDetails=this.aboutService.getvideoUrlForProfile(this.profile)
+    this.videoSrc.set(aboutDetails.videoUrl);
+    this.title=aboutDetails.title;
+    this.description=aboutDetails.description;
   }
 
   ngAfterViewInit() {

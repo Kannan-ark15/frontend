@@ -25,7 +25,7 @@ export class ProfileService {
       name: 'Recruiter',
       heroVideo: 'assets/videos/Recruiter.mp4',
       overlayText: 'Professional Portfolio & Experience',
-      restrictedSections: [],
+      restrictedSections: ['Codex'],
       profileHeroData: {
         title: 'Full Stack Developer',
         subtitle: '',  
@@ -35,26 +35,29 @@ export class ProfileService {
     },
     'developer': {
       name: 'Developer',
-      heroVideo: 'assets/videos/hero.mp4',
+      heroVideo: 'assets/videos/Developer.mp4',
       overlayText: 'Building Amazing Software Solutions',
       restrictedSections: ['Experience'],
       profileHeroData: {
         title: 'Welcome Recruiters',
         subtitle: 'Discover Top Talent',  
-        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
-        actions: ['Resume', 'Linkein']
+        description: `Hey fellow developer! Welcome to my portfolio.  
+                      You know how the heart pumps blood and keeps the whole body running?
+                      That's exactly how I see developers — we keep projects alive and moving.
+                      No matter what the goal is, we RISE so the end result can RISE too.`,
+        actions: ['Resume', 'LinkedIn']
       }
     },
     'stalker': {
       name: 'Stalker',
-      heroVideo: 'assets/videos/stalker-hero.mp4',
+      heroVideo: 'assets/videos/stalker.mp4',
       overlayText: 'Exploring Digital Footprints',
-      restrictedSections: ['Skills', 'Experience'],
+      restrictedSections: ['Experience','Certifications','Codex'],
       profileHeroData: {
-        title: 'Welcome Recruiters',
+        title: 'I See',
         subtitle: 'Discover Top Talent',  
-        description: 'Explore my professional journey, skills, and projects tailored for recruiters.',
-        actions: []
+        description: 'Hello, stalker! You’ve come pretty far in here. Go ahead and explore my projects and skills — but yes, only with limited access',
+        actions: ['LinkedIn']
       }
     }
   };

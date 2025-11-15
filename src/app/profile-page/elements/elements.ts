@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, signal, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { ProfileService } from '../profile-service';
 
 export interface Card {
   id: number;
@@ -25,6 +26,8 @@ export class Elements {
   hoverTimeout: number | undefined;
   isPlaying=false;
   router=inject(Router);
+  profileService=inject(ProfileService)
+  profile=''
   constructor() {
     effect(() => {
       const videoEl = this.videoPlayer();
@@ -52,6 +55,20 @@ export class Elements {
       }
     });
   }
+
+  ngOnInit(){
+    const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+
+  }
   onMouseEnter(): void {
     this.isHovered.set(true);
     
@@ -64,19 +81,24 @@ export class Elements {
   selectedCard(title: string): void {
     switch (title) {
       case 'About':
-      this.router.navigate(['/about']);
+      this.router.navigate([`/${this.profile}/about`]);
       break;
       case 'Skills':
-      this.router.navigate(['/skills']);
+      this.router.navigate([`/${this.profile}/skills`]);
       break;
       case 'Experience':
-      this.router.navigate(['/experience']);
+      this.router.navigate([`/${this.profile}/experience`]);
       break;    
       case 'Certifications':
-      this.router.navigate(['/certifications']);
+      this.router.navigate([`/${this.profile}/certifications`]);
+      break;
+      case 'Codex':
+      this.router.navigate([`/${this.profile}/codex`]);
+      break;
+      case 'Bonus':
+      this.router.navigate([`/${this.profile}/bonus`]);
       break;
       default:
-        this.router.navigate(['']);
       break;
     }
   }

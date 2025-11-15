@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { AppNavbarComponent } from './components/app-navbar/app-navbar.component';
 import { CommonModule } from '@angular/common';
 import { HeroVideoComponent } from './components/hero-video/hero-video.component';
@@ -36,7 +36,8 @@ export class ProfilePage {
    videoSrc = signal('');
   overlayText = signal('');
   menuItems = signal<any[]>([]);
-
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
+  showScrollArrow = true;
   gridcard = signal<Card[]>([
     {
       id: 1,
@@ -103,6 +104,22 @@ export class ProfilePage {
       imageUrl: 'assets/images/certificates.png',
       videoUrl: 'assets/videos/Certificate.mp4',
       section: 'Certifications'
+    },
+    {
+      id: 5,
+      title: 'Codex',
+      text: 'Dont miss this!',
+      imageUrl: 'assets/images/game.png',
+      videoUrl: 'assets/videos/game.mp4',
+      section: 'Codex'
+    },
+    {
+      id: 6,
+      title: 'Bonus',
+      text: 'Time to Compare',
+      imageUrl: 'assets/images/bonus.png',
+      videoUrl: 'assets/videos/bonus.mp4',
+      section: 'Bonus'
     }
   ]);
   projectData: any;
@@ -129,9 +146,8 @@ export class ProfilePage {
     // Now set menu items with the correct profile
     this.allMenuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];
@@ -173,12 +189,28 @@ export class ProfilePage {
 
   ngAfterViewInit() {
     // Also check on page load
+      this.checkScrollPosition();
     const fragment = this.route.snapshot.fragment;
     if (fragment) {
       setTimeout(() => {
         this.scrollToSection(fragment);
       }, 500);
     }
+  }
+   scrollRight() {
+    const container = this.scrollContainer.nativeElement;
+    const scrollAmount = 300; // Adjust scroll distance
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+
+  onScroll() {
+    this.checkScrollPosition();
+  }
+
+  checkScrollPosition() {
+    const container = this.scrollContainer.nativeElement;
+    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+    this.showScrollArrow = !isAtEnd;
   }
 
   scrollToSection(sectionId: string) {

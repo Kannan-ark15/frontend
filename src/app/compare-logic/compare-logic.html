@@ -1,0 +1,53 @@
+<div class="portfolio-compare-wrapper">
+  <div 
+    #scrollContainer
+    class="scroll-wrapper"
+    [class.scrollable]="enableScroll"
+    [ngStyle]="getContainerStyle()"
+    (scroll)="onScroll($event)">
+    
+    <div 
+      #container
+      class="compare-container"
+      [class.horizontal]="mode === 'horizontal'"
+      [class.vertical]="mode === 'vertical'"
+      [class.long-image]="enableScroll">
+      
+      <!-- Old Image Layer -->
+      <div class="image-layer old-image">
+        <img 
+          [src]="oldImage" 
+          alt="Old version"
+          [style.clip-path]="getOldImageClip()">
+        <div class="label top-left">Before</div>
+      </div>
+
+      <!-- New Image Layer -->
+      <div class="image-layer new-image">
+        <img 
+          [src]="newImage" 
+          alt="New version"
+          [style.clip-path]="getNewImageClip()">
+        <div class="label bottom-right">After</div>
+      </div>
+
+      <!-- Divider -->
+      <div 
+        class="divider"
+        [ngStyle]="getDividerStyle()"
+        [class.hovering]="isHovering">
+        <div class="divider-handle">
+          <svg *ngIf="mode === 'horizontal'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+            <polyline points="18 9 12 15 6 9" transform="translate(0, 6)"></polyline>
+          </svg>
+          <svg *ngIf="mode === 'vertical'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+            <polyline points="9 18 15 12 9 6" transform="translate(6, 0)"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -40,6 +40,9 @@
 
 .hover-cards-container {
   margin: 60px 0;
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
 }
 
 .hover-cards-wrapper {
@@ -49,7 +52,93 @@
   min-height: 420px;
   max-height: 700px;
   padding: 20px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(239, 68, 68, 0.5) rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /
 }
+.hover-cards-wrapper::-webkit-scrollbar{
+  display: none;
+} 
+
+.hover-cards-container::-webkit-scrollbar {
+      height: 8px;
+      display: none;
+    }
+
+.hover-cards-container::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      display: none;
+    }
+
+    .hover-cards-container::-webkit-scrollbar-thumb {
+      background: rgba(239, 68, 68, 0.6);
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .hover-cards-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(239, 68, 68, 0.8);
+    }
+
+     .cards-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      padding-bottom: 10px;
+    }
+
+    .scroll-arrow {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(239, 68, 68, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+      animation: pulse 2s infinite;
+    }
+
+    .scroll-arrow:hover {
+      background: rgba(239, 68, 68, 1);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+    }
+
+    .scroll-arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .scroll-arrow svg {
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+      }
+      50% {
+        box-shadow: 0 4px 25px rgba(239, 68, 68, 0.8);
+      }
+    }
 
 @media (max-width: 768px) {
   .content-section {
@@ -67,6 +156,21 @@
   .section-title {
     font-size: 1.4rem;
   }
+
+    .cards-track {
+        gap: 15px;
+      }
+
+      .scroll-arrow {
+        width: 45px;
+        height: 45px;
+        right: 10px;
+      }
+
+      .scroll-arrow svg {
+        width: 20px;
+        height: 20px;
+      }
 }
 
 @media (max-width: 480px) {
@@ -74,6 +178,15 @@
     gap: 8px;
     min-height: 350px;
   }
+  scroll-arrow {
+        width: 40px;
+        height: 40px;
+        right: 5px;
+      }
+
+      .cards-track {
+        gap: 10px;
+      }
 }
 
 @media (max-width: 768px) {

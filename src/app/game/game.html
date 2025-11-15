@@ -1,0 +1,142 @@
+<app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
+<div *ngIf="!selectedMovie" class="screen-container">
+  <div class="content-box">
+    <div class="header">
+      <h1 class="title">🎬 Movie Quiz Reveal</h1>
+      <p class="subtitle">Solve programming puzzles to reveal the movie!</p>
+    </div>
+    
+    <div class="button-group">
+      <button (click)="selectRandomMovie()" class="btn-primary">
+        🎲 Random Movie
+      </button>
+      
+      <div class="movie-grid">
+        <button *ngFor="let movie of movies; let i = index" 
+                (click)="selectMovie(i)" 
+                class="btn-secondary">
+          Movie {{i + 1}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Language Selection Screen -->
+<div *ngIf="selectedMovie && !language" class="screen-container">
+  <div class="content-box-small">
+    <div class="header">
+      <div class="icon">💻</div>
+      <h2 class="title-small">Choose Language</h2>
+      <p class="subtitle">Select your preferred programming language</p>
+    </div>
+    
+    <div class="lang-buttons">
+      <button (click)="selectLanguage('javascript')" class="btn-javascript">
+        JavaScript
+      </button>
+      <button (click)="selectLanguage('java')" class="btn-java">
+        Java
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Game Complete Screen -->
+<div *ngIf="gameComplete" class="screen-container">
+  <div class="content-box complete-box">
+    <h2 class="complete-title">🎉 Congratulations!</h2>
+    <p class="complete-subtitle">The movie is...</p>
+    
+    <div class="poster-complete">
+      <img [src]="selectedMovie!.poster" alt="Movie Poster" class="poster-img-complete" />
+    </div>
+    
+    <h1 class="movie-title-reveal">{{selectedMovie!.title}}</h1>
+    
+    <button (click)="resetGame()" class="btn-primary">
+      Play Again
+    </button>
+  </div>
+</div>
+
+<!-- Quiz Screen -->
+<div *ngIf="selectedMovie && language && !gameComplete" class="quiz-screen">
+  <div class="quiz-container">
+    <!-- Poster Side -->
+    <div class="poster-side">
+      <div class="poster-wrapper" 
+           [style.background]="'linear-gradient(rgba(0,0,0,' + (1 - calculateOpacity()) + '), rgba(0,0,0,' + (1 - calculateOpacity()) + ')), url(' + selectedMovie.poster + ')'"
+           [style.backgroundSize]="'cover'"
+           [style.backgroundPosition]="'center'">
+        <div *ngIf="calculateOpacity() < 1" class="poster-placeholder">
+          <div class="placeholder-content">
+            <div class="emoji">🎬</div>
+            <div class="progress-text">{{progress}}%</div>
+            <div class="revealed-text">Revealed</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="progress-section">
+        <div class="progress-label">Progress</div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" [style.width]="progress + '%'"></div>
+        </div>
+        <div class="progress-count">
+          {{correctAnswers}} / {{totalQuestions}} questions
+        </div>
+      </div>
+    </div>
+
+    <!-- Question Side -->
+    <div class="question-side">
+      <div class="question-header">
+        <h3 class="question-title">Question {{currentQuestion + 1}}</h3>
+        <span class="lang-badge" 
+              [class.js-badge]="language === 'javascript'" 
+              [class.java-badge]="language === 'java'">
+          {{language?.toUpperCase()}}
+        </span>
+      </div>
+      
+      <p class="question-prompt">What is the output of this code?</p>
+      
+      <div class="code-box">
+        <code>{{currentQ?.q}}</code>
+      </div>
+
+      <button (click)="showHint = !showHint" class="hint-button">
+        {{showHint ? 'Hide Hint' : 'Show Hint 💡'}}
+      </button>
+
+      <div *ngIf="showHint" class="hint-box">
+        <p>💡 {{currentQ?.hint}}</p>
+      </div>
+
+      <div class="answer-section">
+        <label class="answer-label">Your Answer:</label>
+        <input type="text" name="userAnswer" [formControl]="userAnswerControl" (keydown.enter)="handleSubmit()"
+            [class.input-correct]="feedback === 'correct'" [class.input-wrong]="feedback === 'wrong'" [class.shake]="shake"
+            class="answer-input" placeholder="Enter the output..." />
+        </div>
+
+      <div *ngIf="feedback" class="feedback-box"
+           [class.feedback-correct]="feedback === 'correct'"
+           [class.feedback-wrong]="feedback === 'wrong'">
+        <span *ngIf="feedback === 'correct'">✔ Correct! Moving to next...</span>
+        <span *ngIf="feedback === 'wrong'">✘ Try again!</span>
+      </div>
+
+      <button (click)="handleSubmit()" 
+              [disabled]="!userAnswer.trim() || feedback === 'correct'"
+              class="btn-submit">
+        Submit Answer
+      </button>
+
+      <button (click)="resetGame()" class="btn-reset">
+        Start Over
+      </button>
+    </div>
+  </div>
+</div>

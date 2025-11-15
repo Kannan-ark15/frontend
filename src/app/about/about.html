@@ -11,8 +11,8 @@
         </video>
       <div class="hero-overlay"></div>
       <div class="video-content">
-        <h1 class="project-title">About Me</h1>
-        <p class="project-description">Where Creativity meets Coding</p>
+        <h1 class="project-title">{{title}}</h1>
+        <p class="project-description">{{description}}</p>
       </div>
        <button class="mute-toggle" (click)="toggleMute()" [attr.aria-label]="isMuted() ? 'Unmute video' : 'Mute video'">
       <!-- Muted Icon -->

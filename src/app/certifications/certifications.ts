@@ -94,9 +94,8 @@ export class Certifications {
     // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];

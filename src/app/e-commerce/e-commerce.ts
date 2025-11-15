@@ -12,7 +12,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
     'This began as a straightforward MERN e-commerce website, but its true value emerged only after deploying it to the cloud. What looked like a normal full-stack website became a practical exploration of DNS, routing, virtual networks, and how internet traffic actually reaches a running application.',
 
   techStack: ['MERN','Cloud Hosting', 'Nginx', 'DNS'],
-  videoUrl: 'assets/videos/cloudcart-demo.mp4',
+  videoUrl: 'assets/project/videos/cn.mp4',
   badge: 'FULL STACK + NETWORKING',
 
   chapters: [
@@ -110,9 +110,8 @@ export class ECommerce {
     // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];

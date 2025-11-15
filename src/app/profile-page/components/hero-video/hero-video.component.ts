@@ -13,7 +13,7 @@ export interface ProfileHeroData {
   template: `
     <div class="hero-video-container" [style.height]="height">
       <video #heroVideo class="hero-video" 
-            [muted]="true"
+            [muted]="false"
             [loop]="true"
             playsinline
             preload="auto"
@@ -238,7 +238,7 @@ export class HeroVideoComponent {
   videoSrc = signal('assets/videos/default-hero.mp4');
   overlayText = signal('Welcome to My Portfolio');
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
-  isMuted = signal(true); 
+  isMuted = signal(false); 
   ngAfterViewInit() {
 
     setTimeout(() => {
@@ -267,7 +267,7 @@ export class HeroVideoComponent {
       const video = this.heroVideoRef.nativeElement;
       
       // Ensure video is muted for autoplay
-      video.muted = true;
+      video.muted = false;
       video.playsInline = true;
       
       // Load the video

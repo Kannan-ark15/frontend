@@ -281,7 +281,7 @@ template: `
 export class AppNavbarComponent {
   @Input() menuItems: MenuItem[] = [];
   @Input() logoClickRoute = '/';
-  @Input() userProfile='/home'
+  @Input() userProfile='/profile'
   isMenuOpen = false;
   isScrolled = false;
 

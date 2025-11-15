@@ -38,7 +38,7 @@ export class LandingPageComponent {
     console.log('✅ Change detection triggered');
     
     // Wait for component to be fully in DOM
-    await this.delay(150);
+    await this.delay(550);
     console.log('✅ Component should be in DOM now');
     // Play audio
     this.audio.play().then(() => {

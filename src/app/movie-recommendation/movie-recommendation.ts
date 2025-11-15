@@ -14,7 +14,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
     'A cinematic fusion of content-based filtering and live sentiment intelligence — powered by PyTorch, Twitter data, and cloud-scale deployment. This system brings movie recommendations to life by analyzing public emotion in real time.',
 
   techStack: ['PyTorch', 'Python', 'Android', 'Java', 'Google Cloud', 'Twitter API'],
-  videoUrl: 'assets/videos/movie-recommender-demo.mp4',
+  videoUrl: 'assets/project/videos/movie.mp4',
   badge: 'AI POWERED',
 
   chapters: [
@@ -138,9 +138,8 @@ export class ProjectsComponent {
     // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+    { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];

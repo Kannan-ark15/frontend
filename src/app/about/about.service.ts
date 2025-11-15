@@ -3,6 +3,8 @@ import { ProfileService } from "../profile-page/profile-service";
 
 export interface VideoProject {
   user:string;
+  title:string;
+  description:string;
   videoUrl: string;
 }
 
@@ -13,21 +15,28 @@ export class AboutService {
     porfileService=inject(ProfileService);
     vidoeProjects: VideoProject[] = [
     {
-        user:'Recruiter',
+        user:'recruiter',
+        title:'About Me',
+        description:'Where Creativity Meets Coding',
         videoUrl: 'assets/videos/About_Recruiter.mp4'
     },
     {
-        user:'Developer',
+        user:'developer',
+        title:'About Me',
+        description:'Where Creativity Meets Coding',
         videoUrl: 'assets/videos/About_Developer.mp4'
     },
     {
-        user:'Stalker',
-      videoUrl: 'https://assets.mixkit.co/videos/preview'
+        user:'stalker',
+        title:'Hi Stalker!',
+        description:'Tell me your name, time to write it down.',
+        videoUrl: 'assets/videos/About_Stalker.mp4'
     },
     ];
 
-    getvideoUrlForProfile(profileName: string): string {
+    getvideoUrlForProfile(profileName: string):any{
         const project = this.vidoeProjects.find(p => p.user === profileName);
-        return project ? project.videoUrl : 'assets/videos/default-hero.mp4';
+        return project ?project:[];
     }
+
 }

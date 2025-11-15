@@ -12,7 +12,7 @@ export const SQL_PROJECT: ProjectShowcaseData = {
   description:
     'A unique automation system that synchronizes SQL changes intelligently across multiple environments, evolving from a simple idea into an agentic, MCP-powered innovation.',
   techStack: ['Spring Boot', 'SQL', 'GitHub Copilot', 'MCP'],
-  videoUrl: 'assets/videos/sql-sync-demo.mp4',
+  videoUrl: 'assets/project/videos/sql.mp4',
   badge: 'FEATURED',
 
   chapters: [
@@ -114,9 +114,8 @@ export class SqlProject{
     // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'About', route: `/${this.profile}/about` },
-      { label: 'Experience', route: `/${this.profile}/experience` },
-      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];

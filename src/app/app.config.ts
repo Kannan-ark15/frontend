@@ -1,6 +1,6 @@
 // app.config.ts
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { 
   LucideAngularModule, 
@@ -15,12 +15,18 @@ import {
   Moon ,
   Search,
   Calendar,         // 10:00 PM - Sleep
-  AlarmClock
+  AlarmClock,
+  Theater,
+  Dice1
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes,withInMemoryScrolling({
+        scrollPositionRestoration: 'top', // Always scroll to top on navigation
+        anchorScrolling: 'enabled' // Enable fragment/anchor scrolling
+      }),),
+
     importProvidersFrom(
       LucideAngularModule.pick({
         Sunrise,
@@ -34,7 +40,9 @@ export const appConfig: ApplicationConfig = {
         Moon,
         Search,
         Calendar,
-        AlarmClock
+        AlarmClock,
+         Theater,
+        Dice1
       })
     )
   ],
