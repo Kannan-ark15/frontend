@@ -96,9 +96,8 @@
       padding-bottom: 10px;
     }
 
-    .scroll-arrow {
+     .scroll-arrow {
       position: absolute;
-      right: 20px;
       top: 50%;
       transform: translateY(-50%);
       width: 50px;
@@ -114,6 +113,14 @@
       z-index: 100;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+
+    .scroll-arrow.left {
+      left: 10px;
+    }
+
+    .scroll-arrow.right {
+      right: 10px;
       animation: pulse 2s infinite;
     }
 
@@ -127,10 +134,6 @@
       transform: translateY(-50%) scale(0.95);
     }
 
-    .scroll-arrow svg {
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    }
-
     @keyframes pulse {
       0%, 100% {
         box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
@@ -139,6 +142,8 @@
         box-shadow: 0 4px 25px rgba(239, 68, 68, 0.8);
       }
     }
+
+
 
 @media (max-width: 768px) {
   .content-section {
@@ -161,15 +166,17 @@
         gap: 15px;
       }
 
-      .scroll-arrow {
+     .scroll-arrow {
         width: 45px;
         height: 45px;
-        right: 10px;
       }
 
-      .scroll-arrow svg {
-        width: 20px;
-        height: 20px;
+      .scroll-arrow.left {
+        left: 5px;
+      }
+
+      .scroll-arrow.right {
+        right: 5px;
       }
 }
 

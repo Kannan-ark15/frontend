@@ -37,7 +37,8 @@ export class ProfilePage {
   overlayText = signal('');
   menuItems = signal<any[]>([]);
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
-  showScrollArrow = true;
+  showRightArrow = true;
+  showLeftArrow = true;
   gridcard = signal<Card[]>([
     {
       id: 1,
@@ -203,14 +204,19 @@ export class ProfilePage {
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   }
 
+   scrollLeft() {
+    const container = this.scrollContainer.nativeElement;
+    container.scrollBy({ left: -300, behavior: 'smooth' });
+  }
+
   onScroll() {
     this.checkScrollPosition();
   }
 
   checkScrollPosition() {
     const container = this.scrollContainer.nativeElement;
-    const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
-    this.showScrollArrow = !isAtEnd;
+    this.showLeftArrow = container.scrollLeft < 10;
+    this.showRightArrow = container.scrollLeft + container.clientWidth < container.scrollWidth - 10;
   }
 
   scrollToSection(sectionId: string) {
