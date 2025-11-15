@@ -50,7 +50,7 @@ export class LandingPageComponent {
 
     setTimeout(() => {
       console.log('🚀 Navigating to /home');
-      this.router.navigate(['/home']);
+      this.router.navigate(['/profile']);
     }, 4000);
   }
 

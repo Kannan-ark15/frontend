@@ -18,10 +18,10 @@ export interface ProfileConfig {
   providedIn: 'root'
 })
 export class ProfileService {
-  private currentProfile = signal<string>('Recruiter');
+  private currentProfile = signal<string>('');
   
   private profileConfigs: Record<string, ProfileConfig> = {
-    'Recruiter': {
+    'recruiter': {
       name: 'Recruiter',
       heroVideo: 'assets/videos/Recruiter.mp4',
       overlayText: 'Professional Portfolio & Experience',
@@ -33,7 +33,7 @@ export class ProfileService {
         actions: ['Resume', 'LinkedIn']
       }
     },
-    'Developer': {
+    'developer': {
       name: 'Developer',
       heroVideo: 'assets/videos/hero.mp4',
       overlayText: 'Building Amazing Software Solutions',
@@ -45,7 +45,7 @@ export class ProfileService {
         actions: ['Resume', 'Linkein']
       }
     },
-    'Stalker': {
+    'stalker': {
       name: 'Stalker',
       heroVideo: 'assets/videos/stalker-hero.mp4',
       overlayText: 'Exploring Digital Footprints',
@@ -68,12 +68,13 @@ export class ProfileService {
   }
 
   getProfileConfig(profileName?: string): ProfileConfig {
-    const name = profileName || this.currentProfile();
-    return this.profileConfigs[name] || this.profileConfigs['Recruiter'];
+    const name = profileName || this.currentProfile().toLowerCase();
+    this.setProfile(name);
+    return this.profileConfigs[name] || this.profileConfigs['recruiter'];
   }
 
-  isSecretionRestricted(sectionName: string): boolean {
-    const config = this.getProfileConfig();
+  isSectionRestricted(sectionName: string,profileName?: string): boolean {
+    const config = this.getProfileConfig(profileName);
     return config.restrictedSections.includes(sectionName);
   }
 }

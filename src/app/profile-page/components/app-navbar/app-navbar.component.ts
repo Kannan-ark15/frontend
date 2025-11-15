@@ -19,7 +19,7 @@ template: `
     <div class="navbar-container">
       <div class="logo-section">
         <a [routerLink]="logoClickRoute" class="logo">K</a>
-        <a [routerLink]="logoClickRoute" class="switch-user-btn">
+        <a [routerLink]="userProfile" class="switch-user-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
@@ -111,10 +111,9 @@ template: `
       align-items: center;
       gap: 8px;
       padding: 8px 16px;
-      background: rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(229, 9, 20, 0.5);
       border-radius: 4px;
-      color: #e5e5e5;
+      color: #fff;
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -282,6 +281,7 @@ template: `
 export class AppNavbarComponent {
   @Input() menuItems: MenuItem[] = [];
   @Input() logoClickRoute = '/';
+  @Input() userProfile='/home'
   isMenuOpen = false;
   isScrolled = false;
 

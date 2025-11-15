@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule,GraduationCap,Book,Trophy,Target,Star,Rocket} from 'lucide-angular';
+import { ProfileService } from '../profile-page/profile-service';
+import { Router } from '@angular/router';
 interface Certificate {
   title: string;
   issuer: string;
@@ -27,15 +29,7 @@ interface Stat {
   styleUrl: './certifications.css',
 })
 export class Certifications {
-  menuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
-
-  certificates: Certificate[] = [
+    certificates: Certificate[] = [
     {
       title: 'Web Development Bootcamp',
       issuer: 'Udemy',
@@ -77,8 +71,35 @@ export class Certifications {
     { icon: Star, value: '100%', label: 'Completion Rate' },
     { icon: Rocket, value: 'Active', label: 'Learning Journey' }
   ];
-
+  menuItems:any[]=[]
+  profile=''
+  router=inject(Router);
+  profileService=inject(ProfileService)
   openCertificate(link: string): void {
     window.open(link, '_blank');
+  }
+
+  ngOnInit(){
+     const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+
+    // Now set menu items with the correct profile
+    this.menuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
   }
 }

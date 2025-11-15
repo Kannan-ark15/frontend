@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit { // Implement OnInit
     {
       name: 'Developer',
       image: 'assets/images/Developer.png',
-      backgroundImage: 'assets/images/Coder-colour.png'
+      backgroundImage: 'assets/images/Coder.jpg'
     },
     {
       name: 'Stalker',
@@ -64,6 +64,6 @@ export class HomeComponent implements OnInit { // Implement OnInit
     this.profileService.setProfile(profile.name);
     
     // Navigate to profile page
-    this.router.navigate(['profile']);
+    this.router.navigate([`${profile.name.toLowerCase()}/home`]);
   }
 }

@@ -1,26 +1,24 @@
-import { Component, ElementRef, HostListener, inject, Input, signal, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, Input, signal, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { AboutService } from './about.service';
 import { ProfileService } from '../profile-page/profile-service';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule} from 'lucide-angular';
+import { LucideAngularModule } from 'lucide-angular';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-about',
   imports: [AppNavbarComponent, CommonModule, LucideAngularModule],
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
-export class About implements AfterViewInit {
-  menuItems = [
-    { label: 'Home', route: '/profile' },
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me', route: '/profile', fragment: 'contact-id' },
-  ];
+export class About implements AfterViewInit, OnInit {
+  profile = '';
+  menuItems: any[] = [];
   
   aboutService = inject(AboutService);
   profileService = inject(ProfileService);
+  router = inject(Router);
   
   @Input() height = '90vh';
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
@@ -29,17 +27,38 @@ export class About implements AfterViewInit {
   isMuted = signal(false);
 
   ngOnInit() {
+    // Extract profile from current URL
+    const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      // Fallback to default profile
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+
+    // Now set menu items with the correct profile
+    this.menuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
     this.animateStats();
     this.observeElements();
-    this.videoSrc.set(this.aboutService.getvideoUrlForProfile(this.profileService.getProfile()));
+    this.videoSrc.set(this.aboutService.getvideoUrlForProfile(this.profile));
   }
 
   ngAfterViewInit() {
-    // Ensure video plays after view is initialized
     if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
       const video = this.heroVideoRef.nativeElement;
       
-      // Try to play the video
       const playPromise = video.play();
       
       if (playPromise !== undefined) {
@@ -49,8 +68,6 @@ export class About implements AfterViewInit {
           })
           .catch(error => {
             console.error('Error playing video:', error);
-            // If autoplay fails, it's usually because of browser policies
-            // Keep it muted and try again
             video.muted = true;
             this.isMuted.set(true);
             video.play().catch(err => console.error('Second play attempt failed:', err));
@@ -106,7 +123,6 @@ export class About implements AfterViewInit {
         }
       };
 
-      // Start animation when element is visible
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {

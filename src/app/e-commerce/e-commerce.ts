@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ProjectShowcaseData } from '../project-showcase/project-data.model';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { ProjectShowcase } from '../project-showcase/project-showcase';
+import { ProfileService } from '../profile-page/profile-service';
+import { Router } from '@angular/router';
 
 export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
   title: 'E-Commerce Website',
@@ -87,12 +89,33 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
   `
 })
 export class ECommerce {
-    menuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
+  router=inject(Router)
+  profileService=inject(ProfileService);
   sentimentProject = ECOMMERCE_NETWORKING_PROJECT;
+  profile=''
+  menuItems:any[]=[];
+
+  ngOnInit(){
+     const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+
+    // Now set menu items with the correct profile
+    this.menuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
+  }
 }

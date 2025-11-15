@@ -20,14 +20,7 @@ export interface Skill {
   styleUrls: ['./skills.css']
 })
 export class Skills implements OnInit {
-  allMenuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
-
+  
   skills: Skill[] = [
     {
       name: 'Python',
@@ -103,12 +96,33 @@ export class Skills implements OnInit {
   private touchStartY: number | null = null;
   scrollDirection = signal<'forward' | 'backward'>('forward');
   menuItems = signal<any[]>([]);
+  profile=''
+  allMenuItems:any[]=[]
+  ngOnInit(){
+     const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
 
-  ngOnInit() {
-    this.currentSkillIndex.set(0);
+    // Now set menu items with the correct profile
+    this.allMenuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+      this.currentSkillIndex.set(0);
     this.menuItems.set(
       this.allMenuItems.filter(item => 
-        !item.section || !this.profileService.isSecretionRestricted(item.section)
+        !item.section || !this.profileService.isSectionRestricted(item.section,this.profileService.getProfile())
       )
     );
   }

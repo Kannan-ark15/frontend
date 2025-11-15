@@ -1,7 +1,9 @@
-import { Component, signal, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, signal, HostListener, ElementRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { LucideAngularModule,Computer,School, GraduationCap } from 'lucide-angular';
+import { Router } from '@angular/router';
+import { ProfileService } from '../profile-page/profile-service';
 
 export interface TimelineItem {
   id: string;
@@ -28,13 +30,8 @@ export interface FlowchartNode {
   styleUrls: ['./experience.css']
 })
 export class Experience {
-  menuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
+  profile=''
+  menuItems:any[]=[]
   isMuted = true; // Start muted for autoplay
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
   timelineItems = signal<TimelineItem[]>([
@@ -98,7 +95,31 @@ export class Experience {
 
   // Track which flowchart nodes have animated
   animatedFlowchartNodes = signal<Set<string>>(new Set());
+  router=inject(Router)
+  profileService=inject(ProfileService)
+  ngOnInit(){
+     const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
 
+    // Now set menu items with the correct profile
+    this.menuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
+  }
   toggleExpand(itemId: string) {
     const currentItem = this.timelineItems().find(item => item.id === itemId);
     const wasExpanded = currentItem?.expanded;

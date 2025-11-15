@@ -25,7 +25,7 @@ export interface ProfileHeroData {
         <p class="project-description">{{ profileHeroData.description }}</p>
         <div class="tech-badges">
           @for (tech of profileHeroData.actions; track tech) {
-            <span class="tech-badge">{{ tech }}</span>
+            <a class="tech-badge"  [href]="actionClicked(tech)">{{ tech }}</a>
           }
         </div>
       </div>
@@ -154,6 +154,8 @@ export interface ProfileHeroData {
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  color:black;
+  text-decoration:none;
 }
 
 .tech-badge:hover ,
@@ -251,6 +253,15 @@ export class HeroVideoComponent {
     }
   }
   
+  actionClicked(tech: any){
+    switch(tech){
+      case 'LinkedIn':
+        return 'https://www.linkedin.com/in/ar-kannan';
+      default:
+      case 'Resume':
+        return ''
+    }
+  }
    private initializeVideo() {
     if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
       const video = this.heroVideoRef.nativeElement;

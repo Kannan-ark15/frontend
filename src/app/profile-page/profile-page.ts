@@ -36,13 +36,6 @@ export class ProfilePage {
    videoSrc = signal('');
   overlayText = signal('');
   menuItems = signal<any[]>([]);
-  private allMenuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
 
   gridcard = signal<Card[]>([
     {
@@ -74,7 +67,7 @@ export class ProfilePage {
       title: '4',
       text: 'Project development in Progress.',
       imageUrl: 'assets/images/soon.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4',
+      videoUrl: 'assets/project/videos/soon.mp4',
       section: ''
     }
   ]);
@@ -113,13 +106,39 @@ export class ProfilePage {
     }
   ]);
   projectData: any;
+  allMenuItems: any;
+  profile='';
 
  
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+
+      // Extract profile from current URL
+    const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+
+    // Now set menu items with the correct profile
+    this.allMenuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
        // Get profile configuration
-    const profileConfig = this.profileService.getProfileConfig();
+    const profileConfig = this.profileService.getProfileConfig(this.profile);
+    console.log('Received',profileConfig);
     
     // Set hero video and overlay text
     this.videoSrc.set(profileConfig.heroVideo);
@@ -128,11 +147,20 @@ export class ProfilePage {
     
     // Filter menu items based on restrictions
     this.menuItems.set(
-      this.allMenuItems.filter(item => 
-        !item.section || !this.profileService.isSecretionRestricted(item.section)
+      this.allMenuItems.filter((item: { section: string; }) => 
+        !item.section || !this.profileService.isSectionRestricted(item.section,this.profile)
       )
     );
-    
+    const restrict=this.profileService.getProfileConfig(this.profile).restrictedSections
+    console.log(restrict);
+    this.cards.update((currentCards) =>
+      currentCards.filter(
+        (card) =>
+          !restrict.some(
+            (restrictedTitle) => card.title.toLowerCase() === restrictedTitle.toLowerCase()
+          )
+      )
+    );
     // Listen for fragment changes
     this.route.fragment.subscribe(fragment => {
       if (fragment) {
@@ -164,7 +192,7 @@ export class ProfilePage {
   }
 
    navigateToSection(route: string, section?: string) {
-    if (section && this.profileService.isSecretionRestricted(section)) {
+    if (section && this.profileService.isSectionRestricted(section)) {
       // Show restricted message or redirect
       alert(`This section is not available for your profile type.`);
       return;

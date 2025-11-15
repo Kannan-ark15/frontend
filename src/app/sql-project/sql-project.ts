@@ -1,8 +1,10 @@
-import { Component, signal, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, signal, ElementRef, ViewChild, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
 import { ProjectShowcaseData } from '../project-showcase/project-data.model';
 import { ProjectShowcase } from '../project-showcase/project-showcase';
+import { Router } from '@angular/router';
+import { ProfileService } from '../profile-page/profile-service';
 
 export const SQL_PROJECT: ProjectShowcaseData = {
   title: 'SQL Sync Automation',
@@ -92,14 +94,33 @@ export const SQL_PROJECT: ProjectShowcaseData = {
   `,
 })
 export class SqlProject{
-    menuItems = [
-    {label:'Home', route:'/profile'},
-    { label: 'Experience', route: '/experience', section: 'Experience' },
-    { label: 'Skills', route: '/skills', section: 'Skills' },
-    { label: 'Projects', route: '/profile', fragment: 'projects-section' },
-    { label: 'Contact Me',route: '/profile', fragment: 'contact-id' },
-  ];
   sqlProject = SQL_PROJECT;
+  profile=''
+  menuItems:any[]=[];
+    router=inject(Router)
+  profileService=inject(ProfileService)
+   ngOnInit(){
+     const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
 
+    // Now set menu items with the correct profile
+    this.menuItems = [
+      { label: 'Home', route: `/${this.profile}/home` },
+      { label: 'About', route: `/${this.profile}/about` },
+      { label: 'Experience', route: `/${this.profile}/experience` },
+      { label: 'Skills', route: `/${this.profile}/skills` },
+      { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
+      { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
+    ];
+
+  }
 
 }
