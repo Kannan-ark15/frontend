@@ -39,7 +39,7 @@ export class ProfileService {
       overlayText: 'Building Amazing Software Solutions',
       restrictedSections: ['Experience'],
       profileHeroData: {
-        title: 'Welcome Recruiters',
+        title: 'Dev in Action',
         subtitle: 'Discover Top Talent',  
         description: `Hey fellow developer! Welcome to my portfolio.  
                       You know how the heart pumps blood and keeps the whole body running?
