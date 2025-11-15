@@ -26,7 +26,7 @@ export class About implements AfterViewInit {
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
   
   videoSrc = signal('assets/videos/About_Recruiter.mp4');
-  isMuted = signal(true);
+  isMuted = signal(false);
 
   ngOnInit() {
     this.animateStats();

@@ -267,6 +267,7 @@ export class TopCardsGridComponent {
          this.hoverTimeout =  setTimeout(() => {  
           if(!this.isPlaying){
             this.isPlaying=true;
+                        video.muted = true;
                       video.play().catch(error => {
           console.error('Video play failed:', error);
         })

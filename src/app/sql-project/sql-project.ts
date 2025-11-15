@@ -47,7 +47,7 @@ export const SQL_PROJECT: ProjectShowcaseData = {
       title: 'Plot Twist',
       content:
         'After completing development, I discovered that the DB team already had an automation script capable of running queries on all servers. However, they used it **only when a query was explicitly highlighted as affecting all servers**. At the same time, I learned that tools like Liquibase already existed with similar functionality. This was the plot twist—my project was no longer unique in its current form, and the story needed to change direction.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      image: 'assets/project/sql/act-4.png',
       color: '#ff6b6b'
     },
     {
@@ -68,7 +68,7 @@ export const SQL_PROJECT: ProjectShowcaseData = {
         { label: 'Manual Effort Reduced', value: '90%', icon: '⬇️' },
         { label: 'Developer Adoption', value: 'High', icon: '🚀' }
       ],
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      image: 'assets/project/sql/act-6.png',
       color: '#2ec4b6'
     },
     {

@@ -50,15 +50,15 @@ export class ProfilePage {
       title: '1',
       text: 'Sql Syncup Automation System with Custom MCP',
       imageUrl: 'assets/images/Sql.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-programmer-writing-on-a-laptop-in-a-dark-room-4330-large.mp4',
+      videoUrl: 'assets/project/videos/sql.mp4',
       section: ''
     },
     {
       id: 2,
       title: '2',
       text: 'Movie Recommendation Sytsem based on Sentiment-Analysis.',
-      imageUrl: 'assets/images/Lstm.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-a-man-sits-in-a-dark-room-and-works-on-a-computer-4328-large.mp4',
+      imageUrl: 'assets/images/movie.png',
+      videoUrl: 'assets/project/videos/movie.mp4',
       section: ''
     },
     {
@@ -66,7 +66,7 @@ export class ProfilePage {
       title: '3',
       text: 'E-commerce Website with Payment Gateway Integration.',
       imageUrl: 'assets/images/E-commerce.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-person-typing-on-a-computer-keyboard-in-a-dark-room-4326-large.mp4',
+      videoUrl: 'assets/project/videos/cn.mp4',
       section: ''
     },
     {
@@ -92,7 +92,7 @@ export class ProfilePage {
       title: 'Skills',
       text: 'Discover my technical skills and expertise in various technologies.',
       imageUrl: 'assets/images/skills.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-a-man-sits-in-a-dark-room-and-works-on-a-computer-4328-large.mp4',
+      videoUrl: 'assets/videos/skills.mp4',
       section: 'Skills'
     },
     {
@@ -100,7 +100,7 @@ export class ProfilePage {
       title: 'Experience',
       text: 'Explore my professional experience and career achievements.',
       imageUrl: 'assets/images/experience.png',
-      videoUrl: 'assets/images/experience.png',
+      videoUrl: 'assets/videos/experience.mp4',
       section: 'Experience'
     },
     {
@@ -108,7 +108,7 @@ export class ProfilePage {
       title: 'Certifications',
       text: 'View my official certifications and professional credentials.',
       imageUrl: 'assets/images/certificates.png',
-      videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-on-a-laptop-in-a-dark-office-4329-large.mp4',
+      videoUrl: 'assets/videos/Certificate.mp4',
       section: 'Certifications'
     }
   ]);

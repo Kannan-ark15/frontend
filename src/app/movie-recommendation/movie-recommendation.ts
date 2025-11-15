@@ -7,151 +7,99 @@ import { ProjectShowcase } from '../project-showcase/project-showcase';
 
 export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
   title: 'AI Movie Recommender',
-  subtitle: 'Content-Based Recommendation using Sentiment Analysis',
-  description: 'A hybrid recommender system that combines content-based filtering with real-time Twitter sentiment analysis to provide personalized movie recommendations powered by deep learning.',
+  subtitle: '',
+  description:
+    'A cinematic fusion of content-based filtering and live sentiment intelligence — powered by PyTorch, Twitter data, and cloud-scale deployment. This system brings movie recommendations to life by analyzing public emotion in real time.',
+
   techStack: ['PyTorch', 'Python', 'Android', 'Java', 'Google Cloud', 'Twitter API'],
   videoUrl: 'assets/videos/movie-recommender-demo.mp4',
   badge: 'AI POWERED',
+
   chapters: [
+    // ACT 1 — PROBLEM SETUP
     {
       id: 1,
-      title: 'The Problem Statement',
-      content: 'Traditional movie recommendation systems rely solely on user ratings and collaborative filtering, which often fail to capture real-time public sentiment and genuine user opinions. With millions of tweets and social media discussions about movies happening daily, there was a massive untapped data source that could significantly improve recommendation accuracy. Users needed a system that not only understands their preferences but also considers current public sentiment about movies.',
-      image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&h=600&fit=crop',
+      title: 'Act 1: The Unspoken Problem',
+      content:
+        'Traditional recommender systems see users, not emotions. They rely on outdated ratings and static metadata, missing out on the massive universe of real-time public sentiment. Thousands of people express opinions about movies every minute — but none of that emotion ever reaches the user. This project began with a single question:“What if recommendations could feel the pulse of the world in real time?”',
+      image: 'assets/project/recommendation/act-1.png',
       color: '#e50914'
     },
+
+    // ACT 2 — ARCHITECTURE & RESEARCH
     {
       id: 2,
-      title: 'Research & Architecture Design',
-      content: 'After extensive research, we designed a hybrid architecture that merges content-based filtering with sentiment analysis. The system would analyze Twitter data using a PyTorch-based deep learning model to generate dynamic movie ratings. We chose to build a three-tier architecture: Android mobile app for user interface, Python Flask backend for recommendation logic, and Google Cloud App Engine for scalable deployment. The sentiment analysis model would be trained on preprocessed tweet data to classify sentiments and generate rating scores.',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      title: 'Act 2: Designing the Intelligence Engine',
+      content:
+        'We architected a hybrid intelligence system: content-based filtering fused with a live sentiment analyzer. A PyTorch LSTM model handles emotional understanding, a Flask backend orchestrates recommendation logic, and an Android app delivers a smooth user experience. The ecosystem runs on Google Cloud App Engine for effortless scalability. Every layer was meticulously designed to transform raw social conversations into intelligent movie suggestions.',
+      image: 'assets/project/recommendation/act-2.png',
       color: '#b20710'
     },
+
+    // ACT 3 — MODEL CREATION
     {
       id: 3,
-      title: 'Building the Sentiment Model',
-      content: 'We developed a custom deep learning model in PyTorch trained on thousands of movie-related tweets. The preprocessing pipeline cleaned and tokenized tweet data, removing noise and extracting meaningful features. The model architecture consisted of embedding layers, LSTM networks, and fully connected layers to capture sequential patterns in text. Training was performed on Google Colab utilizing GPU acceleration for faster convergence. The model achieved high accuracy in classifying tweet sentiments as positive, negative, or neutral.',
-      code: `# Sentiment Analysis Model Training
-class SentimentLSTM(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim):
-        super(SentimentLSTM, self).__init__()
-        self.embedding = nn.Embedding(vocab_size, embedding_dim)
-        self.lstm = nn.LSTM(embedding_dim, hidden_dim, batch_first=True)
-        self.fc = nn.Linear(hidden_dim, 3)  # 3 classes
-        
-    def forward(self, x):
-        embedded = self.embedding(x)
-        lstm_out, _ = self.lstm(embedded)
-        output = self.fc(lstm_out[:, -1, :])
-        return output
-
-# Training loop
-model = SentimentLSTM(vocab_size=10000, embedding_dim=128, hidden_dim=256)
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-criterion = nn.CrossEntropyLoss()
-
-for epoch in range(num_epochs):
-    for tweets, labels in train_loader:
-        optimizer.zero_grad()
-        predictions = model(tweets)
-        loss = criterion(predictions, labels)
-        loss.backward()
-        optimizer.step()`,
-      image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop',
+      title: 'Act 3: Crafting the Emotion Model',
+      content:
+        'A custom PyTorch model was trained on thousands of real movie-related tweets. The pipeline cleaned, tokenized, and embedded tweet data before passing them into stacked LSTMs that capture emotional tone. Using GPU-accelerated training on Google Colab, the model learned to classify sentiments as positive, negative, or neutral — becoming the emotional backbone of the entire system.',
+      image: 'assets/project/recommendation/act-3.png',
       color: '#8b0000'
     },
+
+    // ACT 4 — REAL-TIME SENTIMENT INTEGRATION
     {
       id: 4,
-      title: 'Twitter Integration & Rating System',
-      content: 'We integrated Twitter API to fetch real-time tweets about movies. The TwitterAnalyzer module searches for tweets based on movie titles and passes them through our sentiment model. For each movie, we calculate the percentage of positive tweets to generate a dynamic rating score. This rating is then fused with user preference scores from content-based filtering. Movies with the highest combined scores are recommended to users. The system also features a live Twitter sentiment analyzer where users can search any topic and see real-time sentiment distribution.',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop',
+      title: 'Act 4: Bringing Twitter Into the Equation',
+      content:
+        'A custom TwitterAnalyzer module streams live tweets for any movie. Each tweet is fed into the sentiment model to derive a dynamic positivity score. That score is then combined with content-based similarity metrics, producing recommendations that evolve with real-world discussions. The system even includes a live sentiment dashboard — a window into the emotional landscape of social media.',
+      image: 'assets/project/recommendation/act-4.png',
       color: '#ff6b6b'
     },
+
+    // ACT 5 — THE ANDROID EXPERIENCE
     {
       id: 5,
-      title: 'Android App Development',
-      content: 'We built a native Android application with an intuitive user interface featuring multiple fragments. The Home fragment displays personalized recommendations, the Explore fragment shows trending movies using TheMovieDB API, and the Search fragment allows users to find specific movies and view their sentiment analysis. Users can like or dislike movies, which are stored in a local database and used to refine future recommendations. Movie details and posters are fetched from OMDB API, providing rich visual content.',
-      code: `// Movie Recommendation API Call
-public void getRecommendations() {
-    String apiUrl = "https://major-project-final-246818.appspot.com/recommend";
-    
-    JsonObjectRequest request = new JsonObjectRequest(
-        Request.Method.POST, apiUrl, userLikesJson,
-        response -> {
-            JSONArray movies = response.getJSONArray("recommendations");
-            for (int i = 0; i < movies.length(); i++) {
-                JSONObject movie = movies.getJSONObject(i);
-                String title = movie.getString("title");
-                double score = movie.getDouble("score");
-                // Display recommendations
-            }
-        },
-        error -> Toast.makeText(this, "Error fetching recommendations", Toast.LENGTH_SHORT).show()
-    );
-    
-    requestQueue.add(request);
-}`,
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop',
+      title: 'Act 5: The Mobile Interface',
+      content:
+        'A native Android app forms the face of the system. Sleek fragments display personalized suggestions, trending movies, search insights, and sentiment visualizations. User likes/dislikes are stored locally, influencing future recommendations. Movie posters and metadata are fetched via OMDB API, making the app visually rich and deeply interactive.',
+      image: 'assets/project/recommendation/act-5.png',
       color: '#ff9f1c'
     },
+
+    // ACT 6 — CLOUD DEPLOYMENT
     {
       id: 6,
-      title: 'Google Cloud Deployment',
-      content: 'The backend was deployed on Google Cloud App Engine, providing automatic scaling and high availability. We created REST API endpoints for movie recommendations, sentiment analysis, and user data management. The Flask application handles requests from the Android app, processes them using the recommendation algorithm and sentiment model, and returns JSON responses. The deployment process involved configuring app.yaml, managing dependencies, and optimizing the model checkpoint file size for cloud storage constraints.',
-      code: `# Flask API Endpoint for Recommendations
-from flask import Flask, request, jsonify
-import torch
-
-app = Flask(__name__)
-model = torch.load('sentiment_model.pth')
-
-@app.route('/recommend', methods=['POST'])
-def recommend_movies():
-    user_likes = request.json['likes']
-    
-    # Get content-based recommendations
-    candidate_movies = content_based_filter(user_likes)
-    
-    # Analyze sentiment for each movie
-    recommendations = []
-    for movie in candidate_movies:
-        sentiment_score = analyze_twitter_sentiment(movie['title'])
-        final_score = calculate_hybrid_score(
-            movie['content_score'], 
-            sentiment_score
-        )
-        recommendations.append({
-            'title': movie['title'],
-            'score': final_score,
-            'poster': movie['poster_url']
-        })
-    
-    return jsonify({'recommendations': sorted(recommendations, 
-                    key=lambda x: x['score'], reverse=True)[:10]})
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)`,
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=600&fit=crop',
+      title: 'Act 6: Deploying to the Cloud',
+      content:
+        'The backend runs on Google Cloud App Engine with full autoscaling capability. Flask APIs handle recommendation requests, sentiment queries, and user preference updates. Deploying required building optimized checkpoints, writing an app.yaml configuration, and managing dependency layers — turning the project into a real-world cloud-native application.',
+      image:
+        'assets/project/recommendation/act-6.png',
       color: '#2ec4b6'
     },
+
+    // ACT 7 — IMPACT
     {
       id: 7,
-      title: 'Impact & Results',
-      content: 'The hybrid recommendation system significantly outperformed traditional content-based filtering by incorporating real-time sentiment data. Users reported more relevant and timely recommendations, especially for newly released movies with active social media discussions. The sentiment analyzer achieved 87% accuracy on test data, and the mobile app received positive feedback for its intuitive interface and unique sentiment visualization features. The system successfully demonstrated how combining multiple data sources—user preferences, content features, and public sentiment—creates a more robust recommendation engine.',
+      title: 'Act 7: The Outcome',
+      content:
+        'By combining emotion, user taste, and content intelligence, the system delivered significantly more accurate and timely recommendations. Newly released movies — usually blind spots for traditional recommenders — became the strongest area of improvement. With an 87% sentiment accuracy and sub-2-second API responses, the project proved the power of merging public emotion with machine intelligence.',
       metrics: [
         { label: 'Model Accuracy', value: '87%', icon: '🎯' },
         { label: 'API Response', value: '<2s', icon: '⚡' },
         { label: 'Recommendations', value: '10K+', icon: '🎬' },
         { label: 'User Satisfaction', value: '4.5/5', icon: '⭐' }
       ],
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      image: 'assets/project/recommendation/act-7.png',
       color: '#9b59b6'
     },
+
+    // ACT 8 — BEHIND THE SCENES
     {
       id: 8,
-      title: 'Behind the Scenes',
-      content: 'The project was built during a major academic project timeline, requiring coordination across multiple technologies and APIs 🔧. Debugging the PyTorch model training on limited GPU resources was challenging but rewarding 💪. The Twitter API rate limits forced us to implement smart caching strategies ⚙️. Deploying to Google Cloud for the first time involved a steep learning curve but taught valuable DevOps skills ☁️. The most satisfying moment was seeing real-time sentiment analysis work flawlessly on live tweets 🎉. Open-sourced on GitHub under MIT license to help other developers build similar systems 🌟.',
-      image: 'https://images.unsplash.com/photo-1509395176047-4a66953fd231?w=800&h=600&fit=crop',
+      title: 'Act 8: Behind the Scenes',
+      content:
+        'A project born during a tight academic timeline turned into a deep dive into modern AI engineering. GPU limitations forced creative batching strategies, Twitter API rate limits required intelligent caching, and Google Cloud deployments introduced real DevOps challenges. Watching real-time tweets transform into emotional insights was the most rewarding moment — leading to the project being open-sourced under MIT license for the community.',
+      image: 'assets/project/recommendation/act-8.png',
       color: '#e91e63'
     }
   ]
