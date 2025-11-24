@@ -18,7 +18,7 @@ template: `
   <nav class="navbar" [class.scrolled]="isScrolled">
     <div class="navbar-container">
       <div class="logo-section">
-        <a [routerLink]="logoClickRoute" class="logo">K</a>
+        <a [routerLink]="logoClickRoute" class="logo">KANNAN</a>
         <a [routerLink]="userProfile" class="switch-user-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>

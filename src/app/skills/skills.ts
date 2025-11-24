@@ -30,6 +30,43 @@ export class Skills implements OnInit {
       level: 90
     },
     {
+      name: 'Angular',
+      icon: 'assets/icons/angular.png',
+      description: 'Single Page Applications, Component-based architecture',
+      color: '#DD0031',
+      level: 88
+    },
+    {
+      name: 'Spring Boot',
+      icon: 'assets/icons/springboot.png',
+      description: 'RESTful APIs, Microservices, Cloud-native applications',
+      color: '#6DB33F',
+      level: 82
+    },
+  {
+    name: 'React',
+    icon: 'assets/icons/react.png',
+    description: 'Component-based architecture, UI engineering, hooks & state management',
+    color: '#61DBFB',
+    level: 85
+  },
+  {
+    name: 'Machine Learning',
+    icon: 'assets/icons/machinelearning.png',
+    description: 'Deep Learning, LSTMs, CNNs, model training & evaluation',
+    color: '#FFB800',
+    level: 75
+  }
+  ];
+  allskills:Skill[]=[
+        {
+      name: 'Python',
+      icon: 'assets/icons/python.png',
+      description: 'Backend development, Data Science, Machine Learning',
+      color:'#FFD43B',
+      level: 90
+    },
+    {
       name: 'Java',
       icon: 'assets/icons/java.png',
       description: 'Enterprise applications, Spring Framework, Microservices',
@@ -85,7 +122,7 @@ export class Skills implements OnInit {
     color: '#FFB800',
     level: 75
   }
-  ];
+  ]
   private profileService = inject(ProfileService);
   private router = inject(Router);
   currentSkillIndex = signal(0);

@@ -31,7 +31,7 @@
     </div>
 
     <div class="skills-grid">
-      @for (skill of skills; track skill.name; let i = $index) {
+      @for (skill of allskills; track skill.name; let i = $index) {
         <div 
           class="skill-card" 
           [style.--skill-color]="skill.color"
