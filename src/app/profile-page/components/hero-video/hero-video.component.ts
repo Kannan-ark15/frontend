@@ -13,7 +13,7 @@ export interface ProfileHeroData {
   template: `
     <div class="hero-video-container" [style.height]="height">
       <video #heroVideo class="hero-video" 
-            [muted]="false"
+            [muted]="true"
             [loop]="true"
             playsinline
             preload="auto"
@@ -22,7 +22,7 @@ export interface ProfileHeroData {
       <div class="hero-overlay"></div>
       <div class="video-content">
         <h1 class="project-title">{{ profileHeroData.title }}</h1>
-        <p class="project-description">{{ profileHeroData.description }}</p>
+        <p [innerHTML]="profileHeroData.description" class="project-description"></p>
         <div class="tech-badges">
           @for (tech of profileHeroData.actions; track tech) {
             <a class="tech-badge"  [href]="actionClicked(tech)">{{ tech }}</a>
@@ -73,7 +73,7 @@ export interface ProfileHeroData {
 
     @media (max-width: 768px) {
       .hero-video-container {
-        height: 70vh !important;
+        height: 90vh !important;
       }
     }
     /* Mute Toggle Button */
@@ -144,6 +144,7 @@ export interface ProfileHeroData {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  margin-top:1rem;
 }
 
 .tech-badge {
@@ -174,16 +175,21 @@ export interface ProfileHeroData {
   font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.7;
-  color: #fff;
-  max-width: 45rem;
+  color: grey;
+  width:56rem;
 }
-
+::ng-deep .highlight {
+   /* Netflix red */
+     color: #fff;
+  font-weight: 600;
+}
 /* Responsive */
 @media (max-width: 768px) {
   .video-content {
     left: 4%;
     right: 4%;
     bottom: 60px;
+    top: 20rem;
   }
   .mute-toggle {
     width: 45px;
@@ -206,7 +212,8 @@ export interface ProfileHeroData {
 
   .project-description {
     margin-bottom: 0;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    width: 20rem;
   }
 }
 
@@ -214,7 +221,7 @@ export interface ProfileHeroData {
   .mute-toggle {
     width: 40px;
     height: 40px;
-    bottom: 20px;
+    bottom: 5px;
     right: 20px;
   }
   
@@ -238,7 +245,7 @@ export class HeroVideoComponent {
   videoSrc = signal('assets/videos/default-hero.mp4');
   overlayText = signal('Welcome to My Portfolio');
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
-  isMuted = signal(false); 
+  isMuted = signal(true); 
   ngAfterViewInit() {
 
     setTimeout(() => {
@@ -267,7 +274,7 @@ export class HeroVideoComponent {
       const video = this.heroVideoRef.nativeElement;
       
       // Ensure video is muted for autoplay
-      video.muted = false;
+      video.muted = true;
       video.playsInline = true;
       
       // Load the video

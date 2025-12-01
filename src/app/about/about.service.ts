@@ -27,8 +27,8 @@ export class AboutService {
         videoUrl: 'assets/videos/About_Developer.mp4'
     },
     {
-        user:'stalker',
-        title:'Hi Stalker!',
+        user:'anonymus',
+        title:'Hi There',
         description:'Tell me your name, time to write it down.',
         videoUrl: 'assets/videos/About_Stalker.mp4'
     },

@@ -29,7 +29,7 @@ export class ProfileService {
       profileHeroData: {
         title: 'Full Stack Developer',
         subtitle: '',  
-        description: 'Hello Recruiters, welcome to my portfolio!.I’m an innovative Full Stack Developer specializing in building scalable, high-performance web applications. This portfolio reflects the bridge between my passion for crafting impactful digital solutions and my love for storytelling through movies — combining creativity with technology in every project I build.',
+        description: `Hello Recruiters, welcome to my portfolio! I'm a <span class="highlight">Full Stack Developer</span>specializing in building <span class="highlight">scalable, high-performance web applications.</span>I'm driven by <span class="highlight">creating solutions that add real value</span>— I need to understand <span class="highlight">exactly where the impact happens.</span>As a movie enthusiast, I bring a unique perspective: the art of <span class="highlight">visual storytelling.</span> This <span class="highlight">portfolio bridges my technical expertise</span> with my love for narratives that captivate and engage — combining <span class="highlight">creativity with purpose</span> in every project I build.`,
         actions: ['Resume', 'LinkedIn']
       }
     },
@@ -48,15 +48,15 @@ export class ProfileService {
         actions: ['Resume', 'LinkedIn']
       }
     },
-    'stalker': {
-      name: 'Stalker',
+    'anonymus': {
+      name: 'Anonymus',
       heroVideo: 'assets/videos/stalker.mp4',
       overlayText: 'Exploring Digital Footprints',
       restrictedSections: ['Experience','Certifications','Codex'],
       profileHeroData: {
         title: 'I See',
         subtitle: 'Discover Top Talent',  
-        description: 'Hello, stalker! You’ve come pretty far in here. Go ahead and explore my projects and skills — but yes, only with limited access',
+        description: 'Hello. You’ve come pretty far in here. Go ahead and explore my projects and skills — but yes, only with limited access',
         actions: ['LinkedIn']
       }
     }

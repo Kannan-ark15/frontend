@@ -27,6 +27,6 @@ export const profileGuard: CanActivateFn = (route, state) => {
 
 function extractProfileFromUrl(url: string): string | null {
   // Check if URL contains profile patterns like /recruiter/home, /developer/home
-  const match = url.match(/\/(recruiter|developer|stalker)\//);
+  const match = url.match(/\/(recruiter|developer|anonymus)\//);
   return match ? match[1] : null;
 }

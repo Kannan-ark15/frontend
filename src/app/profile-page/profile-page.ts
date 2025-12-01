@@ -39,12 +39,37 @@ export class ProfilePage {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
   showRightArrow = true;
   showLeftArrow = true;
+// Replace your mangaImages signal with this:
+mangaImages = signal([
+  {
+    id: 1,
+    imageUrl: 'assets/images/sql_manga.webp',
+    videoUrl: 'assets/videos/sql.mp4', // Add video URL
+    title: 'SQL MCP Automation',
+    description: 'Tools:Springboot,AI,MCP'
+  },
+  {
+    id: 2,
+    imageUrl: 'assets/images/movie_manga.webp',
+    videoUrl: 'assets/videos/movie.mp4', // Add video URL
+    title: 'AI Recommender',
+    description: 'Tools:Sentiment Analysis System,LSTM'
+  },
+  {
+    id: 3,
+    imageUrl: 'assets/images/ecommerce_manga.webp',
+    videoUrl: 'assets/videos/cn.mp4', // Add video URL
+    title: 'E-commerce Platform',
+    description: 'Tools:MERN Stack'
+  }
+]);
+
   gridcard = signal<Card[]>([
     {
       id: 1,
       title: '1',
       text: 'Sql Syncup Automation System with Custom MCP',
-      imageUrl: 'assets/images/Sql.png',
+      imageUrl: 'assets/images/Sql.webp',
       videoUrl: 'assets/project/videos/sql.mp4',
       section: ''
     },
@@ -52,7 +77,7 @@ export class ProfilePage {
       id: 2,
       title: '2',
       text: 'Movie Recommendation Sytsem based on Sentiment-Analysis.',
-      imageUrl: 'assets/images/movie.png',
+      imageUrl: 'assets/images/movie.webp',
       videoUrl: 'assets/project/videos/movie.mp4',
       section: ''
     },
@@ -60,7 +85,7 @@ export class ProfilePage {
       id: 3,
       title: '3',
       text: 'E-commerce Website with Payment Gateway Integration.',
-      imageUrl: 'assets/images/E-commerce.png',
+      imageUrl: 'assets/images/E-commerce.webp',
       videoUrl: 'assets/project/videos/cn.mp4',
       section: ''
     },
@@ -68,7 +93,7 @@ export class ProfilePage {
       id: 4,
       title: '4',
       text: 'Project development in Progress.',
-      imageUrl: 'assets/images/soon.png',
+      imageUrl: 'assets/images/soon.webp',
       videoUrl: 'assets/project/videos/soon.mp4',
       section: ''
     }
@@ -78,7 +103,7 @@ export class ProfilePage {
       id: 1,
       title: 'About',
       text: 'Learn more about my journey and background in software development.',
-      imageUrl: 'assets/images/about.png',
+      imageUrl: 'assets/images/about.webp',
       videoUrl: 'assets/videos/about.mp4',
       section: 'About'
     },
@@ -86,7 +111,7 @@ export class ProfilePage {
       id: 2,
       title: 'Skills',
       text: 'Discover my technical skills and expertise in various technologies.',
-      imageUrl: 'assets/images/skills.png',
+      imageUrl: 'assets/images/skills.webp',
       videoUrl: 'assets/videos/skills.mp4',
       section: 'Skills'
     },
@@ -94,7 +119,7 @@ export class ProfilePage {
       id: 3,
       title: 'Experience',
       text: 'Explore my professional experience and career achievements.',
-      imageUrl: 'assets/images/experience.png',
+      imageUrl: 'assets/images/experience.webp',
       videoUrl: 'assets/videos/experience.mp4',
       section: 'Experience'
     },
@@ -102,7 +127,7 @@ export class ProfilePage {
       id: 4,
       title: 'Certifications',
       text: 'View my official certifications and professional credentials.',
-      imageUrl: 'assets/images/certificates.png',
+      imageUrl: 'assets/images/certificates.webp',
       videoUrl: 'assets/videos/Certificate.mp4',
       section: 'Certifications'
     },
@@ -110,7 +135,7 @@ export class ProfilePage {
       id: 5,
       title: 'Codex',
       text: 'Dont miss this!',
-      imageUrl: 'assets/images/game.png',
+      imageUrl: 'assets/images/game.webp',
       videoUrl: 'assets/videos/game.mp4',
       section: 'Codex'
     },
@@ -118,7 +143,7 @@ export class ProfilePage {
       id: 6,
       title: 'Bonus',
       text: 'Time to Compare',
-      imageUrl: 'assets/images/bonus.png',
+      imageUrl: 'assets/images/bonus.webp',
       videoUrl: 'assets/videos/bonus.mp4',
       section: 'Bonus'
     }
@@ -134,7 +159,7 @@ export class ProfilePage {
 
       // Extract profile from current URL
     const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];
@@ -199,14 +224,18 @@ export class ProfilePage {
     }
   }
    scrollRight() {
+    this.onScroll();
     const container = this.scrollContainer.nativeElement;
     const scrollAmount = 300; // Adjust scroll distance
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+
   }
 
    scrollLeft() {
+         this.onScroll();
     const container = this.scrollContainer.nativeElement;
     container.scrollBy({ left: -300, behavior: 'smooth' });
+ 
   }
 
   onScroll() {
@@ -215,7 +244,7 @@ export class ProfilePage {
 
   checkScrollPosition() {
     const container = this.scrollContainer.nativeElement;
-    this.showLeftArrow = container.scrollLeft < 10;
+    this.showLeftArrow = container.scrollLeft > 1;
     this.showRightArrow = container.scrollLeft + container.clientWidth < container.scrollWidth - 10;
   }
 
@@ -237,4 +266,16 @@ export class ProfilePage {
     }
     this.router.navigate([route]);
   }
+  playVideo(event: Event) {
+  const video = event.target as HTMLVideoElement;
+  video.style.opacity = '1';
+  video.play();
+}
+
+pauseVideo(event: Event) {
+  const video = event.target as HTMLVideoElement;
+  video.pause();
+  video.currentTime = 0; // Reset to start
+  video.style.opacity = '0';
+}
 }

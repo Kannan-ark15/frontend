@@ -1,4 +1,4 @@
-// app-navbar.component.ts - With optional scroll effect
+// app-navbar.component.ts - Shows navbar only when scrolling up
 import { Component, Input, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -13,9 +13,8 @@ export interface MenuItem {
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  // app-navbar.component.ts - Updated template section
-template: `
-  <nav class="navbar" [class.scrolled]="isScrolled">
+  template: `
+  <nav class="navbar" [class.scrolled]="isScrolled" [class.hidden]="isNavbarHidden">
     <div class="navbar-container">
       <div class="logo-section">
         <a [routerLink]="logoClickRoute" class="logo">KANNAN</a>
@@ -69,11 +68,21 @@ template: `
       height: 68px;
       background: transparent;
       z-index: 1000;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease, background 0.3s ease;
+      transform: translateY(0);
     }
 
-    /* Background appears when scrolled past 50px */
- 
+    /* Hide navbar when scrolling down */
+    .navbar.hidden {
+      transform: translateY(-100%);
+    }
+
+    /* Show navbar at top of page */
+    .navbar:not(.scrolled) {
+      transform: translateY(0) !important;
+    }
+
+    /* Background appears when scrolled */
     .navbar-container {
       max-width: 1920px;
       margin: 0 auto;
@@ -131,9 +140,8 @@ template: `
       transform: translateY(-2px);
     }
 
-    .switch-user-btn:hover,
-    .switch-user-btn:active
-    svg {
+    .switch-user-btn:hover svg,
+    .switch-user-btn:active svg {
       transform: scale(1.1);
     }
 
@@ -216,9 +224,10 @@ template: `
     }
 
     @media (max-width: 768px) {
-      .navbar{
-            background: linear-gradient(45deg, black, transparent);
+      .navbar {
+        background: linear-gradient(45deg, black, transparent);
       }
+      
       .hamburger {
         display: flex;
       }
@@ -281,16 +290,45 @@ template: `
 export class AppNavbarComponent {
   @Input() menuItems: MenuItem[] = [];
   @Input() logoClickRoute = '/';
-  @Input() userProfile='/profile'
+  @Input() userProfile = '/profile';
+  
   isMenuOpen = false;
   isScrolled = false;
+  isNavbarHidden = false;
+  private lastScrollTop = 0;
+  private scrollThreshold = 5; // Minimum scroll distance to trigger hide/show
 
   constructor(private router: Router) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    
     // Add background when scrolled past 50px
-    this.isScrolled = window.pageYOffset > 50;
+    this.isScrolled = currentScroll > 50;
+    
+    // Show navbar at the very top
+    if (currentScroll <= 0) {
+      this.isNavbarHidden = false;
+      this.lastScrollTop = currentScroll;
+      return;
+    }
+    
+    // Check scroll direction
+    const scrollDifference = Math.abs(currentScroll - this.lastScrollTop);
+    
+    // Only trigger if scroll difference is significant
+    if (scrollDifference > this.scrollThreshold) {
+      if (currentScroll > this.lastScrollTop) {
+        // Scrolling down - hide navbar
+        this.isNavbarHidden = true;
+      } else {
+        // Scrolling up - show navbar
+        this.isNavbarHidden = false;
+      }
+      
+      this.lastScrollTop = currentScroll;
+    }
   }
 
   toggleMenu() {

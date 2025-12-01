@@ -34,7 +34,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
     this.chapters = this.projectData.chapters;
 
          const currentUrl = this.route.url;
-        const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+        const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
        if (profileMatch) {
           this.profile = profileMatch[1];
           this.profileService.setProfile(this.profile);

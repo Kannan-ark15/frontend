@@ -24,7 +24,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 1: The Unspoken Problem',
       content:
         'Traditional recommender systems see users, not emotions. They rely on outdated ratings and static metadata, missing out on the massive universe of real-time public sentiment. Thousands of people express opinions about movies every minute — but none of that emotion ever reaches the user. This project began with a single question:“What if recommendations could feel the pulse of the world in real time?”',
-      image: 'assets/project/recommendation/act-1.png',
+      image: 'assets/project/recommendation/act-1.webp',
       color: '#e50914'
     },
 
@@ -34,7 +34,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 2: Designing the Intelligence Engine',
       content:
         'We architected a hybrid intelligence system: content-based filtering fused with a live sentiment analyzer. A PyTorch LSTM model handles emotional understanding, a Flask backend orchestrates recommendation logic, and an Android app delivers a smooth user experience. The ecosystem runs on Google Cloud App Engine for effortless scalability. Every layer was meticulously designed to transform raw social conversations into intelligent movie suggestions.',
-      image: 'assets/project/recommendation/act-2.png',
+      image: 'assets/project/recommendation/act-2.webp',
       color: '#b20710'
     },
 
@@ -44,7 +44,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 3: Crafting the Emotion Model',
       content:
         'A custom PyTorch model was trained on thousands of real movie-related tweets. The pipeline cleaned, tokenized, and embedded tweet data before passing them into stacked LSTMs that capture emotional tone. Using GPU-accelerated training on Google Colab, the model learned to classify sentiments as positive, negative, or neutral — becoming the emotional backbone of the entire system.',
-      image: 'assets/project/recommendation/act-3.png',
+      image: 'assets/project/recommendation/act-3.webp',
       color: '#8b0000'
     },
 
@@ -54,7 +54,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 4: Bringing Twitter Into the Equation',
       content:
         'A custom TwitterAnalyzer module streams live tweets for any movie. Each tweet is fed into the sentiment model to derive a dynamic positivity score. That score is then combined with content-based similarity metrics, producing recommendations that evolve with real-world discussions. The system even includes a live sentiment dashboard — a window into the emotional landscape of social media.',
-      image: 'assets/project/recommendation/act-4.png',
+      image: 'assets/project/recommendation/act-4.webp',
       color: '#ff6b6b'
     },
 
@@ -64,7 +64,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 5: The Mobile Interface',
       content:
         'A native Android app forms the face of the system. Sleek fragments display personalized suggestions, trending movies, search insights, and sentiment visualizations. User likes/dislikes are stored locally, influencing future recommendations. Movie posters and metadata are fetched via OMDB API, making the app visually rich and deeply interactive.',
-      image: 'assets/project/recommendation/act-5.png',
+      image: 'assets/project/recommendation/act-5.webp',
       color: '#ff9f1c'
     },
 
@@ -75,7 +75,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       content:
         'The backend runs on Google Cloud App Engine with full autoscaling capability. Flask APIs handle recommendation requests, sentiment queries, and user preference updates. Deploying required building optimized checkpoints, writing an app.yaml configuration, and managing dependency layers — turning the project into a real-world cloud-native application.',
       image:
-        'assets/project/recommendation/act-6.png',
+        'assets/project/recommendation/act-6.webp',
       color: '#2ec4b6'
     },
 
@@ -91,7 +91,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
         { label: 'Recommendations', value: '10K+', icon: '🎬' },
         { label: 'User Satisfaction', value: '4.5/5', icon: '⭐' }
       ],
-      image: 'assets/project/recommendation/act-7.png',
+      image: 'assets/project/recommendation/act-7.webp',
       color: '#9b59b6'
     },
 
@@ -101,7 +101,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
       title: 'Act 8: Behind the Scenes',
       content:
         'A project born during a tight academic timeline turned into a deep dive into modern AI engineering. GPU limitations forced creative batching strategies, Twitter API rate limits required intelligent caching, and Google Cloud deployments introduced real DevOps challenges. Watching real-time tweets transform into emotional insights was the most rewarding moment — leading to the project being open-sourced under MIT license for the community.',
-      image: 'assets/project/recommendation/act-8.png',
+      image: 'assets/project/recommendation/act-8.webp',
       color: '#e91e63'
     }
   ]
@@ -125,7 +125,7 @@ export class ProjectsComponent {
   profileService=inject(ProfileService)
   ngOnInit(){
      const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];

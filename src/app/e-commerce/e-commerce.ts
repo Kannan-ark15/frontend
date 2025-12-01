@@ -21,7 +21,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'The Spark',
       content:
         'The project began as a simple MERN-based e-commerce website. But soon, the curiosity shifted from just building the features to understanding how the same site would behave once it was actually live on the internet. That shift turned this small assignment into something far more interesting.',
-      image: 'assets/project/e-commerce/act-1.png',
+      image: 'assets/project/e-commerce/act-1.webp',
       color: '#ff6e6e'
     },
 
@@ -39,7 +39,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: ' Building the Storefront',
       content:
         'The main features were built next: browsing products, login, and cart flow. While they weren’t complicated, they helped highlight how HTTP requests behave, how authentication is handled, and how a backend deals with multiple calls at once. It was a simple store, but it taught practical networking lessons hidden inside everyday APIs.',
-      image: 'assets/project/e-commerce/act-3.png',
+      image: 'assets/project/e-commerce/act-3.webp',
       color: '#ff4949'
     },
 
@@ -57,7 +57,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'Awakening the Cloud',
       content:
         'Deployment was where everything came together. A custom domain pointed to the server using DNS, and Nginx acted as a reverse proxy to route traffic correctly. The app ran inside a cloud network with controlled ports and firewall rules, and the backend connected to MongoDB Atlas securely. Seeing the website run publicly made the whole networking side feel real for the first time.',
-      image: 'assets/project/e-commerce/act-5.png',
+      image: 'assets/project/e-commerce/act-5.webp',
       color: '#ff2525'
     },
 
@@ -66,7 +66,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'Seeing the Internet from the Inside',
       content:
         'Once the site was live, everything behaved differently than localhost. There were small delays, routing changes, and real users accessing it from different regions. Watching how the server handled multiple requests, how Nginx forwarded traffic, and how the cloud VM acted inside its virtual network gave a clearer picture of how apps actually run on the internet.',
-      image: 'assets/project/e-commerce/act-6.png',
+      image: 'assets/project/e-commerce/act-6.webp',
       color: '#ff1717'
     },
 
@@ -97,7 +97,7 @@ export class ECommerce {
 
   ngOnInit(){
      const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];

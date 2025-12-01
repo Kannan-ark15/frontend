@@ -99,7 +99,7 @@ export class Experience {
   profileService=inject(ProfileService)
   ngOnInit(){
      const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];

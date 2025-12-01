@@ -10,6 +10,41 @@
       }
     </div>
 </div>
+<!-- Manga Images Section (Recruiter Only) -->
+@if (profile === 'recruiter') {
+  <div class="manga-section">
+    <h2 class="manga-title">Project Showcases</h2>
+    <div class="manga-grid">
+      @for (manga of mangaImages(); track manga.id) {
+        <div class="manga-card">
+          <!-- Static Image (default) -->
+          <img 
+            [src]="manga.imageUrl" 
+            [alt]="manga.title" 
+            class="manga-image manga-static">
+          
+          <!-- Video (plays on hover) -->
+          <video 
+            [src]="manga.videoUrl" 
+            class="manga-video"
+            [muted]="true"
+            loop
+            playsinline
+            preload="metadata"
+            (mouseenter)="playVideo($event)"
+            (mouseleave)="pauseVideo($event)">
+          </video>
+          
+          <div class="manga-overlay">
+            <h3>{{ manga.title }}</h3>
+            <p>{{ manga.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}
+
 <div class="hover-cards-container">
     <h2 class="section-title">Explore More</h2>
     <button 

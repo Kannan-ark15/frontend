@@ -31,7 +31,7 @@ export class About implements AfterViewInit, OnInit {
   ngOnInit() {
     // Extract profile from current URL
     const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];

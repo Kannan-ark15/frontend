@@ -38,6 +38,285 @@
   z-index: 10;
 }
 
+/* ========== NEW: FULL SCREEN IMAGE CARD SECTION ========== */
+.fullscreen-image-section {
+  width: 100%;
+  height: 95vh;
+  margin: 60px 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fullscreen-image-card {
+  position: relative;
+  width: 95%;
+  height: 90%;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  transform-style: preserve-3d;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: cardEntrance 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) rotateX(-15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+.fullscreen-image-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 35px 80px rgba(239, 68, 68, 0.4);
+}
+
+.fullscreen-image-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.1) 0%,
+    transparent 50%,
+    rgba(59, 130, 246, 0.1) 100%
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fullscreen-image-card:hover::before {
+  opacity: 1;
+}
+
+.fullscreen-image-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: shimmer 3s infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.fullscreen-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.fullscreen-image-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(1) contrast(1.15);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 60px 50px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent 100%
+  );
+  z-index: 3;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: overlayFadeIn 1s ease-out 0.5s forwards;
+}
+
+@keyframes overlayFadeIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.image-overlay h3 {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #fff 0%, #ef4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+  from {
+    filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 30px rgba(239, 68, 68, 0.8));
+  }
+}
+
+.image-overlay p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.corner-accent {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 3px solid rgba(239, 68, 68, 0.6);
+  z-index: 4;
+  transition: all 0.5s ease;
+}
+
+.corner-accent.top-left {
+  top: 20px;
+  left: 20px;
+  border-right: none;
+  border-bottom: none;
+  animation: cornerPulse 2s ease-in-out infinite;
+}
+
+.corner-accent.bottom-right {
+  bottom: 20px;
+  right: 20px;
+  border-left: none;
+  border-top: none;
+  animation: cornerPulse 2s ease-in-out 1s infinite;
+}
+
+@keyframes cornerPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.fullscreen-image-card:hover .corner-accent {
+  width: 120px;
+  height: 120px;
+  border-color: rgba(239, 68, 68, 1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .fullscreen-image-section {
+    height: 85vh;
+  }
+  
+  .image-overlay h3 {
+    font-size: 2.5rem;
+  }
+  
+  .image-overlay p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .fullscreen-image-section {
+    height: 70vh;
+    padding: 10px;
+  }
+  
+  .fullscreen-image-card {
+    width: 98%;
+    height: 95%;
+    border-radius: 20px;
+  }
+  
+  .image-overlay {
+    padding: 40px 30px;
+  }
+  
+  .image-overlay h3 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+  
+  .image-overlay p {
+    font-size: 1rem;
+  }
+  
+  .corner-accent {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .fullscreen-image-card:hover .corner-accent {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullscreen-image-section {
+    height: 60vh;
+  }
+  
+  .image-overlay h3 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .image-overlay p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .corner-accent {
+    width: 40px;
+    height: 40px;
+  }
+}
+/* ========== END: FULL SCREEN IMAGE CARD SECTION ========== */
+
 .hover-cards-container {
   margin: 60px 0;
   position: relative;
@@ -206,5 +485,203 @@
 @media (max-width: 768px) {
   .content-section {
     padding: 20px 2%;
+  }
+}
+
+/* Manga Section Styles - Full Screen */
+.manga-section {
+  padding: 2rem 1rem;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.manga-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.manga-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 100%;
+  padding: 0;
+}
+
+
+/* Hide text on hover */
+.manga-card:hover .manga-overlay h3,
+.manga-card:hover .manga-overlay p {
+  opacity: 0;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .manga-section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .manga-card {
+    height: 55vh; /* Slightly smaller on mobile for better UX */
+    border-radius: 4px;
+  }
+  
+  .manga-grid {
+    gap: 1.5rem;
+  }
+  
+  .manga-overlay {
+    padding: 1.5rem;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .manga-card {
+    height: 88vh;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1920px) {
+  .manga-card {
+    height: 90vh;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+}
+
+/* Replace the .manga-image styles with this: */
+.manga-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed from 'cover' to 'contain' */
+  object-position: center;
+  display: block;
+  transition: filter 0.3s ease;
+  background-color: #000; /* Add black background for letterboxing */
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .manga-section {
+    padding: 1rem 0.5rem;
+  }
+  
+  .manga-card {
+    height: 55vh;
+    border-radius: 4px;
+    background-color: #000; /* Ensure black background on mobile */
+  }
+  
+  .manga-image {
+    object-fit: contain; /* Ensure full image is visible */
+  }
+  
+  .manga-grid {
+    gap: 1.5rem;
+  }
+  
+  .manga-overlay {
+    padding: 1.5rem;
+  }
+}
+
+
+/* Manga Section Styles - Full Screen with Video */
+.manga-card {
+  position: relative;
+  width: 100%;
+  height: 92vh;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background-color: #000;
+}
+
+/* Static Image - Default State */
+.manga-static {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Video - Hidden by Default */
+.manga-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+/* Hide image when video plays */
+.manga-card:hover .manga-static {
+  opacity: 0;
+}
+
+/* Overlay stays on top */
+.manga-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+  color: #fff;
+  padding: 2rem;
+  transition: opacity 0.3s ease;
+  z-index: 3; /* Above video */
+}
+.manga-overlay h3{
+  color: #fff;
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 0%, #e50914 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.manga-overlay p{
+     font-size: 1.3rem;
+}
+
+/* Hide text on hover */
+.manga-card:hover .manga-overlay h3,
+.manga-card:hover .manga-overlay p {
+  opacity: 0;
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .manga-card {
+    height: 55vh;
+    border-radius: 4px;
+  }
+  
+  .manga-video,
+  .manga-static {
+    object-fit: contain;
   }
 }

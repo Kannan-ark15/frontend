@@ -24,35 +24,35 @@ export class Skills implements OnInit {
   skills: Skill[] = [
     {
       name: 'Python',
-      icon: 'assets/icons/python.png',
+      icon: 'assets/icons/python.webp',
       description: 'Backend development, Data Science, Machine Learning',
       color:'#FFD43B',
       level: 90
     },
     {
       name: 'Angular',
-      icon: 'assets/icons/angular.png',
+      icon: 'assets/icons/angular.webp',
       description: 'Single Page Applications, Component-based architecture',
       color: '#DD0031',
       level: 88
     },
     {
       name: 'Spring Boot',
-      icon: 'assets/icons/springboot.png',
+      icon: 'assets/icons/springboot.webp',
       description: 'RESTful APIs, Microservices, Cloud-native applications',
       color: '#6DB33F',
       level: 82
     },
   {
     name: 'React',
-    icon: 'assets/icons/react.png',
+    icon: 'assets/icons/react.webp',
     description: 'Component-based architecture, UI engineering, hooks & state management',
     color: '#61DBFB',
     level: 85
   },
   {
     name: 'Machine Learning',
-    icon: 'assets/icons/machinelearning.png',
+    icon: 'assets/icons/machinelearning.webp',
     description: 'Deep Learning, LSTMs, CNNs, model training & evaluation',
     color: '#FFB800',
     level: 75
@@ -61,63 +61,63 @@ export class Skills implements OnInit {
   allskills:Skill[]=[
         {
       name: 'Python',
-      icon: 'assets/icons/python.png',
+      icon: 'assets/icons/python.webp',
       description: 'Backend development, Data Science, Machine Learning',
       color:'#FFD43B',
       level: 90
     },
     {
       name: 'Java',
-      icon: 'assets/icons/java.png',
+      icon: 'assets/icons/java.webp',
       description: 'Enterprise applications, Spring Framework, Microservices',
       color: '#ED8B00',
       level: 85
     },
     {
       name: 'JavaScript',
-      icon: 'assets/icons/javascript.png',
+      icon: 'assets/icons/javascript.webp',
       description: 'Full-stack development, Modern frameworks, Node.js',
       color: '#F7DF1E',
       level: 95
     },
     {
       name: 'Angular',
-      icon: 'assets/icons/angular.png',
+      icon: 'assets/icons/angular.webp',
       description: 'Single Page Applications, Component-based architecture',
       color: '#DD0031',
       level: 88
     },
     {
       name: 'Spring Boot',
-      icon: 'assets/icons/springboot.png',
+      icon: 'assets/icons/springboot.webp',
       description: 'RESTful APIs, Microservices, Cloud-native applications',
       color: '#6DB33F',
       level: 82
     },
     {
     name: 'MySQL',
-    icon: 'assets/icons/mysql.png',
+    icon: 'assets/icons/mysql.webp',
     description: 'Database design, optimization, queries, indexing, joins',
     color: '#00758F',
     level: 80
   },
   {
     name: 'React',
-    icon: 'assets/icons/react.png',
+    icon: 'assets/icons/react.webp',
     description: 'Component-based architecture, UI engineering, hooks & state management',
     color: '#61DBFB',
     level: 85
   },
   {
     name: 'Node.js',
-    icon: 'assets/icons/nodejs.png',
+    icon: 'assets/icons/nodejs.webp',
     description: 'Backend APIs,authentication, scalable networking applications',
     color: '#68A063',
     level: 78
   },
   {
     name: 'Machine Learning',
-    icon: 'assets/icons/machinelearning.png',
+    icon: 'assets/icons/machinelearning.webp',
     description: 'Deep Learning, LSTMs, CNNs, model training & evaluation',
     color: '#FFB800',
     level: 75
@@ -137,7 +137,7 @@ export class Skills implements OnInit {
   allMenuItems:any[]=[]
   ngOnInit(){
      const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];

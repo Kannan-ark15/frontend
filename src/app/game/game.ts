@@ -30,7 +30,7 @@ export class Game {
   movies: Movie[] = [
     {
       title: 'THE BATMAN 2022',
-      poster: 'assets/images/batman.jpg',
+      poster: 'assets/images/batman.webp',
       questions: {
         javascript: [
           { q: 'let x = 84; console.log(String.fromCharCode(x))', a: 'T', hint: 'ASCII code 84' },
@@ -164,7 +164,7 @@ export class Game {
     },
     {
       title: 'JERSEY',
-      poster: 'assets/images/jersey.jpg',
+      poster: 'assets/images/jersey.webp',
       questions: {
         javascript: [
           {
@@ -236,7 +236,7 @@ export class Game {
   profileService=inject(ProfileService)
     ngOnInit(){
      const currentUrl = this.router.url;
-    const profileMatch = currentUrl.match(/\/(recruiter|developer|stalker)\//);
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
     
     if (profileMatch) {
       this.profile = profileMatch[1];
