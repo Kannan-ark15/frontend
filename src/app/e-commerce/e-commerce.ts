@@ -30,7 +30,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'Foundations of the Stack',
       content:
         'The application used a familiar setup—React for the UI, Express for the backend, and MongoDB Atlas for storage. Even though the architecture was simple, it clearly showed how each request moves through different layers, why latency happens, and how APIs work smoothly only when everything stays stateless and clean.',
-      image: 'assets/project/e-commerce/act-2.jpeg',
+      image: 'assets/project/e-commerce/act-2.webp',
       color: '#ff5b5b'
     },
 
@@ -48,7 +48,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'The Frontend Journey',
       content:
         'React Router handled navigation without reloading pages, which made the site feel faster and more responsive. It also showed how modern frontend frameworks reduce unnecessary network calls, load only what’s needed, and keep the browser and server communication light.',
-      image: 'assets/project/e-commerce/act-4.jpeg',
+      image: 'assets/project/e-commerce/act-4.webp',
       color: '#ff3636'
     },
 
@@ -75,7 +75,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
       title: 'Realizations That Stayed',
       content:
         'What began as a simple MERN project turned into a hands-on lesson about cloud networking. It made concepts like DNS, routing, reverse proxies, and virtual networks feel practical instead of theoretical. It proved that even a small website can teach a lot once it steps out of localhost and faces real-world traffic.',
-      image: 'assets/project/e-commerce/act-7.jpeg',
+      image: 'assets/project/e-commerce/act-7.webp',
       color: '#ff0a0a'
     }
   ]

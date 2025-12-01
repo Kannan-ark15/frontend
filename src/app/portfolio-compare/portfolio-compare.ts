@@ -28,8 +28,8 @@ import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-na
             <div class="compare-section">
               <h3 class="section-title">Home Section</h3>
               <app-compare-logic
-                [oldImage]="'assets/portfolio/home.jpeg'"
-                [newImage]="'assets/portfolio/home_new.jpeg'"
+                [oldImage]="'assets/portfolio/home.webp'"
+                [newImage]="'assets/portfolio/home_new.webp'"
                 [mode]="'vertical'"
                 [enableScroll]="true"
                 [height]="'400px'">
@@ -40,8 +40,8 @@ import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-na
             <div class="compare-section">
               <h3 class="section-title">About Section</h3>
               <app-compare-logic
-                [oldImage]="'assets/portfolio/about.jpeg'"
-                [newImage]="'assets/portfolio/about_new.jpeg'"
+                [oldImage]="'assets/portfolio/about.webp'"
+                [newImage]="'assets/portfolio/about_new.webp'"
                 [mode]="'vertical'"
                 [enableScroll]="true"
                 [height]="'400px'">
@@ -61,8 +61,8 @@ import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-na
             <div class="compare-section">
               <h3 class="section-title">Project Page</h3>
               <app-compare-logic
-                [oldImage]="'assets/portfolio/project.jpeg'"
-                [newImage]="'assets/portfolio/project_new.jpeg'"
+                [oldImage]="'assets/portfolio/project.webp'"
+                [newImage]="'assets/portfolio/project_new.webp'"
                 [mode]="'vertical'"
                 [enableScroll]="true"
                 [maxHeight]="'600px'">
@@ -73,8 +73,8 @@ import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-na
             <div class="compare-section">
               <h3 class="section-title">Contact Page</h3>
               <app-compare-logic
-                [oldImage]="'assets/portfolio/contact.jpeg'"
-                [newImage]="'assets/portfolio/contact_new.jpeg'"
+                [oldImage]="'assets/portfolio/contact.webp'"
+                [newImage]="'assets/portfolio/contact_new.webp'"
                 [mode]="'vertical'"
                 [enableScroll]="true"
                 [maxHeight]="'600px'">

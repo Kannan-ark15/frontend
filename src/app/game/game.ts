@@ -114,7 +114,7 @@ export class Game {
     },
     {
       title: 'SALAAR',
-      poster: 'assets/images/salaar.jpeg',
+      poster: 'assets/images/salaar.webp',
       questions: {
         javascript: [
           { q: 'let x = 83; console.log(String.fromCharCode(x))', a: 'S', hint: 'ASCII 83' },
