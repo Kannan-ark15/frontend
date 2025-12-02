@@ -47,7 +47,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
       imageUrl: 'assets/images/Sql.webp',
       videoUrl: 'assets/project/videos/sql.mp4',
       section: '',
-      githubUrl: 'https://github.com/yourusername/sql-project'
+      githubUrl: 'https://github.com/Kannan-ark15/sqlautomation'
     },
     {
       id: 2,
@@ -56,7 +56,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
       imageUrl: 'assets/images/movie.webp',
       videoUrl: 'assets/project/videos/movie.mp4',
       section: '',
-      githubUrl: 'https://github.com/yourusername/movie-project'
+      githubUrl: 'https://github.com/Kannan-ark15/Sentiment_MovieRecommendation'
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
       imageUrl: 'assets/images/E-commerce.webp',
       videoUrl: 'assets/project/videos/cn.mp4',
       section: '',
-      githubUrl: 'https://github.com/yourusername/ecommerce-project'
+      githubUrl: 'https://github.com/Kannan-ark15/Cn-Ecommerce'
     }
   ]);
   

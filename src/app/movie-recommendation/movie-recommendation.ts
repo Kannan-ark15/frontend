@@ -114,7 +114,7 @@ export const SENTIMENT_ANALYSIS_PROJECT: ProjectShowcaseData = {
   imports: [CommonModule,AppNavbarComponent,ProjectShowcase],
   template: `
     <app-navbar [menuItems]="allMenuItems()"></app-navbar>
-    <app-project-showcase [projectData]="sentimentProject"></app-project-showcase>
+    <app-project-showcase [projectData]="sentimentProject" [githubUrl]="githubUrl"></app-project-showcase>
   `
 })
 export class ProjectsComponent {
@@ -124,6 +124,7 @@ export class ProjectsComponent {
     router=inject(Router)
   profileService=inject(ProfileService)
    allMenuItems=signal<any[]>([]);
+   githubUrl='https://github.com/Kannan-ark15/Sentiment_MovieRecommendation'
   ngOnInit(){
      const currentUrl = this.router.url;
     const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);

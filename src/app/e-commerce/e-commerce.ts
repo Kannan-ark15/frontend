@@ -86,7 +86,7 @@ export const ECOMMERCE_NETWORKING_PROJECT: ProjectShowcaseData = {
   selector: 'app-e-commerce',
   imports: [AppNavbarComponent,ProjectShowcase],
   template:`<app-navbar [menuItems]=" allMenuItems()"></app-navbar>
-    <app-project-showcase [projectData]="sentimentProject"></app-project-showcase>
+    <app-project-showcase [projectData]="sentimentProject" [githubUrl]="githubUrl"></app-project-showcase>
   `
 })
 export class ECommerce {
@@ -96,6 +96,7 @@ export class ECommerce {
   profile=''
   menuItems:any[]=[];
   allMenuItems= signal<any[]>([]);
+  githubUrl='https://github.com/Kannan-ark15/Cn-Ecommerce'
   ngOnInit(){
      const currentUrl = this.router.url;
     const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);

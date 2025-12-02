@@ -89,7 +89,7 @@ export const SQL_PROJECT: ProjectShowcaseData = {
   imports: [CommonModule,AppNavbarComponent,ProjectShowcase],
   template: `
   <app-navbar [menuItems]="menuItems()"></app-navbar>
-  <app-project-showcase [projectData]="sqlProject"></app-project-showcase>
+  <app-project-showcase [projectData]="sqlProject" [githubUrl]="githubUrl"></app-project-showcase>
   `,
 })
 export class SqlProject{
@@ -99,6 +99,7 @@ export class SqlProject{
     router=inject(Router)
   profileService=inject(ProfileService)
    menuItems=signal<any[]>([]);
+   githubUrl='https://github.com/Kannan-ark15/sqlautomation';
    ngOnInit(){
      const currentUrl = this.router.url;
     const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
