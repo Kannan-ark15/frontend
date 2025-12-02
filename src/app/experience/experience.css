@@ -58,18 +58,6 @@
   z-index: 3;
   max-width: 900px;
   padding: 0 5%;
-  animation: fadeInUp 1s ease-out 0.5s backwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
 }
 
 .video-title {
@@ -82,6 +70,16 @@
   background-clip: text;
   letter-spacing: -2px;
   text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: videoTitleFadeUp 1.2s ease-out 0.3s forwards;
+}
+
+@keyframes videoTitleFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .video-subtitle {
@@ -90,6 +88,16 @@
   margin: 0;
   font-weight: 300;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: videoSubtitleFadeUp 1.2s ease-out 0.6s forwards;
+}
+
+@keyframes videoSubtitleFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== EXPERIENCE CONTAINER ===== */
@@ -236,9 +244,9 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 35px;
-  cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  overflow: hidden;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -250,8 +258,7 @@
   margin-left: 0;
 }
 
-.timeline-content:hover ,
-.timeline-content:active {
+.timeline-content:hover {
   background: rgba(255, 255, 255, 0.06);
   transform: translateY(-10px);
 }
@@ -266,12 +273,22 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible .content-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
 }
 
 .header-left {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .content-label {
@@ -281,6 +298,15 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible .content-label {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
 }
 
 .content-duration {
@@ -289,13 +315,51 @@
   padding: 4px 12px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 }
 
+.timeline-item.visible .content-duration {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+/* Toggle Button Styles */
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--item-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.3);
+}
+
+.toggle-btn:active {
+  transform: scale(0.95);
+}
+
+/* Expand Icon Animation */
 .expand-icon {
-  width: 32px;
-  height: 32px;
-  color: var(--item-color);
-  transition: transform 0.3s ease;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .expand-icon.rotated {
@@ -307,6 +371,16 @@
   font-weight: 700;
   margin: 0 0 15px 0;
   color: #fff;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1.3;
+}
+
+.timeline-item.visible .content-heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
 }
 
 .content-description {
@@ -314,6 +388,15 @@
   color: #b3b3b3;
   line-height: 1.7;
   margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.visible .content-description {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
 }
 
 /* ===== FLOWCHART WITH WIRE ANIMATION ===== */
@@ -321,6 +404,27 @@
   margin-top: 30px;
   padding-top: 30px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 5000px;
+  overflow: hidden;
+}
+
+.timeline-item.visible .flowchart {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+/* Smooth collapse animation */
+.timeline-item:not(.expanded) .flowchart {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Flowchart Wire - connects nodes */
@@ -497,16 +601,41 @@
   padding: 20px;
   border-radius: 12px;
   margin-bottom: 15px;
-  opacity: 0.3;
-  transform: translateX(-30px);
-  transition: all 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: none;
+}
+
+/* Staggered reveal for flowchart nodes */
+.timeline-item.visible .flowchart-node:nth-child(1) {
+  transition-delay: 0.8s;
+}
+
+.timeline-item.visible .flowchart-node:nth-child(2) {
+  transition-delay: 1.0s;
+}
+
+.timeline-item.visible .flowchart-node:nth-child(3) {
+  transition-delay: 1.2s;
+}
+
+.timeline-item.visible .flowchart-node:nth-child(4) {
+  transition-delay: 1.4s;
+}
+
+.timeline-item.visible .flowchart-node:nth-child(5) {
+  transition-delay: 1.6s;
+}
+
+.timeline-item.visible .flowchart-node:nth-child(6) {
+  transition-delay: 1.8s;
 }
 
 /* Revealed state - BRIGHT and GLOWING when wire hits */
 .flowchart-node.revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
   background: rgba(255, 255, 255, 0.08);
   border-left-color: var(--item-color);
   animation: nodeGlowStrong 1s ease-out;
@@ -517,12 +646,12 @@
     box-shadow: 0 0 0 rgba(229, 9, 20, 0);
   }
   30% {
-    box-shadow: 0 0 50px var(--item-color), 
-                inset 0 0 30px rgba(229, 9, 20, 0.15);
+    box-shadow: 0 0 50px var(--item-color),
+      inset 0 0 30px rgba(229, 9, 20, 0.15);
   }
   100% {
-    box-shadow: 0 0 25px var(--item-color), 
-                inset 0 0 15px rgba(229, 9, 20, 0.1);
+    box-shadow: 0 0 25px var(--item-color),
+      inset 0 0 15px rgba(229, 9, 20, 0.1);
   }
 }
 
@@ -532,22 +661,34 @@
   color: rgba(229, 9, 20, 0.5);
   margin-bottom: 8px;
   transition: color 0.5s ease;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s ease;
 }
 
 .flowchart-node.revealed .node-title {
   color: var(--item-color);
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
 }
 
 .node-text {
   font-size: 1rem;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
   margin: 0;
-  transition: color 0.5s ease;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s ease;
+  white-space: pre-line;
 }
 
 .flowchart-node.revealed .node-text {
   color: #b3b3b3;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.2s;
 }
 
 /* Scroll Indicator */
@@ -581,24 +722,23 @@
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-
 /* Tablet and smaller */
 @media (max-width: 768px) {
   /* Video Section */
   .hero-video-section {
-    height: 70vh;
+    height: 60vh;
   }
 
   .video-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 
   .video-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .video-content {
-    bottom: 20%;
+    bottom: 15%;
   }
 
   /* Experience Container */
@@ -606,12 +746,16 @@
     padding: 0 4% 60px;
   }
 
+  .timeline-header {
+    margin: 50px 0 60px 0;
+  }
+
   .main-title {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 
   .subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   /* Timeline */
@@ -633,35 +777,117 @@
     width: calc(100% - 100px);
     margin-left: 100px !important;
     margin-right: 0 !important;
-    padding: 25px;
+    padding: 20px;
+  }
+
+  .content-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-left {
+    flex-basis: 100%;
+    gap: 10px;
+  }
+
+  .content-label {
+    font-size: 0.85rem;
+  }
+
+  .content-duration {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .toggle-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .expand-icon {
+    width: 20px;
+    height: 20px;
   }
 
   .content-heading {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    line-height: 1.3;
   }
 
   .content-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
   }
 
   .timeline-item {
     margin-bottom: 60px;
+  }
+
+  .flowchart-node {
+    padding: 15px;
+  }
+
+  .node-title {
+    font-size: 1rem;
+  }
+
+  .node-text {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .flowchart-wire {
+    height: 40px;
+    margin-left: 15px;
   }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
   /* Video Section */
+  .hero-video-section {
+    height: 50vh;
+  }
+
   .video-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    letter-spacing: -1px;
   }
 
   .video-subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .video-content {
+    bottom: 10%;
+  }
+
+  /* Experience Container */
+  .experience-container {
+    padding: 0 3% 40px;
+  }
+
+  .timeline-header {
+    margin: 40px 0 50px 0;
+  }
+
+  .main-title {
+    font-size: 2rem;
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
   }
 
   /* Timeline */
+  .timeline-line {
+    left: 25px;
+    width: 2px;
+  }
+
   .timeline-node {
+    left: 25px;
     width: 50px;
     height: 50px;
   }
@@ -670,19 +896,74 @@
     font-size: 1.5rem;
   }
 
-  .content-heading {
-    font-size: 1.3rem;
-  }
-
-  .flowchart-node {
+  .timeline-content {
+    width: calc(100% - 85px);
+    margin-left: 85px !important;
     padding: 15px;
   }
 
-  .node-title {
+  .content-header {
+    margin-bottom: 15px;
+  }
+
+  .content-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .content-duration {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+
+  .toggle-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .expand-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .content-heading {
     font-size: 1.1rem;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+
+  .content-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .timeline-item {
+    margin-bottom: 50px;
+  }
+
+  .flowchart {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+
+  .flowchart-node {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .node-title {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
   }
 
   .node-text {
-    font-size: 0.95rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .flowchart-wire {
+    height: 30px;
+    margin-left: 10px;
+    width: 3px;
   }
 }

@@ -1,4 +1,4 @@
-<app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
+<app-navbar [menuItems]="allMenuItems()" logoClickRoute="/"></app-navbar>
 
 <section class="certifications-section">
   <div class="certifications-container">
@@ -23,7 +23,7 @@
           <div class="platform-badge" [style.background]="cert.platformColor">
             {{ cert.platform }}
           </div>
-          <lucide-icon [name]="cert.icon" class="cert-icon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          <img [src]="cert.logoUrl" [alt]="cert.platform + ' logo'" class="platform-logo">
         </div>
 
         <div class="card-body">
@@ -32,11 +32,11 @@
           
           <div class="cert-details">
             <div class="detail-item">
-              <lucide-icon name="calendar" class="detail-icon"></lucide-icon>
+              <lucide-icon name="calendar" class="detail-icon" [size]="20"></lucide-icon>
               <span class="detail-text">{{ cert.date }}</span>
             </div>
             <div class="detail-item" *ngIf="cert.duration">
-              <lucide-icon name="AlarmClock" class="detail-icon"></lucide-icon>
+              <lucide-icon name="clock" class="detail-icon" [size]="20"></lucide-icon>
               <span class="detail-text">{{ cert.duration }}</span>
             </div>
           </div>
@@ -49,6 +49,7 @@
         <div class="card-footer">
           <button class="view-btn">
             <span>View Certificate</span>
+            <span class="arrow">→</span>
           </button>
         </div>
       </div>
@@ -57,11 +58,10 @@
     <!-- Stats Section -->
     <div class="stats-section">
       <div class="stat-card" *ngFor="let stat of stats; let i = index" [style.animation-delay]="i * 0.1 + 's'">
-        <lucide-icon [name]="stat.icon" class="stat-icon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+        <lucide-icon [name]="stat.icon" class="stat-icon" [size]="48" [strokeWidth]="1.5"></lucide-icon>
         <div class="stat-value">{{ stat.value }}</div>
         <div class="stat-label">{{ stat.label }}</div>
       </div>
     </div>
   </div>
-
 </section>

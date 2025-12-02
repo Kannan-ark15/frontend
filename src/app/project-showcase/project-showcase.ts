@@ -4,6 +4,15 @@ import { ProjectShowcaseData, Chapter } from './project-data.model';
 import { Route } from 'lucide-angular';
 import { Router } from '@angular/router';
 import { ProfileService } from '../profile-page/profile-service';
+interface Card {
+  id: number;
+  title: string;
+  text: string;
+  imageUrl: string;
+  videoUrl: string;
+  section: string;
+  githubUrl?: string;
+}
 
 @Component({
   selector: 'app-project-showcase',
@@ -14,47 +23,89 @@ import { ProfileService } from '../profile-page/profile-service';
 })
 export class ProjectShowcase implements AfterViewInit, OnDestroy {
   @Input({ required: true }) projectData!: ProjectShowcaseData;
+  @Input() currentProjectId?: number;
+  @Input() githubUrl?: string;
   
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   
   isVideoHovered = signal(false);
   activeChapter = signal(1);
-  typingTexts = signal<{ [key: number]: string }>({});
   completedChapters = signal<Set<number>>(new Set([1]));
   allChaptersCompleted = signal(false);
   
   chapters: Chapter[] = [];
-  route=inject(Router);
-  private typingIntervals: Map<number, any> = new Map();
+  route = inject(Router);
   private scrollListener: any;
-  profileService=inject(ProfileService)
-  profile='';
+  profileService = inject(ProfileService);
+  profile = '';
+  
+  allProjects = signal<Card[]>([
+    {
+      id: 1,
+      title: '1',
+      text: 'Sql Syncup Automation System with Custom MCP',
+      imageUrl: 'assets/images/Sql.webp',
+      videoUrl: 'assets/project/videos/sql.mp4',
+      section: '',
+      githubUrl: 'https://github.com/yourusername/sql-project'
+    },
+    {
+      id: 2,
+      title: '2',
+      text: 'Movie Recommendation System based on Sentiment-Analysis.',
+      imageUrl: 'assets/images/movie.webp',
+      videoUrl: 'assets/project/videos/movie.mp4',
+      section: '',
+      githubUrl: 'https://github.com/yourusername/movie-project'
+    },
+    {
+      id: 3,
+      title: '3',
+      text: 'E-commerce Website with Payment Gateway Integration.',
+      imageUrl: 'assets/images/E-commerce.webp',
+      videoUrl: 'assets/project/videos/cn.mp4',
+      section: '',
+      githubUrl: 'https://github.com/yourusername/ecommerce-project'
+    }
+  ]);
+  
+  otherProjects = signal<Card[]>([]);
+  
   ngOnInit() {
     // Initialize chapters from input data
     this.chapters = this.projectData.chapters;
 
-         const currentUrl = this.route.url;
-        const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
-       if (profileMatch) {
-          this.profile = profileMatch[1];
-          this.profileService.setProfile(this.profile);
-        } else {
-          this.profile = 'recruiter';
-          this.profileService.setProfile(this.profile);
-        }
+    const currentUrl = this.route.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
     
+    // If recruiter profile, unlock all chapters immediately
+    if (this.profile === 'recruiter') {
+      this.allChaptersCompleted.set(true);
+      const allChapters = new Set(this.chapters.map(ch => ch.id));
+      this.completedChapters.set(allChapters);
+    }
+    
+    // Filter other projects (exclude current project)
+    if (this.currentProjectId) {
+      const filtered = this.allProjects().filter(p => p.id !== this.currentProjectId);
+      this.otherProjects.set(filtered);
+    } else {
+      this.otherProjects.set(this.allProjects());
+    }
   }
 
   ngAfterViewInit() {
-    this.startTypingEffect(1);
     this.setupScrollListener();
   }
 
   ngOnDestroy() {
-    // Clean up all typing intervals
-    this.typingIntervals.forEach(interval => clearInterval(interval));
-    this.typingIntervals.clear();
-    
     // Remove scroll listener
     if (this.scrollListener) {
       window.removeEventListener('scroll', this.scrollListener);
@@ -100,15 +151,14 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
 
   setActiveChapter(chapterId: number) {
     this.activeChapter.set(chapterId);
-    this.startTypingEffect(chapterId);
   }
 
   markChapterAsCompleted(chapterId: number) {
     const completed = this.completedChapters();
     completed.add(chapterId);
     
-    // Unlock next chapter
-    if (chapterId < this.chapters.length) {
+    // Unlock next chapter (only for non-recruiter profiles)
+    if (this.profile !== 'recruiter' && chapterId < this.chapters.length) {
       completed.add(chapterId + 1);
     }
     
@@ -121,6 +171,10 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
   }
 
   isChapterUnlocked(chapterId: number): boolean {
+    // For recruiter profile, all chapters are always unlocked
+    if (this.profile === 'recruiter') {
+      return true;
+    }
     return this.allChaptersCompleted() || this.completedChapters().has(chapterId);
   }
 
@@ -152,39 +206,28 @@ export class ProjectShowcase implements AfterViewInit, OnDestroy {
     }
   }
 
-  startTypingEffect(chapterId: number) {
-    const chapter = this.chapters.find(c => c.id === chapterId);
-    if (!chapter) return;
-
-    // Clear existing interval for this chapter if any
-    if (this.typingIntervals.has(chapterId)) {
-      clearInterval(this.typingIntervals.get(chapterId));
-    }
-
-    const fullText = chapter.content;
-    let currentText = '';
-    let index = 0;
-
-    const typingInterval = setInterval(() => {
-      if (index < fullText.length) {
-        currentText += fullText[index];
-        this.typingTexts.update(texts => ({ ...texts, [chapterId]: currentText }));
-        index++;
-      } else {
-        clearInterval(typingInterval);
-        this.typingIntervals.delete(chapterId);
-      }
-    }, 20);
-    
-    this.typingIntervals.set(chapterId, typingInterval);
-  }
-
-  getTypingText(chapterId: number): string {
-    return this.typingTexts()[chapterId] || '';
-  }
-
-  routeProjects(){
+  routeProjects() {
     this.route.navigate([`/${this.profile}/home`], { fragment: 'projects-section' });
   }
 
+  navigateToProject(projectId: number) {
+    // Navigate to the selected project
+    // You'll need to implement the routing logic based on your project structure
+    const projectRoutes: { [key: number]: string } = {
+      1: 'sql-project',
+      2: 'movie-recommendation',
+      3: 'e-commerce-project'
+    };
+    
+    const route = projectRoutes[projectId];
+    if (route) {
+      this.route.navigate([`/${this.profile}/${route}`]);
+    }
+  }
+
+  openGithub() {
+    if (this.githubUrl) {
+      window.open(this.githubUrl, '_blank');
+    }
+  }
 }

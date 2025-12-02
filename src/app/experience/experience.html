@@ -1,80 +1,102 @@
-<app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
-<div class="experience-container">
-  <!-- Netflix-style Hero Video Section -->
-  <div class="hero-video-section">
-    <div class="video-container">
-        <video #heroVideo class="hero-video" 
-            [muted]="true"
-            [loop]="true"
-            playsinline
-            preload="auto">
-        </video>
-      
-      <!-- Gradient Overlay -->
-      <div class="video-overlay"></div>
-      
-      <!-- Video Content -->
-      <div class="video-content">
-        <h1 class="video-title">Welcome to My Journey</h1>
-        <p class="video-subtitle">A timeline of experiences, education, and growth</p>
-      </div>
+<app-navbar [menuItems]="allMenuItems()"></app-navbar>
+
+<!-- Hero Video Section -->
+<section class="hero-video-section">
+  <div class="video-container">
+    <video
+      #heroVideo
+      class="hero-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      poster="assets/experience-poster.jpg"
+    >
+      <source src="assets/experience-hero.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-content">
+      <h1 class="video-title">My Journey</h1>
+      <p class="video-subtitle">From foundations to innovation</p>
     </div>
   </div>
+</section>
+
+<!-- Experience Timeline Section -->
 <div class="experience-container" id="timeline-section">
- <!-- Timeline -->
+  <header class="timeline-header">
+    <h1 class="main-title">Experience Timeline</h1>
+    <p class="subtitle">A cinematic look at my professional and academic journey</p>
+  </header>
+
   <div class="timeline">
-    <!-- Central vertical line -->
     <div class="timeline-line"></div>
 
-    <!-- Timeline Items -->
     @for (item of timelineItems(); track item.id) {
-      <div class="timeline-item" 
-           [class.expanded]="item.expanded"
-           [style.--item-color]="item.color">
-        
-        <!-- Node (Circle Icon) -->
-        <div class="timeline-node" (click)="toggleExpand(item.id)">
-          <!-- <span class="node-icon">{{ item.icon }}</span> -->
-           <lucide-icon [name]="item.icon" class="node-icon"></lucide-icon>
+      <div
+        class="timeline-item"
+        [class.expanded]="item.expanded"
+        [style.--item-color]="item.color"
+      >
+        <!-- Timeline Node -->
+        <div
+          class="timeline-node"
+          [class.active]="item.expanded"
+          (click)="toggleExpand(item.id)"
+        >
+          <lucide-icon [img]="item.icon" class="node-icon" [color]="item.color"></lucide-icon>
           <div class="node-pulse"></div>
         </div>
 
         <!-- Content Card -->
-        <div class="timeline-content" (click)="toggleExpand(item.id)">
-          <!-- Header -->
+        <div class="timeline-content">
           <div class="content-header">
             <div class="header-left">
-              <p class="content-label">{{ item.label }}</p>
+              <h3 class="content-label">{{ item.label }}</h3>
               <span class="content-duration">{{ item.duration }}</span>
             </div>
-            <svg class="expand-icon" [class.rotated]="item.expanded" 
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" 
-                    stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
+            <!-- Collapse/Expand Button -->
+            <button 
+              class="toggle-btn" 
+              (click)="toggleExpand(item.id)"
+              [attr.aria-label]="item.expanded ? 'Collapse' : 'Expand'"
+            >
+              <lucide-icon 
+                [img]="ChevronDown" 
+                class="expand-icon" 
+                [class.rotated]="item.expanded"
+                [color]="item.color"
+              ></lucide-icon>
+            </button>
           </div>
 
-          <!-- Main Content -->
-          <h3 class="content-heading">{{ item.heading }}</h3>
+          <h2 class="content-heading">{{ item.heading }}</h2>
           <p class="content-description">{{ item.description }}</p>
 
-          <!-- Flowchart (if exists) -->
-          @if (item.expanded && item.flowchart) {
+          <!-- Flowchart (Collapsible) -->
+          @if (item.flowchart && item.expanded) {
             <div class="flowchart">
-              @for (node of item.flowchart; track node.title; let i = $index) {
-                <!-- Animated wire leading to this node -->
-                @if (i > 0) {
-                  <div class="flowchart-wire" 
-                       [class.animated]="isFlowchartNodeAnimated(item.id, i)">
-                    <div class="wire-flow"></div>
+              @for (node of item.flowchart; track $index; let isLast = $last) {
+                <div>
+                  <!-- Wire connecting nodes -->
+                  @if ($index > 0) {
+                    <div
+                      class="flowchart-wire"
+                      [class.animated]="isFlowchartNodeAnimated(item.id, $index)"
+                    >
+                      <div class="wire-flow"></div>
+                    </div>
+                  }
+
+                  <!-- Flowchart Node -->
+                  <div
+                    class="flowchart-node"
+                    [class.revealed]="isFlowchartNodeAnimated(item.id, $index)"
+                  >
+                    <h4 class="node-title">{{ node.title }}</h4>
+                    <p class="node-text" [innerHTML]="node.text"></p>
                   </div>
-                }
-                
-                <!-- The flowchart node -->
-                <div class="flowchart-node"
-                     [class.revealed]="isFlowchartNodeAnimated(item.id, i)">
-                  <h4 class="node-title">{{ node.title }}</h4>
-                  <p class="node-text"[innerHTML]="node.text"></p>
                 </div>
               }
             </div>

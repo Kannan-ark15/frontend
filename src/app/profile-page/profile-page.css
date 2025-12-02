@@ -539,6 +539,12 @@
   .manga-overlay {
     padding: 1.5rem;
   }
+   .manga-overlay h3{
+    font-size: 2rem;
+  }
+ .manga-overlay p {
+  font-size: 1rem;
+}
 }
 
 /* Tablet devices */
@@ -546,6 +552,12 @@
   .manga-card {
     height: 88vh;
   }
+    .manga-overlay h3{
+    font-size: 2rem;
+  }
+ .manga-overlay p {
+  font-size: 1rem;
+}
 }
 
 /* Large screens */
@@ -555,6 +567,12 @@
     max-width: 1800px;
     margin: 0 auto;
   }
+    .manga-overlay h3{
+    font-size: 2rem;
+  }
+ .manga-overlay p {
+  font-size: 1rem;
+}
 }
 
 /* Replace the .manga-image styles with this: */
@@ -591,6 +609,22 @@
   .manga-overlay {
     padding: 1.5rem;
   }
+    .manga-card {
+    height: 55vh;
+    border-radius: 4px;
+  }
+  
+  .manga-video,
+  .manga-static {
+    object-fit: contain;
+  }
+
+    .manga-overlay h3{
+    font-size: 2rem;
+  }
+ .manga-overlay p {
+  font-size: 1rem;
+}
 }
 
 
@@ -684,4 +718,10 @@
   .manga-static {
     object-fit: contain;
   }
+    .manga-overlay h3{
+    font-size: 2rem;
+  }
+ .manga-overlay p {
+  font-size: 1rem;
+}
 }

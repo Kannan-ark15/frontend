@@ -41,10 +41,10 @@ export class ProfileService {
       profileHeroData: {
         title: 'Dev in Action',
         subtitle: 'Discover Top Talent',  
-        description: `Hey fellow developer! Welcome to my portfolio.  
-                      You know how the heart pumps blood and keeps the whole body running?
-                      That's exactly how I see developers — we keep projects alive and moving.
-                      No matter what the goal is, we RISE so the end result can RISE too.`,
+        description: `Hey fellow developer! Welcome to my portfolio.
+                      You know how the <span class="highlight">heart pumps blood</span> and <span class="highlight">keeps the whole body running</span>?
+                      That's exactly how I see <span class="highlight">developers</span> — we <span class="highlight">keep projects alive and moving</span>.
+                      No matter what the goal is, <span class="highlight">we rise to challenges</span> so that <span class="highlight">our project can rise with us</span>.`,
         actions: ['Resume', 'LinkedIn']
       }
     },
@@ -56,7 +56,7 @@ export class ProfileService {
       profileHeroData: {
         title: 'I See',
         subtitle: 'Discover Top Talent',  
-        description: 'Hello. You’ve come pretty far in here. Go ahead and explore my projects and skills — but yes, only with limited access',
+        description: '<span class="highlight">Hello. You’ve come pretty far in here. Go ahead and explore my projects and skills — but yes, only with limited access</span>',
         actions: ['LinkedIn']
       }
     }

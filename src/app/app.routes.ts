@@ -35,7 +35,7 @@ export const routes: Routes = [
     },
     {path: ':profile/codex', loadComponent: () => import('./game/game').then(m => m.Game)},
     {path: ':profile/bonus', loadComponent: () => import('./portfolio-compare/portfolio-compare').then(m => m.PortfolioCompare)},
-    {path: 'sql-project', loadComponent: () => import('./sql-project/sql-project').then(m => m.SqlProject)},
-    {path: 'movie-recommendation', loadComponent: () => import('./movie-recommendation/movie-recommendation').then(m => m.ProjectsComponent)},
-    {path: 'e-commerce-project', loadComponent: () => import('./e-commerce/e-commerce').then(m => m.ECommerce)},
+    {path: ':profile/sql-project', loadComponent: () => import('./sql-project/sql-project').then(m => m.SqlProject)},
+    {path: ':profile/movie-recommendation', loadComponent: () => import('./movie-recommendation/movie-recommendation').then(m => m.ProjectsComponent)},
+    {path: ':profile/e-commerce-project', loadComponent: () => import('./e-commerce/e-commerce').then(m => m.ECommerce)},
 ];

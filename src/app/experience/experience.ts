@@ -1,7 +1,7 @@
 import { Component, signal, HostListener, ElementRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppNavbarComponent } from '../profile-page/components/app-navbar/app-navbar.component';
-import { LucideAngularModule,Computer,School, GraduationCap } from 'lucide-angular';
+import { LucideAngularModule, Computer, School, GraduationCap, ChevronDown } from 'lucide-angular';
 import { Router } from '@angular/router';
 import { ProfileService } from '../profile-page/profile-service';
 
@@ -30,34 +30,45 @@ export interface FlowchartNode {
   styleUrls: ['./experience.css']
 })
 export class Experience {
-  profile=''
-  menuItems:any[]=[]
-  isMuted = true; // Start muted for autoplay
-  @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
-  timelineItems = signal<TimelineItem[]>([
+  profile = '';
+  menuItems: any[] = [];
+  isMuted = true;
+  ChevronDown = ChevronDown;
+  @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef;
+
+  timelineItems = signal([
     {
       id: 'experience',
       label: 'Work Experience',
-      duration: '1.3 Years',
+      duration: '1 Year, 4 Months',
       icon: Computer,
       color: '#e50914',
       heading: 'Software Developer',
-      description: 'Building scalable applications and automation tools for enterprise solutions.',
-      expanded: false,
+      description: 'Building scalable applications and automation tools for enterprise solutions at TATA Communications.',
+      expanded: true,
       flowchart: [
+        {
+          title: 'Company',
+          text: 'TATA Communications'
+        },
         {
           title: 'Role',
           text: 'Full Stack Software Developer - Building scalable applications and automation tools'
         },
         {
-          title: 'Achievements',
-          text: ` &#8226;Worked on multiple product enhancemets in both frontend and backend.<br>
-                 &#8226;Imporved and educated about agentic AI capabilities within the team<br>
-                 &#8226;Introduced unique custom prompts and increased productivity by using github copilot ind development tasks.`
+          title: 'Teams Worked',
+          text: 'PIPF (Platform Infrastructure & Product Features) and DBAT (Database & Automation Tools)'
+        },
+        {
+          title: 'Work & Achievements',
+          text: `-Under PIPF: Provided permanent fixes for multiple production issues, ensuring system stability and reliability<br>
+                 -Under DBAT: Working on multiple product enhancements in both frontend and backend<br>
+                 -Improved and educated the team about Agentic AI capabilities<br>
+                 -Introduced unique custom prompts and increased productivity by 30% using GitHub Copilot in development tasks`
         },
         {
           title: 'Tech Stack',
-          text: 'Angular, Spring Boot, MySQL, Docker,Flowable,Agentic AI,MCP,Microservices'
+          text: 'Angular, Spring Boot, MySQL, Docker, Flowable, Agentic AI, MCP, Microservices'
         }
       ]
     },
@@ -67,40 +78,55 @@ export class Experience {
       duration: '4 Years',
       icon: GraduationCap,
       color: '#b20710',
-      heading: 'BTech in Computer Science Atrificial Intelligence and Data Science',
+      heading: 'BTech in Computer Science - Artificial Intelligence and Data Science',
       description: 'Sastra University - Graduated with CGPA: 8.4',
-      expanded: false,
+      expanded: true,
       flowchart: [
         {
-          title: 'Academics',  
-           text: `
-            &#8226; Focused on Algorithms, AI, and ML<br>
-            &#8226; Built projects using LSTM and CNN<br>
-             &#8226; Active member of Tech Fest Committee
-            `,
+          title: 'Academics',
+          text: `-Focused on Algorithms, Artificial Intelligence, and Machine Learning<br>
+                 -Built projects using LSTM and CNN architectures<br>
+                 -Specialized in AI/ML domains with hands-on implementation experience`
         },
+        {
+          title: 'Leadership & Extracurriculars',
+          text: `-Led Technotainment - Event Management Team<br>
+                -Organized multiple cultural and technical events<br>
+                -Successfully executed one major event with 500+ footfall, demonstrating excellent organizational and leadership skills`
+        }
       ]
     },
     {
       id: 'school',
-      label: 'School',
+      label: 'High School [11, 12]',
       duration: '2 Years',
       icon: School,
       color: '#8b0000',
-      heading: 'High School',
-      description: 'Strong foundation in science and mathematics',
-      expanded: false
+      heading: 'Sri Gayatri Junior College',
+      description: 'Strong foundation in science and mathematics with exceptional JEE performance',
+      expanded: true,
+      flowchart: [
+        {
+          title: 'Course Details',
+          text: `-2-year intermediate course<br>
+                  -Major subjects: Mathematics, Physics, Chemistry (MPC)<br>
+                  -Built strong analytical and problem-solving foundation`
+        },
+        {
+          title: 'Achievement',
+          text: 'JEE Score: 98.453126 percentile - Demonstrating exceptional aptitude in engineering entrance examination'
+        }
+      ]
     }
   ]);
 
-  // Track which flowchart nodes have animated
   animatedFlowchartNodes = signal<Set<string>>(new Set());
-  router=inject(Router)
-  profileService=inject(ProfileService)
-  ngOnInit(){
-     const currentUrl = this.router.url;
+  router = inject(Router);
+  profileService = inject(ProfileService);
+  allMenuItems=signal<any[]>([]);
+  ngOnInit() {
+    const currentUrl = this.router.url;
     const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
-    
     if (profileMatch) {
       this.profile = profileMatch[1];
       this.profileService.setProfile(this.profile);
@@ -109,31 +135,47 @@ export class Experience {
       this.profileService.setProfile(this.profile);
     }
 
-    // Now set menu items with the correct profile
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
-      { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
-      { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
+      { label: 'Experience', route: `/${this.profile}/experience`, section: 'Experience' },
+      { label: 'Skills', route: `/${this.profile}/skills`, section: 'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];
 
+    // Trigger animation for all items since they're expanded by default
+    setTimeout(() => {
+      this.timelineItems().forEach(item => {
+        if (item.flowchart && item.expanded) {
+          this.animateFlowchartWires(item.id);
+        }
+      });
+    }, 500);
+
+     this.allMenuItems.set(
+      this.menuItems.filter((item: { section: string; }) => 
+        !item.section || !this.profileService.isSectionRestricted(item.section,this.profile)
+      )
+    );
   }
+
   toggleExpand(itemId: string) {
     const currentItem = this.timelineItems().find(item => item.id === itemId);
     const wasExpanded = currentItem?.expanded;
-    
+
     this.timelineItems.update(items =>
       items.map(item =>
         item.id === itemId
           ? { ...item, expanded: !item.expanded }
-          : { ...item, expanded: false }
+          : item
       )
     );
-    
+
     // If expanding and has flowchart, trigger animation
     if (!wasExpanded && currentItem?.flowchart) {
-      this.animateFlowchartWires(itemId);
+      setTimeout(() => {
+        this.animateFlowchartWires(itemId);
+      }, 100);
     } else if (wasExpanded) {
       // Reset animation when collapsing
       this.resetFlowchartAnimation(itemId);
@@ -141,13 +183,10 @@ export class Experience {
   }
 
   private animateFlowchartWires(itemId: string) {
-    // Reset for this item
     this.resetFlowchartAnimation(itemId);
-    
     const item = this.timelineItems().find(i => i.id === itemId);
     if (!item?.flowchart) return;
-    
-    // Animate each node sequentially
+
     item.flowchart.forEach((node, index) => {
       setTimeout(() => {
         this.animatedFlowchartNodes.update(set => {
@@ -155,14 +194,13 @@ export class Experience {
           newSet.add(`${itemId}-${index}`);
           return newSet;
         });
-      }, index * 1800); // 500ms delay between each node
+      }, index * 1800);
     });
   }
 
   private resetFlowchartAnimation(itemId: string) {
     this.animatedFlowchartNodes.update(set => {
       const newSet = new Set(set);
-      // Remove all nodes for this item
       const item = this.timelineItems().find(i => i.id === itemId);
       item?.flowchart?.forEach((_, index) => {
         newSet.delete(`${itemId}-${index}`);
@@ -182,46 +220,15 @@ export class Experience {
 
   ngAfterViewInit() {
 
-    setTimeout(() => {
-      this.initializeVideo();
-    }, 300);
     this.animateOnScroll();
-    
-  
   }
 
-   private initializeVideo() {
-    if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
-      const video = this.heroVideoRef.nativeElement;
-      
-      // Ensure video is muted for autoplay
-      video.muted = true;
-      video.playsInline = true;
-      
-      // Load the video
-      video.load();
-      
-      // Attempt to play after load
-      const playPromise = video.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            console.log('Video autoplay started successfully');
-          })
-          .catch(error => {
-            console.warn('Autoplay prevented:', error);
-            // Video will show poster image or first frame
-          });
-      }
-    }
-  }
 
   private animateOnScroll() {
     const items = document.querySelectorAll('.timeline-item');
     items.forEach((item) => {
       const rect = item.getBoundingClientRect();
-      const isVisible = rect.top < window.innerHeight * 0.8;
+      const isVisible = rect.top < window.innerHeight * 0.75;
       if (isVisible) {
         item.classList.add('visible');
       }

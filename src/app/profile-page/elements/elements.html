@@ -1,47 +1,51 @@
-    <div
-      class="hover-card"
-      [class.expanded]="isHovered()"
-      (mouseenter)="onMouseEnter()"
-      (mouseleave)="onMouseLeave()"
-      (click)="selectedCard(card().title)">      
-      <!-- Image (visible by default) -->
-      <img
-        [src]="card().imageUrl"
-        [alt]="card().title"
-        class="card-media card-image"
-        [class.hidden]="isHovered()"
-      />
+<div 
+  class="hover-card" 
+  [class.expanded]="isHovered()"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (click)="selectedCard(card().title)"
+>
+  <!-- Image -->
+  <img 
+    [src]="card().imageUrl" 
+    [alt]="card().title"
+    class="card-media card-image" 
+    [class.hidden]="isHovered()"
+    loading="lazy"
+  />
 
-      <!-- Video (visible on hover) -->
-      <video
-        #videoPlayer
-        class="card-media card-video"
-        [class.visible]="isHovered()"
-        loop
-        muted
-        playsinline
-        preload="auto">
-        <source [src]="card().videoUrl" type="video/mp4" />
-      </video>
+  <!-- Video -->
+  <video 
+    #videoPlayer
+    [src]="card().videoUrl" 
+    class="card-media card-video" 
+    [class.visible]="isHovered()"
+    muted 
+    loop
+    playsinline
+    preload="metadata"
+  ></video>
 
-      <!-- Gradient Overlay -->
-      <div class="card-overlay"></div>
+  <!-- Gradient Overlay -->
+  <div class="card-overlay"></div>
 
-      <!-- Content -->
-      <div class="card-content">
-        <!-- Collapsed Title (Rotated) -->
-        <h3 
-          class="card-title-collapsed"
-          [class.hidden]="isHovered()">
-          {{ card().title }}
-        </h3>
+  <!-- Card Content -->
+  <div class="card-content">
+    <!-- Collapsed Title (Always Visible) -->
+    <h3 
+      class="card-title-collapsed" 
+      [class.hidden]="isHovered()"
+    >
+      {{ card().title }}
+    </h3>
 
-        <!-- Expanded Content -->
-        <div *ngIf="isHovered()"
-          class="card-content-expanded"
-          [class.visible]="isHovered()">
-          <h3 class="card-title-expanded">{{ card().title }}</h3>
-          <p class="card-text-expanded">{{ card().text }}</p>
-        </div>
-      </div>
+    <!-- Expanded Content (Visible on Hover) -->
+    <div 
+      class="card-content-expanded" 
+      [class.visible]="isHovered()"
+    >
+      <h3 class="card-title-expanded">{{ card().title }}</h3>
+      <p class="card-text-expanded">{{ card().text }}</p>
     </div>
+  </div>
+</div>

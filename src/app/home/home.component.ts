@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
   @Input() logoClickRoute = '/';
   isHovering = false;
   currentBackground: string | null = null;
-  
   profiles = [
     {
       name: 'Recruiter',
@@ -36,12 +35,11 @@ export class HomeComponent implements OnInit {
   private profileService = inject(ProfileService);
 
   ngOnInit(): void {
-    // On mobile, set the first profile's background as default
-    if (window.innerWidth <= 768) {
-      if (this.profiles.length > 0) {
-        const firstProfile = this.profiles[0];
-        this.currentBackground = `url(${firstProfile.backgroundImage})`;
-      }
+   
+    // Override with first profile background on mobile
+    if (this.profiles.length > 0) {
+      const firstProfile = this.profiles[0];
+      this.currentBackground = `url(${firstProfile.backgroundImage})`;
     }
   }
 
@@ -54,8 +52,8 @@ export class HomeComponent implements OnInit {
 
   onProfileLeave(): void {
     // On desktop, clear background when not hovering
+     // On desktop, revert to default background when not hovering
     if (window.innerWidth > 768) {
-      this.currentBackground = null;
       this.isHovering = false;
     }
   }

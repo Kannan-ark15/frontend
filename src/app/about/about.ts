@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class About implements AfterViewInit, OnInit {
   profile = '';
-  menuItems: any[] = [];
+  menuItems= signal<any[]>([]);
   
   aboutService = inject(AboutService);
   profileService = inject(ProfileService);
@@ -22,12 +22,12 @@ export class About implements AfterViewInit, OnInit {
   
   @Input() height = '90vh';
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
-  
+   @ViewChild('carouselTrack', { static: false }) carouselTrackRef!: ElementRef<HTMLDivElement>;
   videoSrc = signal('assets/videos/About_Recruiter.mp4');
   isMuted = signal(false);
   description: any;
   title: any;
-
+  allMenuItems: any;
   ngOnInit() {
     // Extract profile from current URL
     const currentUrl = this.router.url;
@@ -43,14 +43,18 @@ export class About implements AfterViewInit, OnInit {
     }
 
     // Now set menu items with the correct profile
-    this.menuItems = [
+    this.allMenuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
       { label: 'Experience', route: `/${this.profile}/experience`,section:'Experience' },
       { label: 'Skills', route: `/${this.profile}/skills`,section:'Skills' },
       { label: 'Projects', route: `/${this.profile}/home`, fragment: 'projects-section' },
       { label: 'Contact Me', route: `/${this.profile}/home`, fragment: 'contact-id' },
     ];
-
+       this.menuItems.set(
+      this.allMenuItems.filter((item: { section: string; }) => 
+        !item.section || !this.profileService.isSectionRestricted(item.section,this.profile)
+      )
+    );
     this.animateStats();
     this.observeElements();
     const aboutDetails=this.aboutService.getvideoUrlForProfile(this.profile)
@@ -77,6 +81,12 @@ export class About implements AfterViewInit, OnInit {
             video.play().catch(err => console.error('Second play attempt failed:', err));
           });
       }
+    }
+    if (this.carouselTrackRef && this.carouselTrackRef.nativeElement) {
+      // Add a slight delay to ensure DOM is fully ready
+      setTimeout(() => {
+        this.carouselTrackRef.nativeElement.classList.add('animate');
+      }, 100);
     }
   }
 

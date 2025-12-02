@@ -60,7 +60,7 @@ mangaImages = signal([
     imageUrl: 'assets/images/ecommerce_manga.webp',
     videoUrl: 'assets/videos/cn.mp4', // Add video URL
     title: 'E-commerce Platform',
-    description: 'Tools:MERN Stack'
+    description: 'Tools:MERN Stack,Google-Cloud,Networking'
   }
 ]);
 

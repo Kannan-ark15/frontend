@@ -179,8 +179,10 @@
 }
 
 .label.bottom-right {
-  bottom: 20px;
-  right: 20px;
+  top: 20px;
+    right: 20px;
+    background: white;
+    color: black;
 }
 
 .divider {
@@ -269,7 +271,7 @@
   }
 
   .label.bottom-right {
-    bottom: 10px;
+    top: 20px;
     right: 10px;
   }
 

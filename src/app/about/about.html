@@ -1,4 +1,4 @@
-<app-navbar [menuItems]="menuItems" logoClickRoute="/"></app-navbar>
+<app-navbar [menuItems]="menuItems()" logoClickRoute="/"></app-navbar>
 <div class="about-page">
  <div class="hero-video-container" [style.height]="height">
       <video #heroVideo class="hero-video" 
@@ -71,17 +71,25 @@
       <!-- Intro Text -->
       <div class="intro-content">
         <div class="text-reveal">
-          <h2 class="section-heading">Who I Am</h2>
+          <h2 class="section-heading">The Mind Behind the Code</h2>
           <p class="section-text">
-            A passionate developer driven by curiosity and innovation. 
-            I transform complex problems into elegant solutions through 
-            clean code and thoughtful design.
-            <h2 class="section-heading">Anything Else</h2>
-            <p class="section-text">
-             Dont worry iam not a Nerd who only codes all day,
-              Hitting gym has become my ritual.Gym taught me How to Raise the bar every day.
-              And yes Movies.Gym Code Moive that defines me.
-            </p>
+            I’m a developer who loves <span class="highlight">turning complexity into clarity.</span>
+            For me, <span class="highlight">code isn’t just instructions for a machine — it’s a craft,</span> a way to
+            shape ideas into experiences that feel simple, smooth, and intentional.
+            <span class="highlight">I explore, experiment, break things, rebuild them, and learn constantly.</span>
+            Curiosity fuels me. Precision guides me. Innovation keeps me moving.
+          </p>
+          <br><br>
+          <h2 class="section-heading">More Than Just a Keyboard Warrior</h2>
+          <p class="section-text">
+            I<span class="highlight"> don’t believe in the “all-code-no-life” </span>stereotype.
+            The <span class="highlight">gym</span> is where <span class="highlight">I reset, rebuild, and raise my standards — every single day.</span>
+            It teaches me <span class="highlight">discipline, consistency</span>, and the <span class="highlight">art of pushing one more rep,</span>
+            the <span class="highlight">same way I push one more improvement in my code</span>.
+            <span class="highlight">Movies</span> add the <span class="highlight">creativity and storytelling</span> that <span class="highlight">shape how I design, think,
+            and build digital experiences.</span>
+          </p>
+        
         </div>
       </div>
 
@@ -105,14 +113,16 @@
       </div>
      <!-- A Day in My Life Section -->
 <section class="day-in-life-section">
-  <div class="section-container">
-    <h2 class="section-title">A Day in My Life</h2>
-    <p class="section-subtitle">24 hours of code, coffee, and chaos</p>
+  <div class="container">
+    <h2 class="section-heading">A Day in My Life</h2>
+    <p class="attention-description" style="text-align: center; margin-bottom: 40px;">
+      24 hours of code, coffee, and chaos
+    </p>
     
     <div class="timeline-carousel-wrapper">
-      <div class="timeline-carousel">
+      <div class="timeline-carousel" #carouselTrack>
         
-        <!-- 5:00 AM -->
+        <!-- First Set of Cards -->
         <div class="timeline-card">
           <div class="time-badge">5:00 AM</div>
           <div class="activity-icon">
@@ -122,7 +132,6 @@
           <p class="activity-desc">The early bird catches the bug... I mean worm!</p>
         </div>
 
-        <!-- 6:00 AM -->
         <div class="timeline-card">
           <div class="time-badge">6:00 AM</div>
           <div class="activity-icon">
@@ -132,7 +141,6 @@
           <p class="activity-desc">Raising the bar, literally and metaphorically</p>
         </div>
 
-        <!-- 10:00 AM -->
         <div class="timeline-card office-hours">
           <div class="time-badge">10:00 AM</div>
           <div class="activity-icon">
@@ -143,7 +151,6 @@
           <span class="office-badge">Office Hours</span>
         </div>
 
-        <!-- 12:00 PM -->
         <div class="timeline-card office-hours">
           <div class="time-badge">12:00 PM</div>
           <div class="activity-icon">
@@ -154,7 +161,6 @@
           <span class="office-badge">Office Hours</span>
         </div>
 
-        <!-- 2:00 PM -->
         <div class="timeline-card office-hours">
           <div class="time-badge">2:00 PM</div>
           <div class="activity-icon">
@@ -165,7 +171,6 @@
           <span class="office-badge">Office Hours</span>
         </div>
 
-        <!-- 5:00 PM -->
         <div class="timeline-card">
           <div class="time-badge">5:00 PM</div>
           <div class="activity-icon">
@@ -175,7 +180,6 @@
           <p class="activity-desc">Sip, relax, and contemplate semicolons</p>
         </div>
 
-        <!-- 7:00 PM -->
         <div class="timeline-card">
           <div class="time-badge">7:00 PM</div>
           <div class="activity-icon">
@@ -185,7 +189,6 @@
           <p class="activity-desc">Lights, camera, action! Netflix & chill</p>
         </div>
 
-        <!-- 8:00 PM -->
         <div class="timeline-card">
           <div class="time-badge">8:00 PM</div>
           <div class="activity-icon">
@@ -195,7 +198,91 @@
           <p class="activity-desc">Nom nom... energy restored!</p>
         </div>
 
-        <!-- 10:00 PM -->
+        <div class="timeline-card">
+          <div class="time-badge">10:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="moon" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Sleep Mode</h3>
+          <p class="activity-desc">Should sleep... or one more commit?</p>
+        </div>
+
+        <!-- Duplicate Set for Seamless Loop -->
+        <div class="timeline-card">
+          <div class="time-badge">5:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="sunrise" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Rise & Shine</h3>
+          <p class="activity-desc">The early bird catches the bug... I mean worm!</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="time-badge">6:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="dumbbell" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Gym Time</h3>
+          <p class="activity-desc">Raising the bar, literally and metaphorically</p>
+        </div>
+
+        <div class="timeline-card office-hours">
+          <div class="time-badge">10:00 AM</div>
+          <div class="activity-icon">
+            <lucide-icon name="coffee" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Coffee + Meet</h3>
+          <p class="activity-desc">Caffeine loading... Hello World and Standup!</p>
+          <span class="office-badge">Office Hours</span>
+        </div>
+
+        <div class="timeline-card office-hours">
+          <div class="time-badge">12:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="utensils-crossed" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Lunch Break</h3>
+          <p class="activity-desc">Refueling the coding machine</p>
+          <span class="office-badge">Office Hours</span>
+        </div>
+
+        <div class="timeline-card office-hours">
+          <div class="time-badge">2:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="bug" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Debugging Session</h3>
+          <p class="activity-desc">It's not a bug, it's a feature... right?</p>
+          <span class="office-badge">Office Hours</span>
+        </div>
+
+        <div class="timeline-card">
+          <div class="time-badge">5:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="soup" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Tea Break</h3>
+          <p class="activity-desc">Sip, relax, and contemplate semicolons</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="time-badge">7:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="film" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Movie Time</h3>
+          <p class="activity-desc">Lights, camera, action! Netflix & chill</p>
+        </div>
+
+        <div class="timeline-card">
+          <div class="time-badge">8:00 PM</div>
+          <div class="activity-icon">
+            <lucide-icon name="cooking-pot" [size]="56" [strokeWidth]="1.5"></lucide-icon>
+          </div>
+          <h3 class="activity-title">Dinner</h3>
+          <p class="activity-desc">Nom nom... energy restored!</p>
+        </div>
+
         <div class="timeline-card">
           <div class="time-badge">10:00 PM</div>
           <div class="activity-icon">

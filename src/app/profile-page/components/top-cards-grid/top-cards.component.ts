@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TopCardComponent } from '../top-card/top-card.component';
 import { Router } from '@angular/router';
 import { Card } from '../../elements/elements';
+import { ProfileService } from '../../profile-service';
 
 export interface TopItem {
   id: number;
@@ -255,6 +256,8 @@ export class TopCardsGridComponent {
   hoverTimeout: number | undefined;
   isPlaying=false;
   router=inject(Router);
+    profileService = inject(ProfileService);
+    profile = '';
   constructor() {
     effect(() => {
       const videoEl = this.videoPlayer();
@@ -283,6 +286,18 @@ export class TopCardsGridComponent {
       }
     });
   }
+
+  ngOnInit(){
+      const currentUrl = this.router.url;
+    const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
+    if (profileMatch) {
+      this.profile = profileMatch[1];
+      this.profileService.setProfile(this.profile);
+    } else {
+      this.profile = 'recruiter';
+      this.profileService.setProfile(this.profile);
+    }
+  }
   onMouseEnter(): void {
     this.isHovered.set(true);
     
@@ -295,13 +310,13 @@ export class TopCardsGridComponent {
   selectedCard(item:Number) {
     switch (item) {
       case 1:
-        this.router.navigate(['/sql-project'], { queryParams: { id: item } });
+        this.router.navigate([`/${this.profile}/sql-project`], { queryParams: { id: item } });
         return
       case 2:
-        this.router.navigate(['/movie-recommendation']);
+        this.router.navigate([`/${this.profile}/movie-recommendation`]);
         return;
       case 3:
-        this.router.navigate(['/e-commerce-project']);
+        this.router.navigate([`/${this.profile}/e-commerce-project`]);
         return
       default:
     }

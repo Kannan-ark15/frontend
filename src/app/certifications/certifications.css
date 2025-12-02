@@ -72,8 +72,10 @@
 }
 
 .certificate-card:hover,
-.certificate-card:active{
+.certificate-card:active {
   transform: translateY(-16px) scale(1.02);
+  border-color: rgba(229, 9, 20, 0.4);
+  box-shadow: 0 20px 60px rgba(229, 9, 20, 0.3);
 }
 
 .card-glow {
@@ -88,11 +90,9 @@
   pointer-events: none;
 }
 
-.certificate-card:hover,
-.certificate-card:active
-.card-glow {
+.certificate-card:hover .card-glow,
+.certificate-card:active .card-glow {
   opacity: 1;
-  animation: rotate 8s linear infinite;
 }
 
 /* Card Header */
@@ -106,21 +106,33 @@
 }
 
 .platform-badge {
-  padding: 8px 20px;
-  border-radius: 20px;
+  padding: 12px 24px;
+  border-radius: 8px;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 2px;
   color: #fff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  animation: badgePulse 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
 }
 
-.cert-icon {
-  font-size: 2.5rem;
-  filter: drop-shadow(0 4px 8px rgba(229, 9, 20, 0.5));
-  animation: float 3s ease-in-out infinite;
-  color: #fff;
+.certificate-card:hover .platform-badge,
+.certificate-card:active .platform-badge {
+  transform: scale(1.05);
+}
+
+.platform-logo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(229, 9, 20, 0.3));
+  transition: all 0.3s ease;
+}
+
+.certificate-card:hover .platform-logo,
+.certificate-card:active .platform-logo {
+  filter: drop-shadow(0 6px 12px rgba(229, 9, 20, 0.5));
+  transform: scale(1.05);
 }
 
 /* Card Body */
@@ -137,9 +149,8 @@
   transition: color 0.3s ease;
 }
 
-.certificate-card:hover
-.certificate-card:active,
-.cert-title {
+.certificate-card:hover .cert-title,
+.certificate-card:active .cert-title {
   color: #e50914;
 }
 
@@ -167,6 +178,7 @@
 
 .detail-icon {
   font-size: 1.2rem;
+  color: #e50914;
 }
 
 .detail-text {
@@ -191,10 +203,11 @@
   transition: all 0.3s ease;
 }
 
-.certificate-card:hover,
-.certificate-card:active
-.skill-tag {
+.certificate-card:hover .skill-tag,
+.certificate-card:active .skill-tag {
   transform: translateY(-2px);
+  background: rgba(229, 9, 20, 0.25);
+  border-color: rgba(229, 9, 20, 0.5);
 }
 
 /* Card Footer */
@@ -232,58 +245,9 @@
   transition: transform 0.3s ease;
 }
 
-.view-btn:hover,
-.view-btn:active,
-.arrow {
+.view-btn:hover .arrow,
+.view-btn:active .arrow {
   transform: translateX(8px);
-}
-
-/* Card Overlay */
-.card-overlay {
-  position: absolute;
-  top: 10rem;
-  right: 10rem;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.certificate-card:hover,
-.certificate-card:active,
-.card-overlay {
-  opacity: 1;
-}
-
-.overlay-content {
-  text-align: center;
-  transform: scale(0.8);
-  transition: transform 0.4s ease;
-}
-
-.certificate-card:hover,
-.certificate-card:active,
-.overlay-content {
-  transform: scale(1);
-}
-
-.overlay-icon {
-  color:#fff;
-  display: block;
-  margin-bottom: 16px;
-  animation: pulse 1.5s ease-in-out infinite;
-}
-
-.overlay-content p {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
 /* Stats Section */
@@ -302,18 +266,21 @@
   transition: all 0.4s ease;
   animation: fadeInUp 0.8s ease-out backwards;
   backdrop-filter: blur(10px);
+  border: 2px solid rgba(229, 9, 20, 0.1);
 }
 
 .stat-card:hover,
 .stat-card:active {
   transform: translateY(-8px);
+  border-color: rgba(229, 9, 20, 0.4);
+  box-shadow: 0 12px 40px rgba(229, 9, 20, 0.2);
 }
 
 .stat-icon {
   font-size: 3rem;
   margin-bottom: 16px;
   animation: float 3s ease-in-out infinite;
-  color: #fff;
+  color: #e50914;
 }
 
 .stat-value {
@@ -414,7 +381,6 @@
   }
 }
 
-
 @keyframes expandWidth {
   from {
     width: 0;
@@ -442,35 +408,15 @@
   }
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes badgePulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
-}
-
 @keyframes floatShape {
   0%, 100% {
-    transform: translate(0, 0) rotate(0deg);
+    transform: translate(0, 0);
   }
   33% {
-    transform: translate(100px, -100px) rotate(120deg);
+    transform: translate(100px, -100px);
   }
   66% {
-    transform: translate(-100px, 100px) rotate(240deg);
+    transform: translate(-100px, 100px);
   }
 }
 
@@ -513,6 +459,10 @@
   .bg-shape {
     display: none;
   }
+  
+  .platform-logo {
+    height: 48px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -542,5 +492,9 @@
 
   .stats-section {
     grid-template-columns: 1fr;
+  }
+  
+  .platform-logo {
+    height: 40px;
   }
 }
