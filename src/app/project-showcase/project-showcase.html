@@ -22,7 +22,7 @@
       <div class="video-content">
         <h1 class="project-title">{{ projectData.title }}</h1>
         <p class="project-subtitle">{{ projectData.subtitle }}</p>
-        <p class="project-description">{{ projectData.description }}</p>
+        <p class="project-description" [innerHTML]="projectData.description"></p>
         <h1>Cast:</h1>
         <div class="tech-badges">
           @for (tech of projectData.techStack; track tech) {

@@ -131,6 +131,9 @@
   min-height: 600px;
   cursor: crosshair;
   background: #000;
+  touch-action: none; /* Prevent default touch actions */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .compare-container.long-image {
@@ -155,7 +158,9 @@
   display: block;
   user-select: none;
   pointer-events: none;
-  object-fit: contain; /* Changed from cover to contain for long images */
+  object-fit: contain;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
 }
 
 .label {
@@ -180,9 +185,9 @@
 
 .label.bottom-right {
   top: 20px;
-    right: 20px;
-    background: white;
-    color: black;
+  right: 20px;
+  background: white;
+  color: black;
 }
 
 .divider {
@@ -276,22 +281,42 @@
   }
 
   .divider-handle {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
 
   .divider-handle svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 
   .scroll-wrapper.scrollable::-webkit-scrollbar {
     width: 8px;
+  }
+  
+  /* Make the compare container more touch-friendly on mobile */
+  .compare-container {
+    cursor: grab;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .compare-container:active {
+    cursor: grabbing;
   }
 }
 
 @media (max-width: 480px) {
   .scroll-indicator {
     height: 50px;
+  }
+  
+  .divider-handle {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .divider-handle svg {
+    width: 20px;
+    height: 20px;
   }
 }

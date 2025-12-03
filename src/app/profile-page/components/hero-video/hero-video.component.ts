@@ -1,11 +1,13 @@
 import { Component, ElementRef, Input, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 export interface ProfileHeroData {
   title: string;
   subtitle: string;
   description: string;
   actions: string[];
 }
+
 @Component({
   selector: 'app-hero-video',
   standalone: true,
@@ -13,7 +15,7 @@ export interface ProfileHeroData {
   template: `
     <div class="hero-video-container" [style.height]="height">
       <video #heroVideo class="hero-video" 
-            [muted]="false"
+            [muted]="isMuted()"
             [loop]="true"
             playsinline
             preload="auto"
@@ -76,161 +78,169 @@ export interface ProfileHeroData {
         height: 90vh !important;
       }
     }
+    
     /* Mute Toggle Button */
-.mute-toggle {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 4;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
+    .mute-toggle {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
 
-.mute-toggle:hover,
-.mute-toggle:active {
-  background: rgba(229, 9, 20, 0.8);
-  border-color: #e50914;
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
-}
+    .mute-toggle:hover,
+    .mute-toggle:active {
+      background: rgba(229, 9, 20, 0.8);
+      border-color: #e50914;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+    }
 
-.mute-toggle:active {
-  transform: scale(0.95);
-}
+    .mute-toggle:active {
+      transform: scale(0.95);
+    }
 
-.volume-icon {
-  width: 24px;
-  height: 24px;
-  color: #fff;
-  transition: all 0.2s ease;
-}
+    .volume-icon {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+      transition: all 0.2s ease;
+    }
 
-/* Pulse animation for unmuted state */
-.mute-toggle:not(:hover) .volume-icon {
-  animation: none;
-}
-.video-content {
-  font-color: white;
-  position: absolute;
-  bottom: 80px;
-  left: 5%;
-  top:45%;
-  max-width: 700px;
-  z-index: 10;
-  animation: fadeInUp 1s ease-out;
-}
+    /* Pulse animation for unmuted state */
+    .mute-toggle:not(:hover) .volume-icon {
+      animation: none;
+    }
+    
+    .video-content {
+      font-color: white;
+      position: absolute;
+      bottom: 80px;
+      left: 5%;
+      top:45%;
+      max-width: 700px;
+      z-index: 10;
+      animation: fadeInUp 1s ease-out;
+    }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-.tech-badges {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top:1rem;
-}
+    .tech-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top:1rem;
+    }
 
-.tech-badge {
-  background: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  color:black;
-  text-decoration:none;
-}
+    .tech-badge {
+      background: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      color:black;
+      text-decoration:none;
+    }
 
-.tech-badge:hover ,
-.tech-badge:active {
-  transform: translateY(-2px);
-}
+    .tech-badge:hover ,
+    .tech-badge:active {
+      transform: translateY(-2px);
+    }
 
-.project-title {
-  font-size: clamp(3rem, 2vw, 5rem);
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: #fff;
-}
+    .project-title {
+      font-size: clamp(3rem, 2vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+    }
 
-.project-description {
-  font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.7;
-  color: grey;
-  width:56rem;
-}
-::ng-deep .highlight {
-   /* Netflix red */
-     color: #fff;
-  font-weight: 600;
-}
-/* Responsive */
-@media (max-width: 768px) {
-  .video-content {
-    left: 4%;
-    right: 4%;
-    bottom: 60px;
-    top: 20rem;
-  }
-  .mute-toggle {
-    width: 45px;
-    height: 45px;
-    bottom: 30px;
-    right: 30px;
-  }
-  
-  .volume-icon {
-    width: 22px;
-    height: 22px;
-  }
-   .project-title {
-    font-size: 2rem;
-  }
-  
-  .project-subtitle {
-    font-size: 1.3rem;
-  }
+    .project-description {
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.7;
+      color: grey;
+      width:56rem;
+    }
+    
+    ::ng-deep .highlight {
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .video-content {
+        left: 4%;
+        right: 4%;
+        bottom: 60px;
+        top: 20rem;
+      }
+      
+      .mute-toggle {
+        width: 45px;
+        height: 45px;
+        bottom: 30px;
+        right: 30px;
+      }
+      
+      .volume-icon {
+        width: 22px;
+        height: 22px;
+      }
+      
+      .project-title {
+        font-size: 2rem;
+      }
+      
+      .project-subtitle {
+        font-size: 1.3rem;
+      }
 
-  .project-description {
-    margin-bottom: 0;
-    font-size: 0.8rem;
-    width: 20rem;
-  }
-}
+      .project-description {
+        margin-bottom: 0;
+        font-size: 0.8rem;
+        width: 20rem;
+      }
+    }
 
-@media (max-width: 480px) {
-  .mute-toggle {
-    width: 40px;
-    height: 40px;
-    bottom: 5px;
-    right: 20px;
-  }
-  
-  .volume-icon {
-    width: 20px;
-    height: 20px;
-  }
-}
-
+    @media (max-width: 480px) {
+      .mute-toggle {
+        width: 40px;
+        height: 40px;
+        bottom: 5px;
+        right: 20px;
+      }
+      
+      .volume-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
   `]
 })
 export class HeroVideoComponent {
@@ -242,39 +252,53 @@ export class HeroVideoComponent {
     this.overlayText.set(value);
   }
   @Input() profileHeroData!: ProfileHeroData;
+  
   videoSrc = signal('assets/videos/default-hero.mp4');
   overlayText = signal('Welcome to My Portfolio');
+  isMuted = signal(true); // Start muted for autoplay compatibility
+  
   @ViewChild('heroVideo', { static: false }) heroVideoRef!: ElementRef<HTMLVideoElement>;
-  isMuted = signal(false); 
-  ngAfterViewInit() {
 
+  ngAfterViewInit() {
     setTimeout(() => {
       this.initializeVideo();
     }, 300);
   }
+  
   toggleMute() {
     if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
       const video = this.heroVideoRef.nativeElement;
-      video.muted = !video.muted;
-      this.isMuted.set(video.muted);
+      const newMutedState = !video.muted;
+      video.muted = newMutedState;
+      this.isMuted.set(newMutedState);
+      
+      // Ensure video is playing when unmuting on mobile
+      if (!newMutedState && video.paused) {
+        video.play().catch(err => {
+          console.warn('Failed to play video:', err);
+        });
+      }
     }
   }
   
-  actionClicked(tech: any){
-    switch(tech){
+  actionClicked(tech: any) {
+    switch(tech) {
       case 'LinkedIn':
         return 'https://www.linkedin.com/in/ar-kannan';
-      default:
       case 'Resume':
-        return 'https://drive.google.com/uc?export=download&id=1Vf8OJ3eLAF91THHBbmsdnHf2uXhEHDzv'
+        return 'https://drive.google.com/uc?export=download&id=1Vf8OJ3eLAF91THHBbmsdnHf2uXhEHDzv';
+      default:
+        return '#';
     }
   }
-   private initializeVideo() {
+  
+  private initializeVideo() {
     if (this.heroVideoRef && this.heroVideoRef.nativeElement) {
       const video = this.heroVideoRef.nativeElement;
       
-      // Ensure video is muted for autoplay
+      // Start muted for autoplay compatibility (especially on mobile)
       video.muted = false;
+      this.isMuted.set(false);
       video.playsInline = true;
       
       // Load the video

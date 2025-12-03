@@ -1,4 +1,4 @@
-<app-navbar [menuItems]="menuItems()" logoClickRoute="/"></app-navbar>
+<app-navbar [menuItems]="allMenuItems()" logoClickRoute="/"></app-navbar>
 <div class="about-page">
  <div class="hero-video-container" [style.height]="height">
       <video #heroVideo class="hero-video" 
@@ -11,8 +11,8 @@
         </video>
       <div class="hero-overlay"></div>
       <div class="video-content">
-        <h1 class="project-title">{{title}}</h1>
-        <p class="project-description">{{description}}</p>
+        <h1 class="project-title">{{title()}}</h1>
+        <p class="project-description">{{description()}}</p>
       </div>
        <button class="mute-toggle" (click)="toggleMute()" [attr.aria-label]="isMuted() ? 'Unmute video' : 'Mute video'">
       <!-- Muted Icon -->
