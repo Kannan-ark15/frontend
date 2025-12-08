@@ -45,15 +45,6 @@ export class About implements AfterViewInit {
     profileService = inject(ProfileService);
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      const profileName = params['profile'] || 'developer';
-      const data = this.aboutService.getvideoUrlForProfile(profileName);
-      if (data.videoUrl) {
-        this.videoSrc.set(data.videoUrl);
-        this.title.set(data.title);
-        this.description.set(data.description);
-      }
-    });
      const currentUrl = this.router.url;
     const profileMatch = currentUrl.match(/\/(recruiter|developer|anonymus)\//);
 
@@ -64,7 +55,13 @@ export class About implements AfterViewInit {
       this.profile = 'recruiter';
       this.profileService.setProfile(this.profile);
     }
-
+        const profileName = this.profile
+      const data = this.aboutService.getvideoUrlForProfile(profileName);
+      if (data.videoUrl) {
+        this.videoSrc.set(data.videoUrl);
+        this.title.set(data.title);
+        this.description.set(data.description);
+      }
     this.menuItems = [
       { label: 'Home', route: `/${this.profile}/home` },
       { label: 'Experience', route: `/${this.profile}/experience`, section: 'Experience' },
