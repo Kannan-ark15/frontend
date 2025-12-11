@@ -57,7 +57,7 @@ export class Experience {
         },
         {
           title: 'Teams Worked',
-          text: 'PIPF (Platform Infrastructure & Product Features) and DBAT (Database & Automation Tools)'
+          text: 'PIPF (Platform Infrastructure & Product Features) and DBAT (Product Enhancements Team)'
         },
         {
           title: 'Work & Achievements',
