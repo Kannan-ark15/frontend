@@ -63,12 +63,12 @@ export const SQL_PROJECT: ProjectShowcaseData = {
       id: 6,
       title: 'Climax',
       content:
-        `The breakthrough happened through the <span class="highlight">Model Context Protocol (MCP)</span>. I designed a <span class="highlight">custom MCP that integrates seamlessly with GitHub Copilot</span>. Now, when a developer commits changes in the model folder, they can simply instruct Copilot to <span class="highlight">"Generate SQL for this Jira ID."</span> The MCP <span class="highlight">detects git diffs</span>, builds a <span class="highlight">structured prompt file using enterprise SQL standards</span>, sends it to a <span class="highlight">Sonnet agent</span>, and stores the <span class="highlight">generated SQL in the Migrations folder—named after the Jira ID</span>. This approach aligns with <span class="highlight">modern agentic coding practices</span> and integrates naturally into the company's workflow.',
+        `The breakthrough happened through the <span class="highlight">Model Context Protocol (MCP)</span>. I designed a <span class="highlight">custom MCP that integrates seamlessly with GitHub Copilot</span>. Now, when a developer commits changes in the model folder, they can simply instruct Copilot to <span class="highlight">"Generate SQL for this Jira ID."</span> The MCP <span class="highlight">detects git diffs</span>, builds a <span class="highlight">structured prompt file using enterprise SQL standards</span>, sends it to a <span class="highlight">Sonnet agent</span>, and stores the <span class="highlight">generated SQL in the Migrations folder—named after the Jira ID</span>. This approach aligns with <span class="highlight">modern agentic coding practices</span> and integrates naturally into the company's workflow.`,
       metrics: [
         { label: 'AI Query Generation', value: '100%', icon: '⚙️' },
         { label: 'Manual Effort Reduced', value: '90%', icon: '⬇️' },
         { label: 'Developer Adoption', value: 'High', icon: '🚀' }
-      `,
+      ],
       image: 'assets/project/sql/act-6.webp',
       color: '#2ec4b6'
     },
