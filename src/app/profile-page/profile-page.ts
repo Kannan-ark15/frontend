@@ -67,7 +67,7 @@ mangaImages = signal([
   gridcard = signal<Card[]>([
     {
       id: 1,
-      title: 'Zapify',
+      title: '1',
       text: 'Landing page for Zapify.',
       imageUrl: 'assets/project/Zapify/1.png',
       videoUrl: '',
@@ -75,10 +75,10 @@ mangaImages = signal([
     },
     {
       id: 2,
-      title: 'Transportation Management Software',
+      title: '2',
       text: 'Software for managing transportation operations.',
       imageUrl: 'assets/project/Transportation/1.png',
-      videoUrl: '',
+       videoUrl: '',
       section: ''
     },
     {
