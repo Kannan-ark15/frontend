@@ -38,4 +38,5 @@ export const routes: Routes = [
     {path: ':profile/sql-project', loadComponent: () => import('./sql-project/sql-project').then(m => m.SqlProject)},
     {path: ':profile/movie-recommendation', loadComponent: () => import('./movie-recommendation/movie-recommendation').then(m => m.ProjectsComponent)},
     {path: ':profile/e-commerce-project', loadComponent: () => import('./e-commerce/e-commerce').then(m => m.ECommerce)},
+    {path: ':profile/zapify', loadComponent: () => import('./zapify/zapify').then(m => m.ZapifyProject)},
 ];

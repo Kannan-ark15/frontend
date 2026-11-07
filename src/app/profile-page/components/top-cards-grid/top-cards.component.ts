@@ -321,6 +321,9 @@ export class TopCardsGridComponent {
 
   selectedCard(item:Number) {
     switch (item) {
+      case 1:
+        this.router.navigate([`/${this.profile}/zapify`]);
+        return;
       case 3:
         this.router.navigate([`/${this.profile}/sql-project`], { queryParams: { id: 1 } });
         return

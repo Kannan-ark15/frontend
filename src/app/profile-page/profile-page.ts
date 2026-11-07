@@ -70,7 +70,7 @@ mangaImages = signal([
       title: '1',
       text: 'Landing page for Zapify.',
       imageUrl: 'assets/project/Zapify/1.png',
-      videoUrl: '',
+      videoUrl: 'assets/project/videos/zapify.mp4',
       section: ''
     },
     {
@@ -78,7 +78,7 @@ mangaImages = signal([
       title: '2',
       text: 'Software for managing transportation operations.',
       imageUrl: 'assets/project/Transportation/1.png',
-       videoUrl: '',
+       videoUrl: 'assets/project/videos/transportation.mp4',
       section: ''
     },
     {
