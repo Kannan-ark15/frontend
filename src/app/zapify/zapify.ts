@@ -22,7 +22,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `Every product deserves a website that communicates its value instantly. Zapify was an <span class="highlight">AI-powered platform that automated Instagram DMs and social media interactions</span>. But its existing landing page wasn't doing justice to the product. The <span class="highlight">hero section lacked impact</span>, the <span class="highlight">content hierarchy was weak</span>, and visitors couldn't immediately understand what the platform actually did.`,
       image: 'assets/project/Zapify/1.png',
-      color: '#ff6e6e'
+      color: '#a7fff3'
     },
 
     {
@@ -31,7 +31,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `I started with a complete <span class="highlight">UI/UX review of the existing website</span>. The page lacked a strong <span class="highlight">visual identity</span>, important messages weren't highlighted, and there was <span class="highlight">no clear visual representation of the product</span>. Visitors had to read through the content just to understand its purpose. The website was missing the <span class="highlight">clarity and structure needed to turn interest into action</span>.`,
       image: 'assets/project/Zapify/2.png',
-      color: '#ff5b5b'
+      color: '#39d6c8'
     },
 
     {
@@ -40,7 +40,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `I wanted visitors to <span class="highlight">understand Zapify before they even started reading</span>. Since the product focused on <span class="highlight">Instagram DM automation</span>, I created a visual showing the <span class="highlight">automation experience happening inside a smartphone</span>. This became the centerpiece of the hero section, giving visitors an <span class="highlight">immediate idea of what the product could do</span>.`,
       image: 'assets/project/Zapify/3.png',
-      color: '#ff4949'
+      color: '#5eead4'
     },
 
     {
@@ -49,7 +49,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `A good landing page needs more than attractive sections. It needs <span class="highlight">consistency</span>. I established a <span class="highlight">font theme and carried it throughout the website</span>. I also improved the <span class="highlight">content hierarchy using contrasting text highlights</span>, making important messages stand out and helping visitors <span class="highlight">understand the product's value without getting lost in paragraphs</span>.`,
       image: 'assets/project/Zapify/4.png',
-      color: '#ff3636'
+      color: '#22d3ee'
     },
 
     {
@@ -58,7 +58,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `Instead of simply explaining the features, I wanted visitors to <span class="highlight">see them in action</span>. I introduced an About section with <span class="highlight">short animated videos</span> that demonstrated how Zapify worked. I also created a <span class="highlight">scroll-triggered loading animation</span> that flowed naturally into the About section, making the transition through the landing page feel <span class="highlight">more interactive and engaging</span>.`,
       image: 'assets/project/Zapify/11.png',
-      color: '#ff2525'
+      color: '#67e8f9'
     },
 
     {
@@ -67,7 +67,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `People are more likely to trust a product when they hear about it from <span class="highlight">actual users</span>. I introduced a <span class="highlight">dedicated testimonial section</span> with links to real customer testimonials, allowing visitors to explore <span class="highlight">genuine experiences</span> and understand how others were using Zapify. The goal was to <span class="highlight">replace uncertainty with confidence</span>.`,
       image: 'assets/project/Zapify/1.png',
-      color: '#ff1717'
+      color: '#2dd4bf'
     },
 
     {
@@ -76,7 +76,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
       content:
         `A visitor shouldn't have to search for the next step or wonder how much a product costs. I introduced <span class="highlight">primary and secondary call-to-action buttons</span> to guide users through the <span class="highlight">conversion journey</span>. I also added <span class="highlight">dedicated FAQ and pricing sections</span>, both missing from the original website, so visitors could find answers, understand the available plans, and make an <span class="highlight">informed subscription decision</span>.`,
       image: 'assets/project/Zapify/2.png',
-      color: '#ff0a0a'
+      color: '#38bdf8'
     },
 
     {
@@ -90,7 +90,7 @@ export const ZAPIFY_PROJECT: ProjectShowcaseData = {
         { label: 'Engagement', value: 'High', icon: '🚀' }
       ],
       image: 'assets/project/Zapify/11.png',
-      color: '#ff0000'
+      color: '#99f6e4'
     }
   ]
 };
@@ -111,7 +111,7 @@ export class ZapifyProject implements OnInit {
   router = inject(Router);
   profileService = inject(ProfileService);
   menuItems = signal<any[]>([]);
-  githubUrl = 'https://github.com/Kannan-ark15';
+  githubUrl = 'https://github.com/Kannan-ark15/Zapify-hero';
 
   ngOnInit() {
     const currentUrl = this.router.url;

@@ -7,10 +7,23 @@
 }
 
 .project-container {
+  --accent: #e50914;
+  --accent-rgb: 229, 9, 20;
+  --accent-dark: #b20710;
+  --accent-deep: #8b0000;
+  --accent-light: #ff6b6b;
   min-height: 100vh;
   background: #000;
   color: #fff;
   font-family: 'Poppins', sans-serif;
+}
+
+.project-container.zapify-theme {
+  --accent: #39d6c8;
+  --accent-rgb: 57, 214, 200;
+  --accent-dark: #168f9b;
+  --accent-deep: #155e75;
+  --accent-light: #a7fff3;
 }
 
 /* ===== VIDEO BANNER SECTION ===== */
@@ -49,9 +62,9 @@
 
 .github-button:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #e50914;
+  border-color: var(--accent);
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
 }
 
 .github-button svg {
@@ -60,7 +73,7 @@
 }
 
 .github-button:hover svg {
-  color: #e50914;
+  color: var(--accent);
 }
 
 .banner-video {
@@ -118,7 +131,7 @@
 
 .title-badge {
   display: inline-block;
-  background: #e50914;
+  background: var(--accent);
   color: #fff;
   padding: 6px 16px;
   border-radius: 4px;
@@ -205,7 +218,7 @@
 .timeline-section {
   padding: 60px 5% 40px;
   background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
-  border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+  border-bottom: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .timeline-title {
@@ -213,9 +226,9 @@
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: 4px;
-  color: #e50914;
+  color: var(--accent);
   margin-bottom: 40px;
-  text-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+  text-shadow: 0 0 30px rgba(var(--accent-rgb), 0.5);
 }
 
 .timeline-container {
@@ -228,7 +241,7 @@
   padding: 20px 0;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: #e50914 #1a1a1a;
+  scrollbar-color: var(--accent) #1a1a1a;
 }
 
 .timeline-container::-webkit-scrollbar {
@@ -240,7 +253,7 @@
 }
 
 .timeline-container::-webkit-scrollbar-thumb {
-  background: #e50914;
+  background: var(--accent);
   border-radius: 3px;
 }
 
@@ -252,13 +265,13 @@
   height: 3px;
   background: linear-gradient(
     90deg, 
-    #e50914 0%, 
-    #b20710 33%, 
-    #8b0000 66%, 
-    #ff6b6b 100%
+    var(--accent) 0%, 
+    var(--accent-dark) 33%, 
+    var(--accent-deep) 66%, 
+    var(--accent-light) 100%
   );
   transform: translateY(-50%);
-  box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.5);
 }
 
 .timeline-point {
@@ -360,10 +373,10 @@
   height: 2px;
   background: linear-gradient(
     90deg, 
-    #e50914 0%, 
-    #b20710 33%, 
-    #8b0000 66%, 
-    #ff6b6b 100%
+    var(--accent) 0%, 
+    var(--accent-dark) 33%, 
+    var(--accent-deep) 66%, 
+    var(--accent-light) 100%
   );
   transform: translateY(-50%);
   opacity: 0.3;
@@ -642,7 +655,7 @@
   background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
   padding: 80px 5%;
   text-align: center;
-  border-top: 1px solid rgba(229, 9, 20, 0.2);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .footer-content h3 {
@@ -660,8 +673,8 @@
 
 .back-button {
   background: transparent;
-  border: 2px solid #e50914;
-  color: #e50914;
+  border: 2px solid var(--accent);
+  color: var(--accent);
   padding: 15px 40px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -673,10 +686,10 @@
 
 .back-button:hover,
 .back-button:active {
-  background: #e50914;
+  background: var(--accent);
   color: #fff;
   transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4);
+  box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.4);
 }
 
 /* ===== OTHER PROJECTS SECTION ===== */
@@ -688,7 +701,7 @@
 .other-projects-title {
   font-size: 2rem;
   font-weight: 700;
-  color: #e50914;
+  color: var(--accent);
   text-align: center;
   margin-bottom: 40px;
   letter-spacing: 2px;
@@ -716,10 +729,10 @@
 
 .project-card:hover {
   transform: translateY(-10px);
-  border-color: #e50914;
+  border-color: var(--accent);
   box-shadow: 
     0 20px 40px rgba(0, 0, 0, 0.6),
-    0 0 60px rgba(229, 9, 20, 0.3);
+    0 0 60px rgba(var(--accent-rgb), 0.3);
 }
 
 .project-card-image {
@@ -756,8 +769,8 @@
 .project-number {
   font-size: 3rem;
   font-weight: 900;
-  color: #e50914;
-  text-shadow: 0 0 20px rgba(229, 9, 20, 0.8);
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(var(--accent-rgb), 0.8);
 }
 
 .project-card-content {
@@ -779,7 +792,7 @@
 
 .project-card-arrow {
   font-size: 1.5rem;
-  color: #e50914;
+  color: var(--accent);
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
