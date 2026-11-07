@@ -25,23 +25,27 @@ export interface TopItem {
       (mouseleave)="onMouseLeave()"
       (click)="onCardClick()">
       @if (card().title) {
-        <img
-          [src]="card().imageUrl"
-          [alt]="card().title"
-          class="card-media card-image"
-          [class.hidden]="isHovered()"
-        />
+        @if (card().imageUrl) {
+          <img
+            [src]="card().imageUrl"
+            [alt]="card().title"
+            class="card-media card-image"
+            [class.hidden]="isHovered()"
+          />
+        }
 
-        <video
-          #videoPlayer
-          class="card-media card-video"
-          [class.visible]="isHovered()"
-          loop
-          muted
-          playsinline
-          preload="auto">
-          <source [src]="card().videoUrl" type="video/mp4" />
-        </video>
+        @if (card().videoUrl) {
+          <video
+            #videoPlayer
+            class="card-media card-video"
+            [class.visible]="isHovered()"
+            loop
+            muted
+            playsinline
+            preload="auto">
+            <source [src]="card().videoUrl" type="video/mp4" />
+          </video>
+        }
 
         <div class="card-overlay"></div>
 
