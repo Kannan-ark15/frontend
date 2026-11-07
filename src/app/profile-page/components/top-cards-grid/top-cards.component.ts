@@ -53,7 +53,7 @@ export interface TopItem {
           <h3
             class="card-title-collapsed"
             [class.hidden]="isHovered()">
-            {{ card().title }}
+            {{ card().id }}
           </h3>
 
           <div *ngIf="isHovered()"
