@@ -17,52 +17,49 @@ export interface TopItem {
   standalone: true,
   imports: [CommonModule],
   template: `
-        <div
+    <div
       class="hover-card"
+      [class.empty]="!card().title"
       [class.expanded]="isHovered()"
       (mouseenter)="onMouseEnter()"
       (mouseleave)="onMouseLeave()"
-      (click)="selectedCard(card().id)">      
-      <!-- Image (visible by default) -->
-      <img
-        [src]="card().imageUrl"
-        [alt]="card().title"
-        class="card-media card-image"
-        [class.hidden]="isHovered()"
-      />
+      (click)="onCardClick()">
+      @if (card().title) {
+        <img
+          [src]="card().imageUrl"
+          [alt]="card().title"
+          class="card-media card-image"
+          [class.hidden]="isHovered()"
+        />
 
-      <!-- Video (visible on hover) -->
-      <video
-        #videoPlayer
-        class="card-media card-video"
-        [class.visible]="isHovered()"
-        loop
-        muted
-        playsinline
-        preload="auto">
-        <source [src]="card().videoUrl" type="video/mp4" />
-      </video>
+        <video
+          #videoPlayer
+          class="card-media card-video"
+          [class.visible]="isHovered()"
+          loop
+          muted
+          playsinline
+          preload="auto">
+          <source [src]="card().videoUrl" type="video/mp4" />
+        </video>
 
-      <!-- Gradient Overlay -->
-      <div class="card-overlay"></div>
+        <div class="card-overlay"></div>
 
-      <!-- Content -->
-      <div class="card-content">
-        <!-- Collapsed Title (Rotated) -->
-        <h3 
-          class="card-title-collapsed"
-          [class.hidden]="isHovered()">
-          {{ card().title }}
-        </h3>
+        <div class="card-content">
+          <h3
+            class="card-title-collapsed"
+            [class.hidden]="isHovered()">
+            {{ card().title }}
+          </h3>
 
-        <!-- Expanded Content -->
-        <div *ngIf="isHovered()"
-          class="card-content-expanded"
-          [class.visible]="isHovered()">
-          <h3 class="card-title-expanded">{{ card().title }}</h3>
-          <p class="card-text-expanded">{{ card().text }}</p>
+          <div *ngIf="isHovered()"
+            class="card-content-expanded"
+            [class.visible]="isHovered()">
+            <h3 class="card-title-expanded">{{ card().title }}</h3>
+            <p class="card-text-expanded">{{ card().text }}</p>
+          </div>
         </div>
-      </div>
+      }
     </div>
   `,
   styles: [`
@@ -81,6 +78,10 @@ export interface TopItem {
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; 
       overflow-y: hidden;
+    }
+    .hover-card.empty {
+      cursor: default;
+      box-shadow: none;
     }
     .hover-card::-webkit-scrollbar {
       display: none; /* Chrome, Safari, Opera */
@@ -299,25 +300,29 @@ export class TopCardsGridComponent {
     }
   }
   onMouseEnter(): void {
-    this.isHovered.set(true);
-    
+    if (this.card().title) {
+      this.isHovered.set(true);
+    }
   }
 
   onMouseLeave(): void {
     this.isHovered.set(false);
   }
 
+  onCardClick(): void {
+    if (this.card().title) {
+      this.selectedCard(this.card().id);
+    }
+  }
+
   selectedCard(item:Number) {
     switch (item) {
-      case 1:
-        this.router.navigate([`/${this.profile}/sql-project`], { queryParams: { id: item } });
+      case 3:
+        this.router.navigate([`/${this.profile}/sql-project`], { queryParams: { id: 1 } });
         return
-      case 2:
+      case 4:
         this.router.navigate([`/${this.profile}/movie-recommendation`]);
         return;
-      case 3:
-        this.router.navigate([`/${this.profile}/e-commerce-project`]);
-        return
       default:
     }
   }

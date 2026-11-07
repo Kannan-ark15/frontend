@@ -67,34 +67,34 @@ mangaImages = signal([
   gridcard = signal<Card[]>([
     {
       id: 1,
-      title: '1',
+      title: '',
+      text: '',
+      imageUrl: '',
+      videoUrl: '',
+      section: ''
+    },
+    {
+      id: 2,
+      title: '',
+      text: '',
+      imageUrl: '',
+      videoUrl: '',
+      section: ''
+    },
+    {
+      id: 3,
+      title: '3',
       text: 'Sql Syncup Automation System with Custom MCP',
       imageUrl: 'assets/images/Sql.webp',
       videoUrl: 'assets/project/videos/sql.mp4',
       section: ''
     },
     {
-      id: 2,
-      title: '2',
+      id: 4,
+      title: '4',
       text: 'Movie Recommendation Sytsem based on Sentiment-Analysis.',
       imageUrl: 'assets/images/movie.webp',
       videoUrl: 'assets/project/videos/movie.mp4',
-      section: ''
-    },
-    {
-      id: 3,
-      title: '3',
-      text: 'E-commerce Website with Payment Gateway Integration.',
-      imageUrl: 'assets/images/E-commerce.webp',
-      videoUrl: 'assets/project/videos/cn.mp4',
-      section: ''
-    },
-    {
-      id: 4,
-      title: '4',
-      text: 'Project development in Progress.',
-      imageUrl: 'assets/images/soon.webp',
-      videoUrl: 'assets/project/videos/soon.mp4',
       section: ''
     }
   ]);
